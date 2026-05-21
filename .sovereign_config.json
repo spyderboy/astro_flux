@@ -1,0 +1,85 @@
+{
+  "_comment": "Sovereign Agent per-project configuration for AstroFlux.",
+
+  "locked_prefixes": [
+    "android/",
+    "ios/",
+    "assets/",
+    ".github/",
+    ".idea/",
+    "coverage/",
+    "release-notes/",
+    "tools/"
+  ],
+
+  "locked_files": [
+    "pubspec.lock",
+    "pubspec.yaml",
+    "analysis_options.yaml",
+    "context.md",
+    "ROADMAP.md",
+    "VISION.md",
+    "CHANGELOG.md",
+    "README.md",
+    "RELEASE_CHECKLIST.md",
+    "sovereign.json",
+    "config/sdk_dependencies.json",
+    "functions/package.json",
+    "lib/firebase_options.dart",
+    "lib/main.dart",
+    "lib/game/game_widget.dart",
+    "lib/game/game_core.dart",
+    "lib/game/astro_game.dart",
+    "lib/game/gcp_sync_handler.dart",
+    "lib/game/gcp_sync_service.dart",
+    "lib/game/circuit_breaker.dart",
+    "lib/game/retry_scheduler.dart",
+    "lib/game/fusion_rules.dart",
+    "lib/game/capture_rules.dart",
+    "lib/game/game_rules_engine.dart",
+    "lib/game/victory_rules.dart",
+    "lib/game/game_events.dart",
+    "lib/game/game_over_controller.dart",
+    "lib/components/star_component.dart",
+    "lib/components/mote_component.dart",
+    "lib/components/vector_component.dart",
+    "lib/components/particle_system.dart",
+    "lib/components/particle_component.dart",
+    "lib/models",
+    "lib/config"
+  ],
+
+  "additional_bad_patterns": [
+    {
+      "pattern": "import 'package:shared_preferences/",
+      "hint": "shared_preferences is not available — persist state via Riverpod or game state objects."
+    },
+    {
+      "pattern": "import 'package:http/",
+      "hint": "http package is not available — use Dart's dart:io HttpClient or the existing GcpSyncHandler."
+    },
+    {
+      "pattern": "import 'package:go_router/",
+      "hint": "go_router is not available — navigation is handled directly via Flutter Navigator."
+    },
+    {
+      "pattern": "import 'package:mockito/",
+      "hint": "mockito is not available in this project — write manual fakes or use flutter_test mocks."
+    }
+  ],
+
+  "additional_error_hints": [
+    {
+      "pattern": "Could not find package \"firebase_core\"",
+      "hint": "firebase_core should be in pubspec.yaml. Run `flutter pub get` — if it fails, check that pubspec.yaml lists firebase_core, cloud_firestore, and cloud_functions."
+    },
+    {
+      "pattern": "The method 'initializeApp' isn't defined",
+      "hint": "Call Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform) in main() before runApp()."
+    },
+    {
+      "pattern": "FlameGame.*not.*found|flame.*undefined",
+      "hint": "FlameGame APIs live in package:flame/game.dart — ensure the import is present."
+    }
+  ]
+}

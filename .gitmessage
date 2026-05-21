@@ -1,0 +1,12 @@
+type(scope): description
+
+# Types:
+# feat     - New feature
+# fix      - Bug fix
+# chore    - Maintenance, build tasks, etc.
+# refactor - Code change that neither fixes a bug nor adds a feature
+# test     - Adding or correcting tests
+# docs     - Documentation changes
+
+# Scope (optional):
+# e.g., feat(models): add Mote id field

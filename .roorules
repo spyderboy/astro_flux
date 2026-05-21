@@ -1,0 +1,364 @@
+# Project rules — read and follow these on every task
+
+## !! ANTI-STUB RULE — READ FIRST, APPLY ALWAYS !!
+
+A task is ONLY complete when every method body contains WORKING Dart code.
+The following patterns are FORBIDDEN outputs — they are stubs, not implementations:
+
+```dart
+// FORBIDDEN — stub with comment body
+void tick(double dt) {
+  // Tasks A and B are implemented here.
+}
+
+// FORBIDDEN — loop that does nothing
+void handleOrders(List<Component> orders, double dt) {
+  for (var order in orders) {
+    if (order is PositionComponent) {
+      // Handle movement logic here
+    }
+  }
+}
+
+// FORBIDDEN — empty callback
+@override
+Future<void> onTapDown(TapDownEvent event) async {
+  // Handle vector tap
+}
+```
+
+If you cannot implement a method body with real logic, ESCALATE (exit 2).
+Do NOT write a stub and mark the task done. Stubs break future tasks silently.
+
+Every task must have an observable result: something the player sees, or
+something `flutter analyze` can verify. If there is no observable result,
+you have not finished the task.
+
+---
+
+## What this project is
+
+Astro Flux is a Flutter/Flame real-time strategy / idle game. Players capture
+Stars, accumulate Motes, and fuse them into combat units to grow their force.
+The full gameplay spec lives in `docs/unit_spec.md` — read it before any
+gameplay task. The summary is below.
+
+---
+
+## Gameplay mechanics — authoritative summary (full spec: docs/unit_spec.md)
+
+### Three unit tiers
+
+| Tier | Name   | Speed (px/s) | Power | Max HP | Point value |
+|------|--------|-------------|-------|--------|-------------|
+| 1    | Mote   | 300         | 1     | 1      | 1           |
+| 2    | Vector | 150         | 3     | 5      | 5           |
+| 3    | Surge  | 60          | 9     | 25     | 25          |
+
+### Selection — lasso drag
+- Single-finger drag draws a selection rectangle on the canvas.
+- All units whose world positions fall inside the rectangle are selected.
+- A highlight ring renders around each selected unit.
+- Tapping empty space with no drag clears the selection.
+
+### Tap to move
+- With units selected, tapping anywhere dispatches a MoveOrderEvent.
+- Selected units march toward the tapped world position at their tier speed.
+- Arriving at empty space: units idle at that position.
+- Arriving at an enemy/neutral star: units contribute power and are consumed (see Stars).
+- Arriving at a friendly star: units contribute power to upgrade it, then are consumed.
+- Units engage enemy units automatically en route (see Combat).
+- Selection clears after a move order is dispatched.
+
+### Long-press to combine (≥ 600 ms)
+- Long-pressing a selected group triggers a CombineOrderEvent.
+- Each unit contributes its point value to a shared pool.
+- If pool ≥ 25: spawn 1 Tier-3 Surge at group centroid, consume all selected units.
+- If pool ≥ 5 and < 25: spawn 1 Tier-2 Vector at group centroid, consume all selected units.
+- If pool < 5: gesture ignored, no change.
+- Reinforcement: if the group contains a damaged higher-tier unit, incoming points
+  heal it first (1 pt = 1 hp) before counting toward an upgrade threshold.
+
+### Stars — power accumulation (NOT instant capture)
+Stars are NOT captured instantly. Units are CONSUMED on arrival and contribute power.
+
+| Tier transition | Power required |
+|-----------------|----------------|
+| 0 → 1 (capture) | 10             |
+| 1 → 2           | 30             |
+| 2 → 3           | 90             |
+| 3 → 4           | 270            |
+
+- `currentTier` starts at 0 (neutral, produces nothing).
+- Tier 0 → 1 transition flips `ownerId` to the attacking player.
+- Stars produce motes every 5 seconds when owned (currentTier ≥ 1):
+  - Tier 1: 1 mote/cycle, Tier 2: 3 motes/cycle, Tier 3: 9 motes/cycle, Tier 4: 27 motes/cycle.
+- Each star has a `maxTier` (set at map generation, 1–4). Power beyond maxTier is discarded.
+
+### Mote auto-fusion
+- 10 free Motes (produced by a star) auto-fuse into 1 Tier-1 Mote unit.
+- No player action required. This is the idle production loop.
+
+### Combat — unit vs unit
+- Units do NOT stop to fight. They continue toward their target while combat ticks.
+- Combat resolves once per second for all colliding pairs.
+- Damage is simultaneous: compute BOTH damage values before writing either to state.
+- Collision radii: Tier-1 = 16 px, Tier-2 = 24 px, Tier-3 = 36 px.
+- Unit reaching 0 HP is removed from Flame world and Riverpod state.
+
+### Pinch to zoom / two-finger pan
+- ScaleDetector lives on AstroGame (FlameGame) — NEVER on a PositionComponent.
+- `info.delta.global` and `info.scale.global` are already Vector2. No `.toVector2()`.
+
+---
+
+## Core mechanic — never break this
+- 10 Motes fuse into 1 Tier-1 Mote unit. This ratio is fixed.
+- Stars produce Motes automatically at a rate determined by their tier.
+- Units are CONSUMED when they arrive at a star. Capture is never instant.
+- Do not change ratios or thresholds without explicit human sign-off.
+
+---
+
+## Aesthetic rules — non-negotiable
+- Dark background only. Never use white or light-mode colours.
+- All glows must be high-saturation neon. No pastels.
+- Combat and glow effects use additive blending. Use BlendMode.plus
+  (BlendMode.add does NOT exist in Flutter).
+- No flat Material widgets rendered inside the Flame game canvas.
+- Unit colour by owner + tier:
+  - Player tier 1 → cyan #00DDFF
+  - Player tier 2 → mint #00FFAA
+  - Player tier 3 → gold #FFDD00
+  - Enemy any tier → red #FF3366
+  - Neutral star   → dim white #888888
+
+---
+
+## Project structure
+```
+lib/
+  game/        — FlameGame subclass (astro_game.dart) and game-loop systems
+  models/      — Pure Dart data classes: Mote, Vector, Star (no Flame imports)
+  components/  — Flame PositionComponents for rendering (no business logic)
+  providers/   — Riverpod providers that are not the core GameStateNotifier
+  systems/     — Non-Flame systems (MoteProductionSystem, PersistenceService)
+```
+- models/ must stay pure Dart — no Flame or Flutter imports.
+- components/ depend on models/, never the reverse.
+
+---
+
+## Current model schema
+These are the exact fields on each model. Do not invent fields that are not here.
+If you add a field, you MUST update this section in the same task.
+
+```
+Mote          id: int | lifecycleState: MoteLifecycle (default: active)
+              Helpers: setCreated() setActive() setFused()
+              Getters: isCreated isActive isFused
+              (lib/models/mote.dart)
+
+MoteLifecycle created | active | fused
+
+Vector        id: int | owner: String ('player'|'enemy') | tier: int (1–3)
+              | currentHealth: int (default = maxHealth for tier)
+              Getters: maxHealth power isAlive
+              copyWith(owner, tier, currentHealth)
+              (lib/models/vector.dart)
+
+Star          id: int | tier: int (1–3) | ownerId: String ('' = neutral)
+              Getters: isCaptured productionRate
+              (lib/models/star.dart)
+
+GameState     motes: List<Mote> | vectors: List<Vector> | stars: List<Star>
+              (lib/models/game_state.dart)
+```
+
+Positions are NEVER stored in models. Position is a Flame/rendering concern
+that lives in the component (PositionComponent.position).
+
+---
+
+## State management architecture
+- `lib/models/game_state.dart`          — pure immutable GameState data class
+- `lib/models/game_state_provider.dart` — GameStateNotifier + gameServiceProvider
+- `lib/systems/persistence_service.dart` — PersistenceService + LocalPersistenceService
+- Provider name: `gameServiceProvider`  (NOT `gameStateProvider`)
+- Notifier type: `GameStateNotifier`
+- Notifier methods (exact signatures):
+  ```dart
+  addMote(int id)
+  addVector(int id, {String owner = 'player', int tier = 1})
+  addStar(int id, int tier)
+  removeMote(int id)
+  removeVector(int id)
+  removeStar(int id)
+  updateStar(int id, int tier)
+  captureStar(int id, String ownerId)
+  damageVector(int id, int amount)
+  spawnSurge(int id, {String owner = 'player'})
+  clearMotes() clearVectors() clearStars()
+  saveGame() loadGame() reset()
+  ```
+
+---
+
+## File size
+- Keep every file under 150 lines. Split into smaller focused modules if exceeded.
+
+---
+
+## Flutter/Flame conventions
+- Prefer const constructors wherever possible.
+- One class per file.
+- State exposed to UI via Riverpod providers only — no direct game state reads from widgets.
+- Every async operation must handle loading and error states.
+
+---
+
+## Vector2 vs Offset — read this before writing any component
+`Vector2` and `Offset` are INCOMPATIBLE types.
+
+- **Flame component fields** (position, size, velocity): use `Vector2`.
+- **Flutter canvas draw calls**: use `Offset`.
+- **Convert at the render boundary only:**
+  ```dart
+  // CORRECT
+  canvas.drawCircle(Offset(position.x, position.y), radius, paint);
+  // WRONG — compile error
+  canvas.drawCircle(position, radius, paint);
+  ```
+- `position.toOffset()` works — use it only at canvas draw call sites.
+- Never declare positional state as `Offset` inside a PositionComponent.
+
+---
+
+## Key API signatures — use these exactly, do not guess
+```dart
+// Particles — all positions are Vector2, never Offset
+ParticleSystem.spawnSpark(Vector2 position, {Color? color, double? radius, Vector2? velocity, double? lifetime})
+ParticleSystem.spawnRing(Vector2 position, {Color? color, double? radius, double? lifetime})
+```
+- `Star.ownerId` is a String (who owns it); `Star.id` is an int (identity).
+- `vectorId` and `starId` are always int — never pass a String as an ID.
+
+---
+
+## Dart/Flame API rules — common mistakes to avoid
+- BlendMode: use `BlendMode.plus`. `BlendMode.add` does NOT exist in Flutter.
+- Always `import 'dart:ui';` in files using Color, Canvas, Offset, Paint, MaskFilter, BlendMode, Rect.
+- PositionComponent is NOT const — never `const` its subclass constructors.
+- `flame/geometry.dart` does not exist — remove it if generated.
+- Canvas.drawCircle takes `(Offset, double, Paint)` — not Rect, not Vector2.
+- `flame/components.dart` exports its own `Vector` type. Any file importing both
+  `flame/components.dart` AND `models/vector.dart` MUST hide the Flame one:
+  `import 'package:flame/components.dart' hide Vector;`
+- `.withOpacity()` is deprecated — use `.withAlpha(int 0–255)`.
+- `.normalized()` does not exist — use `..normalize()` (mutates) or `clone()..normalize()`.
+- Mixin constraints: `on` requires a concrete class, never a type parameter.
+  WRONG: `mixin Foo<T extends Component> on T`
+  RIGHT: `mixin Foo on PositionComponent`
+- `nova.dart` does NOT exist. The fused unit class is `Vector` in `lib/models/vector.dart`.
+- `package:flame/game.dart` — ONLY import this in `lib/game/astro_game.dart` (which extends
+  FlameGame) and `lib/main.dart` (which uses Flame's GameWidget). Every other file must use
+  `package:flame/components.dart` instead. flame/game.dart re-exports vector_math, causing
+  ambiguity wherever `models/vector.dart` is also in scope.
+  WRONG (in any file other than astro_game.dart / main.dart):
+    `import 'package:flame/game.dart';`
+  RIGHT: `import 'package:flame/components.dart';`
+- `lib/game/game_widget.dart` — do NOT import `package:flame/game.dart` here. `GameWidget`
+  in that file is a plain Flutter `ConsumerWidget` wrapping a `child` with `CombatScoreWidget`
+  in a Stack. Flame's GameWidget is handled in `main.dart`.
+- `BitmapFont` does NOT exist in Flame. Use `TextPaint` for text rendering.
+- Import paths from `lib/game/` to `lib/components/` use `'../components/...'` (one level up).
+  WRONG: `import 'components/combat_score_text_component.dart';`
+  RIGHT: `import '../components/combat_score_text_component.dart';`
+- Do NOT write `flame.GameWidget<T, overlays: [...]>` — that is not valid Dart syntax.
+  Overlays are configured via the `overlayBuilderMap` and `initialActiveOverlays` parameters.
+
+---
+
+## flame_audio API — exact methods only
+Import: `import 'package:flame_audio/flame_audio.dart';`
+
+| Call | What it does |
+|------|-------------|
+| `FlameAudio.bgm.play(filename, {double volume})` | Loop background sound |
+| `FlameAudio.bgm.stop()` | Stop loop |
+| `FlameAudio.play(filename, {double? volume})` | One-shot SFX |
+| `FlameAudio.audioCache.loadAll([...])` | Preload assets |
+
+Classes that do NOT exist: `SoundManager`, `SoundPlayer`, `FlameAudioPlayer`,
+`AudioCache` (direct), `FlameAudio.stopAll()`, `FlameAudio.play(..., isLooping: ...)`.
+
+`AudioService` is implemented in `lib/game/audio_service.dart` — do not rewrite it.
+
+---
+
+## Emulator / device tasks
+Tasks phrased as "Run on Android Emulator" or "Verify on device":
+1. Confirm `flutter analyze` passes with 0 errors.
+2. Mark DONE in CHANGELOG.md as "Verified: static analysis clean".
+3. Do NOT loop or retry. Move to the next task immediately.
+
+---
+
+## CHANGELOG rules
+- CHANGELOG.md entries must ONLY contain human-readable change descriptions.
+- NEVER write API error messages or "DEPRECATION ERROR:" text into CHANGELOG.md.
+- If you cannot complete a task, leave CHANGELOG.md unchanged.
+
+---
+
+## Packages — pubspec.yaml is LOCKED, do not add others
+Runtime: `flame`, `flame_audio`, `flutter_riverpod`, `vector_math`,
+         `firebase_core`, `cloud_firestore`, `cloud_functions`
+Dev: `flutter_test`, `flutter_lints`
+
+Not available: `shared_preferences`, `mockito`, `http`, `go_router`.
+Firebase IS configured — use `GcpSyncHandler` for cloud calls and
+`cloud_functions` for callable Cloud Functions.
+
+---
+
+## Lint rules
+- `flutter analyze --no-fatal-infos --no-fatal-warnings` must return exit code 0.
+- Use `const` on any constructor call where ALL arguments are compile-time constants.
+- Every test file inside `lib/` MUST start with:
+  `// ignore_for_file: depend_on_referenced_packages`
+- Every `README.dart` file MUST start with: `// ignore_for_file: file_names`
+
+---
+
+## Testing rules
+- No `mockito`, no `shared_preferences` in tests.
+- Use plain Riverpod `ProviderContainer` overrides for dependency injection.
+- Test files under `lib/` use relative imports.
+- Test files under `test/` use `package:astro_flux/...` imports.
+
+---
+
+## LOCKED FILES — do not rewrite during any task
+Permitted edits only: targeted bug fixes. Never restructure or change APIs.
+
+- `lib/systems/persistence_service.dart`
+- `lib/models/game_state.dart`
+- `lib/components/combat_particle_component.dart`
+- `lib/components/neon_renderer.dart`
+- `lib/game/audio_service.dart`
+- `lib/game/audio_player.dart`  (intentional stub — do not add code)
+
+If the task is "Document…", "Write changelog…", or "Analyze…", your ONLY
+permitted output files are: CHANGELOG.md, ROADMAP.md, docs/*.md, or new
+standalone markdown files. Do not touch any .dart files during these tasks.
+
+---
+
+## What NOT to do
+- Do not add packages without checking pub.dev.
+- Do not commit secrets or .env files.
+- Do not use GoRouter or named routes — this is a game, not a multi-screen app.
+- Do not render game state using Material widgets inside the Flame canvas.
+- Do not invent model fields — use only what is listed in "Current model schema".
+- Do not write stub method bodies. See anti-stub rule at the top of this file.

@@ -1,0 +1,22 @@
+## Generated files
+bin/cache
+build
+
+## Dart package files
+*.iml
+.pub-cache
+
+## IDE files
+.idea
+.vscode
+*.swp
+*.swo
+
+## OS files
+.DS_Store
+Thumbs.db
+
+## Logs
+*.log
+*.pid
+*.pid.lock

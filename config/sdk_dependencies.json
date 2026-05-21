@@ -1,0 +1,16 @@
+{
+  "android": {
+    "minSdkVersion": 23,
+    "targetSdkVersion": 34,
+    "compileSdkVersion": 34,
+    "dependencies": [
+      "com.google.gms:google-services"
+    ]
+  },
+  "ios": {
+    "deploymentTarget": "13.0",
+    "dependencies": [
+      "FirebaseCrashlytics"
+    ]
+  }
+}

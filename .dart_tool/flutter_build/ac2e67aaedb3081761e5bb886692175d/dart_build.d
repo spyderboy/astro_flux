@@ -1,0 +1,1 @@
+ /Users/joseantoniolicon/Code/astro_flux/.dart_tool/flutter_build/ac2e67aaedb3081761e5bb886692175d/dart_build_result.json:  /Users/joseantoniolicon/Code/astro_flux/.dart_tool/package_config.json /Users/joseantoniolicon/Code/astro_flux/pubspec.yaml /opt/homebrew/share/flutter/bin/cache/dart-sdk/version
