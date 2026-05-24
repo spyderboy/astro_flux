@@ -1,14 +1,14 @@
 {
-  "generated": "2026-05-21",
+  "generated": "2026-05-24",
   "project": "astro_flux",
   "total": 81,
   "tasks": [
     {
       "id": 0,
-      "description": "Create and add CombatScoreWidget TextComponent in GameWidget in lib/game/game_widget.dart",
-      "short": "Create and add CombatScoreWidget TextComponent in GameWidget in lib/game/game_widget.dart",
+      "description": "Create SiegeEffectComponent visual effect at star world position in lib/components/siege_effect_component.dart",
+      "short": "Create SiegeEffectComponent visual effect at star world position in lib/components/siege_effect_component.dart",
       "files": [
-        "lib/game/game_widget.dart"
+        "lib/components/siege_effect_component.dart"
       ],
       "depends_on": [],
       "status": "pending",
@@ -16,874 +16,35 @@
     },
     {
       "id": 1,
-      "description": "Create HUD overlay for mote and vector counts in GameWidget in lib/game/game_widget.dart",
-      "short": "Create HUD overlay for mote and vector counts in GameWidget in lib/game/game_widget.dart",
-      "files": [
-        "lib/game/game_widget.dart"
-      ],
-      "depends_on": [
-        0
-      ],
+      "description": "Create and add CombatScoreWidget TextComponent to display current player score \u2014 done when: score is visible on the HUD.",
+      "short": "Create and add CombatScoreWidget TextComponent to display current player score",
+      "files": [],
+      "depends_on": [],
       "status": "pending",
       "tier_history": []
     },
     {
       "id": 2,
-      "description": "Create burst animation at centroid when combine succeeds in lib/components/burst_animation_component.dart",
-      "short": "Create burst animation at centroid when combine succeeds in lib/components/burst_animation_component.dart",
-      "files": [
-        "lib/components/burst_animation_component.dart"
-      ],
+      "description": "Define StarSiegeEvent class to handle enemy star siege events \u2014 done when: siege event class exists with proper attributes.",
+      "short": "Define StarSiegeEvent class to handle enemy star siege events",
+      "files": [],
       "depends_on": [],
       "status": "pending",
       "tier_history": []
     },
     {
       "id": 3,
-      "description": "Add method _handleCombineSuccess to CombineOrderHandler in lib/game/combine_order_handler.dart",
-      "short": "Add method _handleCombineSuccess to CombineOrderHandler in lib/game/combine_order_handler.dart",
-      "files": [
-        "lib/game/combine_order_handler.dart"
+      "description": "Create SiegeEffectComponent to display visual effects at captured star positions \u2014 done when: visual effects are visible when stars are captured.",
+      "short": "Create SiegeEffectComponent to display visual effects at captured star positions",
+      "files": [],
+      "depends_on": [
+        0
       ],
-      "depends_on": [],
       "status": "pending",
       "tier_history": []
     },
     {
       "id": 4,
-      "description": "Update Star model with tiers and power pools in lib/models/star.dart",
-      "short": "Update Star model with tiers and power pools in lib/models/star.dart",
-      "files": [
-        "lib/models/star.dart"
-      ],
-      "depends_on": [
-        0
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 5,
-      "description": "Implement siege logic in UnitCombatResolver in lib/game/unit_combat_resolver.dart",
-      "short": "Implement siege logic in UnitCombatResolver in lib/game/unit_combat_resolver.dart",
-      "files": [
-        "lib/game/unit_combat_resolver.dart"
-      ],
-      "depends_on": [],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 6,
-      "description": "Create visual pulse on star each time a unit arrives in lib/components/pulse_effect_component.dart",
-      "short": "Create visual pulse on star each time a unit arrives in lib/components/pulse_effect_component.dart",
-      "files": [
-        "lib/components/pulse_effect_component.dart"
-      ],
-      "depends_on": [],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 7,
-      "description": "Add method _handleUnitArrival to GameStateNotifier in lib/game/game_state_notifier.dart",
-      "short": "Add method _handleUnitArrival to GameStateNotifier in lib/game/game_state_notifier.dart",
-      "files": [
-        "lib/game/game_state_notifier.dart"
-      ],
-      "depends_on": [
-        3
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 8,
-      "description": "Define UnitAttackEvent class in lib/models/unit_attack_event.dart",
-      "short": "Define UnitAttackEvent class in lib/models/unit_attack_event.dart",
-      "files": [
-        "lib/models/unit_attack_event.dart"
-      ],
-      "depends_on": [],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 9,
-      "description": "Implement combat logic in UnitCombatResolver.tick() in lib/game/unit_combat_resolver.dart",
-      "short": "Implement combat logic in UnitCombatResolver.tick() in lib/game/unit_combat_resolver.dart",
-      "files": [
-        "lib/game/unit_combat_resolver.dart"
-      ],
-      "depends_on": [
-        5
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 10,
-      "description": "Create CombatParticleComponent demolish effect at unit world position in lib/components/combat_particle_component.dart",
-      "short": "Create CombatParticleComponent demolish effect at unit world position in lib/components/combat_particle_component.dart",
-      "files": [
-        "lib/components/combat_particle_component.dart"
-      ],
-      "depends_on": [],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 11,
-      "description": "Add method _handleUnitCombat to UnitCombatResolver in lib/game/unit_combat_resolver.dart",
-      "short": "Add method _handleUnitCombat to UnitCombatResolver in lib/game/unit_combat_resolver.dart",
-      "files": [
-        "lib/game/unit_combat_resolver.dart"
-      ],
-      "depends_on": [
-        3,
-        9
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 12,
-      "description": "Update MoteComponent rendering with world position in lib/components/mote_component.dart",
-      "short": "Update MoteComponent rendering with world position in lib/components/mote_component.dart",
-      "files": [
-        "lib/components/mote_component.dart"
-      ],
-      "depends_on": [],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 13,
-      "description": "Implement reinforce logic in CombineOrderHandler in lib/game/combine_order_handler.dart",
-      "short": "Implement reinforce logic in CombineOrderHandler in lib/game/combine_order_handler.dart",
-      "files": [
-        "lib/game/combine_order_handler.dart"
-      ],
-      "depends_on": [
-        3
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 14,
-      "description": "Create HUD overlay showing captured stars vs total in GameWidget in lib/game/game_widget.dart",
-      "short": "Create HUD overlay showing captured stars vs total in GameWidget in lib/game/game_widget.dart",
-      "files": [
-        "lib/game/game_widget.dart"
-      ],
-      "depends_on": [
-        1
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 15,
-      "description": "Add method _handleReinforceSuccess to CombineOrderHandler in lib/game/combine_order_handler.dart",
-      "short": "Add method _handleReinforceSuccess to CombineOrderHandler in lib/game/combine_order_handler.dart",
-      "files": [
-        "lib/game/combine_order_handler.dart"
-      ],
-      "depends_on": [
-        3,
-        13
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 16,
-      "description": "Define UnitHealEvent class in lib/models/unit_heal_event.dart",
-      "short": "Define UnitHealEvent class in lib/models/unit_heal_event.dart",
-      "files": [
-        "lib/models/unit_heal_event.dart"
-      ],
-      "depends_on": [],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 17,
-      "description": "Implement healing logic in GameStateNotifier in lib/game/game_state_notifier.dart",
-      "short": "Implement healing logic in GameStateNotifier in lib/game/game_state_notifier.dart",
-      "files": [
-        "lib/game/game_state_notifier.dart"
-      ],
-      "depends_on": [
-        7
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 18,
-      "description": "Create burst animation at centroid when heal succeeds in lib/components/heal_animation_component.dart",
-      "short": "Create burst animation at centroid when heal succeeds in lib/components/heal_animation_component.dart",
-      "files": [
-        "lib/components/heal_animation_component.dart"
-      ],
-      "depends_on": [
-        2
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 19,
-      "description": "Add method _handleUnitHeal to GameStateNotifier in lib/game/game_state_notifier.dart",
-      "short": "Add method _handleUnitHeal to GameStateNotifier in lib/game/game_state_notifier.dart",
-      "files": [
-        "lib/game/game_state_notifier.dart"
-      ],
-      "depends_on": [
-        3,
-        17
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 20,
-      "description": "Update Star model with maxTier and accumulatedPower in lib/models/star.dart",
-      "short": "Update Star model with maxTier and accumulatedPower in lib/models/star.dart",
-      "files": [
-        "lib/models/star.dart"
-      ],
-      "depends_on": [
-        0,
-        4
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 21,
-      "description": "Implement power pooling logic in UnitCombatResolver in lib/game/unit_combat_resolver.dart",
-      "short": "Implement power pooling logic in UnitCombatResolver in lib/game/unit_combat_resolver.dart",
-      "files": [
-        "lib/game/unit_combat_resolver.dart"
-      ],
-      "depends_on": [
-        11
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 22,
-      "description": "Create HUD overlay showing current health and maxHealth of selected units in GameWidget in lib/game/game_widget.dart",
-      "short": "Create HUD overlay showing current health and maxHealth of selected units in GameWidget in lib/game/game_widget.dart",
-      "files": [
-        "lib/game/game_widget.dart"
-      ],
-      "depends_on": [
-        0,
-        1,
-        14
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 23,
-      "description": "Add method _handleStarCapture to GameStateNotifier in lib/game/game_state_notifier.dart",
-      "short": "Add method _handleStarCapture to GameStateNotifier in lib/game/game_state_notifier.dart",
-      "files": [
-        "lib/game/game_state_notifier.dart"
-      ],
-      "depends_on": [
-        3,
-        19
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 24,
-      "description": "Define StarSiegeEvent class in lib/models/star_siege_event.dart",
-      "short": "Define StarSiegeEvent class in lib/models/star_siege_event.dart",
-      "files": [
-        "lib/models/star_siege_event.dart"
-      ],
-      "depends_on": [],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 25,
-      "description": "Implement siege logic in UnitCombatResolver.tick() in lib/game/unit_combat_resolver.dart",
-      "short": "Implement siege logic in UnitCombatResolver.tick() in lib/game/unit_combat_resolver.dart",
-      "files": [
-        "lib/game/unit_combat_resolver.dart"
-      ],
-      "depends_on": [
-        5,
-        21
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 26,
-      "description": "Create SiegeEffectComponent visual effect at star world position in lib/components/siege_effect_component.dart",
-      "short": "Create SiegeEffectComponent visual effect at star world position in lib/components/siege_effect_component.dart",
-      "files": [
-        "lib/components/siege_effect_component.dart"
-      ],
-      "depends_on": [
-        6
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 27,
-      "description": "Add _updateGameState method to AstroGame in lib/game/astro_game.dart",
-      "short": "Add _updateGameState method to AstroGame in lib/game/astro_game.dart",
-      "files": [
-        "lib/game/astro_game.dart"
-      ],
-      "depends_on": [
-        3
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 28,
-      "description": "Update Mote model with lifecycle state machine in lib/models/mote.dart \u2014 done when: motes have states (created, active, fused).",
-      "short": "Update Mote model with lifecycle state machine in lib/models/mote.dart",
-      "files": [
-        "lib/models/mote.dart"
-      ],
-      "depends_on": [],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 29,
-      "description": "Implement capture logic in CombatAttackHandler in lib/game/combat_attack_handler.dart \u2014 done when: successful captures update player's stars and vectors.",
-      "short": "Implement capture logic in CombatAttackHandler in lib/game/combat_attack_handler.dart",
-      "files": [
-        "lib/game/combat_attack_handler.dart"
-      ],
-      "depends_on": [],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 30,
-      "description": "Add method _updateFusionIndicator to AstroGame in lib/game/astro_game.dart \u2014 done when: fusion indicator updates based on pending motes.",
-      "short": "Add method _updateFusionIndicator to AstroGame in lib/game/astro_game.dart",
-      "files": [
-        "lib/game/astro_game.dart"
-      ],
-      "depends_on": [
-        3,
-        27
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 31,
-      "description": "Define StarLevelUpEvent class in lib/models/star_level_up_event.dart \u2014 done when: event exists for capturing stars and leveling up.",
-      "short": "Define StarLevelUpEvent class in lib/models/star_level_up_event.dart",
-      "files": [
-        "lib/models/star_level_up_event.dart"
-      ],
-      "depends_on": [],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 32,
-      "description": "Implement VictoryRules.checkVictoryConditions() in GameStateNotifier in lib/game/game_state_notifier.dart \u2014 done when: game checks for victory conditions and triggers game over or win state.",
-      "short": "Implement VictoryRules.checkVictoryConditions() in GameStateNotifier in lib/game/game_state_notifier.dart",
-      "files": [
-        "lib/game/game_state_notifier.dart"
-      ],
-      "depends_on": [
-        23
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 33,
-      "description": "Create WelcomeScreen StatefulWidget in lib/screens/welcome_screen.dart \u2014 done when: welcome screen with START button is shown.",
-      "short": "Create WelcomeScreen StatefulWidget in lib/screens/welcome_screen.dart",
-      "files": [
-        "lib/screens/welcome_screen.dart"
-      ],
-      "depends_on": [],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 34,
-      "description": "Add method _handleCaptureSuccess to CombatAttackHandler in lib/game/combat_attack_handler.dart \u2014 done when: capture success triggers UI feedback.",
-      "short": "Add method _handleCaptureSuccess to CombatAttackHandler in lib/game/combat_attack_handler.dart",
-      "files": [
-        "lib/game/combat_attack_handler.dart"
-      ],
-      "depends_on": [
-        3,
-        29
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 35,
-      "description": "Update MoteComponent rendering with neon glow in lib/components/mote_component.dart \u2014 done when: motes are rendered with a neon glow effect.",
-      "short": "Update MoteComponent rendering with neon glow in lib/components/mote_component.dart",
-      "files": [
-        "lib/components/mote_component.dart"
-      ],
-      "depends_on": [
-        12
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 36,
-      "description": "Implement move logic in MoveOrderHandler in lib/game/move_order_handler.dart \u2014 done when: units move toward tapped positions on the map.",
-      "short": "Implement move logic in MoveOrderHandler in lib/game/move_order_handler.dart",
-      "files": [
-        "lib/game/move_order_handler.dart"
-      ],
-      "depends_on": [],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 37,
-      "description": "Add method _handleMoveComplete to MoveOrderHandler in lib/game/move_order_handler.dart \u2014 done when: move completion triggers any necessary UI updates.",
-      "short": "Add method _handleMoveComplete to MoveOrderHandler in lib/game/move_order_handler.dart",
-      "files": [
-        "lib/game/move_order_handler.dart"
-      ],
-      "depends_on": [
-        3,
-        36
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 38,
-      "description": "Define CombineOrderEvent class in lib/models/combine_order_event.dart \u2014 done when: event exists for combining units.",
-      "short": "Define CombineOrderEvent class in lib/models/combine_order_event.dart",
-      "files": [
-        "lib/models/combine_order_event.dart"
-      ],
-      "depends_on": [],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 39,
-      "description": "Implement long press gesture detection in GestureHandler in lib/game/gesture_handler.dart \u2014 done when: long press triggers a combine or siege event.",
-      "short": "Implement long press gesture detection in GestureHandler in lib/game/gesture_handler.dart",
-      "files": [
-        "lib/game/gesture_handler.dart"
-      ],
-      "depends_on": [],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 40,
-      "description": "Implement siege logic in UnitCombatResolver tick() in lib/game/unit_combat_resolver.dart \u2014 done when: enemy units cause damage to player units during combat.",
-      "short": "Implement siege logic in UnitCombatResolver tick() in lib/game/unit_combat_resolver.dart",
-      "files": [
-        "lib/game/unit_combat_resolver.dart"
-      ],
-      "depends_on": [
-        5,
-        25
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 41,
-      "description": "Add update(dt) to VectorComponent that moves position toward _target at speed px/s \u2014 done when: units visibly travel across the screen toward a tapped star.",
-      "short": "Add update(dt) to VectorComponent that moves position toward _target at speed px/s",
-      "files": [],
-      "depends_on": [],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 42,
-      "description": "Implement move logic in MoveOrderHandler to handle unit movement based on target positions \u2014 done when: selected units move to tap coordinates.",
-      "short": "Implement move logic in MoveOrderHandler to handle unit movement based on target positions",
-      "files": [],
-      "depends_on": [
-        36
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 43,
-      "description": "Create and add CombatScoreWidget TextComponent to display current player score \u2014 done when: score is visible on the HUD.",
-      "short": "Create and add CombatScoreWidget TextComponent to display current player score",
-      "files": [],
-      "depends_on": [
-        0
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 44,
-      "description": "Define StarLevelUpEvent class with parameters for star ID and new level \u2014 done when: event class exists with proper attributes.",
-      "short": "Define StarLevelUpEvent class with parameters for star ID and new level",
-      "files": [],
-      "depends_on": [
-        0,
-        31
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 45,
-      "description": "Implement VictoryRules.checkVictoryConditions() in GameStateNotifier to check for win/lose conditions \u2014 done when: victory rules are checked each tick.",
-      "short": "Implement VictoryRules.checkVictoryConditions() in GameStateNotifier to check for win/lose conditions",
-      "files": [],
-      "depends_on": [
-        32
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 46,
-      "description": "Create WelcomeScreen StatefulWidget with START button and game title \u2014 done when: welcome screen is shown on cold start.",
-      "short": "Create WelcomeScreen StatefulWidget with START button and game title",
-      "files": [],
-      "depends_on": [
-        0,
-        33
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 47,
-      "description": "Add method _handleCaptureSuccess in CombatAttackHandler to handle successful star captures \u2014 done when: player's captured stars update on capture.",
-      "short": "Add method _handleCaptureSuccess in CombatAttackHandler to handle successful star captures",
-      "files": [],
-      "depends_on": [
-        3
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 48,
-      "description": "Update MoteComponent rendering with neon glow effect using NeonRenderer \u2014 done when: motes are rendered with a neon glow.",
-      "short": "Update MoteComponent rendering with neon glow effect using NeonRenderer",
-      "files": [],
-      "depends_on": [
-        41
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 49,
-      "description": "Define StarSiegeEvent class to handle enemy star siege events \u2014 done when: siege event class exists with proper attributes.",
-      "short": "Define StarSiegeEvent class to handle enemy star siege events",
-      "files": [],
-      "depends_on": [
-        5,
-        24
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 50,
-      "description": "Implement siege logic in UnitCombatResolver.tick() for player and enemy unit interactions \u2014 done when: enemy units damage player units during combat.",
-      "short": "Implement siege logic in UnitCombatResolver.tick() for player and enemy unit interactions",
-      "files": [],
-      "depends_on": [
-        0,
-        5
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 51,
-      "description": "Create CombatParticleComponent to display demolish effects on destroyed units \u2014 done when: particle effects are visible when units are destroyed.",
-      "short": "Create CombatParticleComponent to display demolish effects on destroyed units",
-      "files": [],
-      "depends_on": [
-        10
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 52,
-      "description": "Add method _handleUnitCombat in UnitCombatResolver to handle combat between player and enemy units \u2014 done when: combat events trigger proper visual and audio effects.",
-      "short": "Add method _handleUnitCombat in UnitCombatResolver to handle combat between player and enemy units",
-      "files": [],
-      "depends_on": [
-        0,
-        3,
-        9
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 53,
-      "description": "Update Mote model with lifecycle states (created, active, fused) \u2014 done when: motes have these states.",
-      "short": "Update Mote model with lifecycle states (created, active, fused)",
-      "files": [],
-      "depends_on": [
-        41
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 54,
-      "description": "Implement capture logic in CombatAttackHandler to update player's stars on successful captures \u2014 done when: player's star count updates on capture.",
-      "short": "Implement capture logic in CombatAttackHandler to update player's stars on successful captures",
-      "files": [],
-      "depends_on": [
-        29,
-        41
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 55,
-      "description": "Create HUD overlay for mote and vector counts using TextComponent \u2014 done when: mote and vector counts are displayed on the HUD.",
-      "short": "Create HUD overlay for mote and vector counts using TextComponent",
-      "files": [],
-      "depends_on": [
-        0,
-        1
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 56,
-      "description": "Add method _handleMoveComplete in MoveOrderHandler to handle completion of unit movement orders \u2014 done when: move completion triggers any necessary UI updates.",
-      "short": "Add method _handleMoveComplete in MoveOrderHandler to handle completion of unit movement orders",
-      "files": [],
-      "depends_on": [
-        3
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 57,
-      "description": "Define CombineOrderEvent class for combining units \u2014 done when: combine event class exists with proper attributes.",
-      "short": "Define CombineOrderEvent class for combining units",
-      "files": [],
-      "depends_on": [
-        38
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 58,
-      "description": "Implement reinforce logic in CombineOrderHandler to handle unit reinforcements based on power pools \u2014 done when: successful reinforcements update game state.",
-      "short": "Implement reinforce logic in CombineOrderHandler to handle unit reinforcements based on power pools",
-      "files": [],
-      "depends_on": [
-        13,
-        21
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 59,
-      "description": "Create burst animation at centroid when combine succeeds using AnimationController and Flame SpriteSheet \u2014 done when: successful combines trigger an animated effect.",
-      "short": "Create burst animation at centroid when combine succeeds using AnimationController and Flame SpriteSheet",
-      "files": [],
-      "depends_on": [
-        0,
-        2
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 60,
-      "description": "Add method _handleCombineSuccess in CombineOrderHandler to handle successful combine events \u2014 done when: combine success updates game state and triggers UI effects.",
-      "short": "Add method _handleCombineSuccess in CombineOrderHandler to handle successful combine events",
-      "files": [],
-      "depends_on": [
-        3
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 61,
-      "description": "Update Star model with properties for current tier, accumulated power, and max tier \u2014 done when: stars have these new properties.",
-      "short": "Update Star model with properties for current tier, accumulated power, and max tier",
-      "files": [],
-      "depends_on": [
-        0,
-        21,
-        41
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 62,
-      "description": "Implement siege logic in UnitCombatResolver.tick() for enemy units capturing player stars \u2014 done when: enemy units can capture player stars during combat.",
-      "short": "Implement siege logic in UnitCombatResolver.tick() for enemy units capturing player stars",
-      "files": [],
-      "depends_on": [
-        5
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 63,
-      "description": "Create SiegeEffectComponent to display visual effects at captured star positions \u2014 done when: visual effects are visible when stars are captured.",
-      "short": "Create SiegeEffectComponent to display visual effects at captured star positions",
-      "files": [],
-      "depends_on": [
-        6,
-        26
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 64,
-      "description": "Add method _handleUnitArrival in GameStateNotifier to handle units arriving at stars \u2014 done when: units arriving at stars update game state and trigger visual effects.",
-      "short": "Add method _handleUnitArrival in GameStateNotifier to handle units arriving at stars",
-      "files": [],
-      "depends_on": [
-        3
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 65,
-      "description": "Define UnitHealEvent class for unit healing events \u2014 done when: heal event class exists with proper attributes.",
-      "short": "Define UnitHealEvent class for unit healing events",
-      "files": [],
-      "depends_on": [
-        16,
-        17
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 66,
-      "description": "Implement healing logic in GameStateNotifier to handle unit healing based on available resources \u2014 done when: units are healed and UI is updated accordingly.",
-      "short": "Implement healing logic in GameStateNotifier to handle unit healing based on available resources",
-      "files": [],
-      "depends_on": [
-        17
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 67,
-      "description": "Create burst animation at centroid when heal succeeds using AnimationController and Flame SpriteSheet \u2014 done when: successful heals trigger an animated effect.",
-      "short": "Create burst animation at centroid when heal succeeds using AnimationController and Flame SpriteSheet",
-      "files": [],
-      "depends_on": [
-        0,
-        2
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 68,
-      "description": "Add method _handleUnitHeal in GameStateNotifier to handle successful heal events \u2014 done when: heal success updates game state and triggers UI effects.",
-      "short": "Add method _handleUnitHeal in GameStateNotifier to handle successful heal events",
-      "files": [],
-      "depends_on": [
-        3
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 69,
-      "description": "Update MoteComponent rendering with world position for accurate visual representation on the map \u2014 done when: motes are rendered at their correct positions.",
-      "short": "Update MoteComponent rendering with world position for accurate visual representation on the map",
-      "files": [],
-      "depends_on": [
-        6,
-        41
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 70,
-      "description": "Implement reinforce logic in CombineOrderHandler to handle combining of damaged units based on incoming power \u2014 done when: successful reinforcements update game state and trigger UI effects.",
-      "short": "Implement reinforce logic in CombineOrderHandler to handle combining of damaged units based on incoming power",
-      "files": [],
-      "depends_on": [
-        13,
-        21
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 71,
-      "description": "Create HUD overlay showing captured stars vs total using TextComponent \u2014 done when: captured star count is displayed on the HUD.",
-      "short": "Create HUD overlay showing captured stars vs total using TextComponent",
-      "files": [],
-      "depends_on": [
-        1
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 72,
-      "description": "Add method _handleReinforceSuccess in CombineOrderHandler to handle successful reinforce events \u2014 done when: reinforce success triggers UI feedback.",
-      "short": "Add method _handleReinforceSuccess in CombineOrderHandler to handle successful reinforce events",
-      "files": [],
-      "depends_on": [
-        3,
-        13
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 73,
       "description": "Define VictoryCondition enum for different game end conditions \u2014 done when: victory condition enum exists with proper values.",
       "short": "Define VictoryCondition enum for different game end conditions",
       "files": [],
@@ -892,82 +53,820 @@
       "tier_history": []
     },
     {
-      "id": 74,
-      "description": "Implement VictoryRules.checkVictoryConditions() in GameStateNotifier to check for win/lose based on VictoryCondition \u2014 done when: game checks for victory conditions and triggers game over or win state.",
-      "short": "Implement VictoryRules.checkVictoryConditions() in GameStateNotifier to check for win/lose based on VictoryCondition",
-      "files": [],
-      "depends_on": [
-        32,
-        73
-      ],
-      "status": "pending",
-      "tier_history": []
-    },
-    {
-      "id": 75,
-      "description": "Create GameOverOverlay widget to display game over screen \u2014 done when: game over screen is shown upon losing the game.",
-      "short": "Create GameOverOverlay widget to display game over screen",
+      "id": 5,
+      "description": "Fix test API mismatches in test/game/combat_attack_handler_test.dart (33 errors): complete stub method bodies in test/game/combat_attack_handler_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/combat_attack_handler_test.dart",
+      "short": "Fix test API mismatches in test/game/combat_attack_handler_test.dart (33 errors): complete stub method bodies in test/game/combat_attack_handler_test.dart",
       "files": [],
       "depends_on": [],
       "status": "pending",
       "tier_history": []
     },
     {
-      "id": 76,
-      "description": "Add method triggerGameOver(GameOverReason reason) in GameStateNotifier to handle game end scenarios \u2014 done when: game over triggers with correct reason and UI updates.",
-      "short": "Add method triggerGameOver(GameOverReason reason) in GameStateNotifier to handle game end scenarios",
-      "files": [],
+      "id": 6,
+      "description": "Fix test API mismatches in lib/components/mote_component_test.dart (23 errors): add missing param 'glowRadius'; add missing param 'neonColor'; remove illegal const; add missing param 'state'; +2 more in lib/components/mote_component_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/components/mote_component_test.dart",
+      "short": "Fix test API mismatches in lib/components/mote_component_test.dart (23 errors): add missing param 'glowRadius'; add missing param 'neonColor'; remove illegal const; add missing param 'state'; +2 more in lib/components/mote_component_test.dart",
+      "files": [
+        "lib/components/mote_component_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 7,
+      "description": "Fix test API mismatches in lib/components/particle_component_test.dart (20 errors): add missing param 'age'; add missing param 'isRing'; add missing param 'lifetime'; add missing param 'radius'; +4 more in lib/components/particle_component_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/components/particle_component_test.dart",
+      "short": "Fix test API mismatches in lib/components/particle_component_test.dart (20 errors): add missing param 'age'; add missing param 'isRing'; add missing param 'lifetime'; add missing param 'radius'; +4 more in lib/components/particle_component_test.dart",
+      "files": [
+        "lib/components/particle_component_test.dart"
+      ],
       "depends_on": [
-        3
+        6
       ],
       "status": "pending",
       "tier_history": []
     },
     {
-      "id": 77,
-      "description": "Update WelcomeScreen to include brief one-line rule summary \u2014 done when: welcome screen displays a concise game rule on cold start.",
-      "short": "Update WelcomeScreen to include brief one-line rule summary",
+      "id": 8,
+      "description": "Fix test API mismatches in test/game/gcp_sync_handler_test.dart (19 errors): add missing param 'state'; fix miscellaneous error; resolve undefined name 'Gameconst'; fix undefined function 'State'; +5 more in test/game/gcp_sync_handler_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/gcp_sync_handler_test.dart",
+      "short": "Fix test API mismatches in test/game/gcp_sync_handler_test.dart (19 errors): add missing param 'state'; fix miscellaneous error; resolve undefined name 'Gameconst'; fix undefined function 'State'; +5 more in test/game/gcp_sync_handler_test.dart",
       "files": [],
       "depends_on": [
-        33,
-        41
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 9,
+      "description": "Fix test API mismatches in test/components/star_defense_component_test.dart (16 errors): fix miscellaneous error; fix missing member on 'GameStateNotifier'; fix type mismatch; fix undefined getter 'state'; +1 more in test/components/star_defense_component_test.dart \u2014 done when: flutter analyze reports 0 errors for test/components/star_defense_component_test.dart",
+      "short": "Fix test API mismatches in test/components/star_defense_component_test.dart (16 errors): fix miscellaneous error; fix missing member on 'GameStateNotifier'; fix type mismatch; fix undefined getter 'state'; +1 more in test/components/star_defense_component_test.dart",
+      "files": [],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 10,
+      "description": "Fix test API mismatches in lib/game/capture_rules_test.dart (15 errors): fix broken import 'fake_async.dart'; add missing param 'state'; fix missing member on 'CaptureRules'; fix undefined function 'fakeAsync'; +2 more in lib/game/capture_rules_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/game/capture_rules_test.dart",
+      "short": "Fix test API mismatches in lib/game/capture_rules_test.dart (15 errors): fix broken import 'fake_async.dart'; add missing param 'state'; fix missing member on 'CaptureRules'; fix undefined function 'fakeAsync'; +2 more in lib/game/capture_rules_test.dart",
+      "files": [
+        "lib/game/capture_rules_test.dart"
+      ],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 11,
+      "description": "Fix test API mismatches in test/integration/fusion_effect_service_test.dart (15 errors): fix broken import 'fusion_effect_service.dart'; fix miscellaneous error; fix undefined function 'GameStateNotifier'; fix undefined function 'FusionEffectService'; +6 more in test/integration/fusion_effect_service_test.dart \u2014 done when: flutter analyze reports 0 errors for test/integration/fusion_effect_service_test.dart",
+      "short": "Fix test API mismatches in test/integration/fusion_effect_service_test.dart (15 errors): fix broken import 'fusion_effect_service.dart'; fix miscellaneous error; fix undefined function 'GameStateNotifier'; fix undefined function 'FusionEffectService'; +6 more in test/integration/fusion_effect_service_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 12,
+      "description": "Fix test API mismatches in lib/game/fuse_motes_test.dart (14 errors): fix wrong constructor arg count; fix miscellaneous error; remove void-result usage; resolve undefined name 'moteCountProvider' in lib/game/fuse_motes_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/game/fuse_motes_test.dart",
+      "short": "Fix test API mismatches in lib/game/fuse_motes_test.dart (14 errors): fix wrong constructor arg count; fix miscellaneous error; remove void-result usage; resolve undefined name 'moteCountProvider' in lib/game/fuse_motes_test.dart",
+      "files": [
+        "lib/game/fuse_motes_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 13,
+      "description": "Fix test API mismatches in lib/models/game_state_test.dart (14 errors): fix non-const value in const decl; remove illegal const; add missing param 'state'; fix miscellaneous error in lib/models/game_state_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/models/game_state_test.dart",
+      "short": "Fix test API mismatches in lib/models/game_state_test.dart (14 errors): fix non-const value in const decl; remove illegal const; add missing param 'state'; fix miscellaneous error in lib/models/game_state_test.dart",
+      "files": [
+        "lib/models/game_state_test.dart"
+      ],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 14,
+      "description": "Fix test API mismatches in lib/game/combat_attack_handler_test.dart (13 errors): fix broken import 'local_persistence_service.dart'; fix miscellaneous error; fix undefined function 'LocalPersistenceService'; fix type mismatch; +5 more in lib/game/combat_attack_handler_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/game/combat_attack_handler_test.dart",
+      "short": "Fix test API mismatches in lib/game/combat_attack_handler_test.dart (13 errors): fix broken import 'local_persistence_service.dart'; fix miscellaneous error; fix undefined function 'LocalPersistenceService'; fix type mismatch; +5 more in lib/game/combat_attack_handler_test.dart",
+      "files": [
+        "lib/game/combat_attack_handler_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 15,
+      "description": "Fix test API mismatches in test/game/circuit_breaker_test.dart (13 errors): fix broken import 'circuit_breaker.dart'; fix miscellaneous error; fix undefined function 'CircuitBreaker'; resolve undefined name 'CircuitState' in test/game/circuit_breaker_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/circuit_breaker_test.dart",
+      "short": "Fix test API mismatches in test/game/circuit_breaker_test.dart (13 errors): fix broken import 'circuit_breaker.dart'; fix miscellaneous error; fix undefined function 'CircuitBreaker'; resolve undefined name 'CircuitState' in test/game/circuit_breaker_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 16,
+      "description": "Fix test API mismatches in test/game/sparkle_renderer_test.dart (13 errors): fix undefined function 'when'; fix miscellaneous error; fix undefined getter 'spawnSpark'; fix undefined function 'calledOnceWith'; +3 more in test/game/sparkle_renderer_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/sparkle_renderer_test.dart",
+      "short": "Fix test API mismatches in test/game/sparkle_renderer_test.dart (13 errors): fix undefined function 'when'; fix miscellaneous error; fix undefined getter 'spawnSpark'; fix undefined function 'calledOnceWith'; +3 more in test/game/sparkle_renderer_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 17,
+      "description": "Fix test API mismatches in test/game/fusion_test.dart (12 errors): resolve undefined name 'gameServiceProvider'; resolve undefined name 'fusionReadyEventProvider'; fix miscellaneous error in test/game/fusion_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/fusion_test.dart",
+      "short": "Fix test API mismatches in test/game/fusion_test.dart (12 errors): resolve undefined name 'gameServiceProvider'; resolve undefined name 'fusionReadyEventProvider'; fix miscellaneous error in test/game/fusion_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 18,
+      "description": "Fix test API mismatches in test/game/game_over_test.dart (12 errors): resolve undefined name 'gameOverProvider'; resolve undefined name 'GameOverReason'; fix wrong constructor arg count; fix undefined function 'MockGame'; +2 more in test/game/game_over_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/game_over_test.dart",
+      "short": "Fix test API mismatches in test/game/game_over_test.dart (12 errors): resolve undefined name 'gameOverProvider'; resolve undefined name 'GameOverReason'; fix wrong constructor arg count; fix undefined function 'MockGame'; +2 more in test/game/game_over_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 19,
+      "description": "Fix test API mismatches in test/game/mote_count_provider_test.dart (11 errors): fix type mismatch; fix undefined function 'Mote'; fix undefined getter 'notifier' in test/game/mote_count_provider_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/mote_count_provider_test.dart",
+      "short": "Fix test API mismatches in test/game/mote_count_provider_test.dart (11 errors): fix type mismatch; fix undefined function 'Mote'; fix undefined getter 'notifier' in test/game/mote_count_provider_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 20,
+      "description": "Fix test API mismatches in lib/components/particle_system_test.dart (10 errors): fix type mismatch; fix wrong constructor arg count; fix undefined getter 'particles'; resolve undefined name 'ParticleType' in lib/components/particle_system_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/components/particle_system_test.dart",
+      "short": "Fix test API mismatches in lib/components/particle_system_test.dart (10 errors): fix type mismatch; fix wrong constructor arg count; fix undefined getter 'particles'; resolve undefined name 'ParticleType' in lib/components/particle_system_test.dart",
+      "files": [
+        "lib/components/particle_system_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 21,
+      "description": "Fix test API mismatches in test/game/audio_service_test.dart (10 errors): resolve undefined name 'FlameAudio' in test/game/audio_service_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/audio_service_test.dart",
+      "short": "Fix test API mismatches in test/game/audio_service_test.dart (10 errors): resolve undefined name 'FlameAudio' in test/game/audio_service_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 22,
+      "description": "Fix test API mismatches in test/game/capture_event_notifier_test.dart (10 errors): fix broken import 'capture_event_notifier.dart'; fix undefined function 'ProviderContainer'; fix undefined function 'AstroGameStateProvider'; fix undefined function 'CaptureEventNotifier'; +3 more in test/game/capture_event_notifier_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/capture_event_notifier_test.dart",
+      "short": "Fix test API mismatches in test/game/capture_event_notifier_test.dart (10 errors): fix broken import 'capture_event_notifier.dart'; fix undefined function 'ProviderContainer'; fix undefined function 'AstroGameStateProvider'; fix undefined function 'CaptureEventNotifier'; +3 more in test/game/capture_event_notifier_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 23,
+      "description": "Fix test API mismatches in test/game/xp_gain_level_up_boundary_test.dart (10 errors): fix undefined function 'StateNotifierProvider'; fix miscellaneous error; fix wrong constructor arg count; resolve undefined name 'ref' in test/game/xp_gain_level_up_boundary_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/xp_gain_level_up_boundary_test.dart",
+      "short": "Fix test API mismatches in test/game/xp_gain_level_up_boundary_test.dart (10 errors): fix undefined function 'StateNotifierProvider'; fix miscellaneous error; fix wrong constructor arg count; resolve undefined name 'ref' in test/game/xp_gain_level_up_boundary_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 24,
+      "description": "Fix test API mismatches in test/components/attack_line_component_test.dart (9 errors): fix missing member on 'AttackLineComponentTest'; resolve undefined name 'testRenderer'; fix type mismatch; fix wrong constructor arg count; +4 more in test/components/attack_line_component_test.dart \u2014 done when: flutter analyze reports 0 errors for test/components/attack_line_component_test.dart",
+      "short": "Fix test API mismatches in test/components/attack_line_component_test.dart (9 errors): fix missing member on 'AttackLineComponentTest'; resolve undefined name 'testRenderer'; fix type mismatch; fix wrong constructor arg count; +4 more in test/components/attack_line_component_test.dart",
+      "files": [],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 25,
+      "description": "Fix test API mismatches in test/game/combat_attack_event_handler_test.dart (9 errors): fix broken import 'combat_attack_event.dart'; fix broken import 'flutter_vector_math.dart'; fix miscellaneous error; fix undefined function 'CombatAttackHandler'; +4 more in test/game/combat_attack_event_handler_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/combat_attack_event_handler_test.dart",
+      "short": "Fix test API mismatches in test/game/combat_attack_event_handler_test.dart (9 errors): fix broken import 'combat_attack_event.dart'; fix broken import 'flutter_vector_math.dart'; fix miscellaneous error; fix undefined function 'CombatAttackHandler'; +4 more in test/game/combat_attack_event_handler_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 26,
+      "description": "Fix test API mismatches in lib/game/capture_target_animation_test.dart (8 errors): fix undefined function 'Vector2'; resolve undefined name 'Colors'; resolve undefined name 'FlameTester'; fix undefined function 'GameWidget'; +3 more in lib/game/capture_target_animation_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/game/capture_target_animation_test.dart",
+      "short": "Fix test API mismatches in lib/game/capture_target_animation_test.dart (8 errors): fix undefined function 'Vector2'; resolve undefined name 'Colors'; resolve undefined name 'FlameTester'; fix undefined function 'GameWidget'; +3 more in lib/game/capture_target_animation_test.dart",
+      "files": [
+        "lib/game/capture_target_animation_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 27,
+      "description": "Fix test API mismatches in lib/game/collision_performance_test.dart (8 errors): fix miscellaneous error; fix missing member on 'Game'; resolve ambiguous import; fix undefined function 'Star'; +1 more in lib/game/collision_performance_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/game/collision_performance_test.dart",
+      "short": "Fix test API mismatches in lib/game/collision_performance_test.dart (8 errors): fix miscellaneous error; fix missing member on 'Game'; resolve ambiguous import; fix undefined function 'Star'; +1 more in lib/game/collision_performance_test.dart",
+      "files": [
+        "lib/game/collision_performance_test.dart"
+      ],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 28,
+      "description": "Fix test API mismatches in lib/systems/persistence_service_test.dart (8 errors): fix non-const value in const decl; remove illegal const; add missing param 'state' in lib/systems/persistence_service_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/systems/persistence_service_test.dart",
+      "short": "Fix test API mismatches in lib/systems/persistence_service_test.dart (8 errors): fix non-const value in const decl; remove illegal const; add missing param 'state' in lib/systems/persistence_service_test.dart",
+      "files": [
+        "lib/systems/persistence_service_test.dart"
+      ],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 29,
+      "description": "Fix test API mismatches in test/components/neon_glow_test.dart (8 errors): resolve undefined name 'testRenderer'; fix type mismatch; fix wrong constructor arg count; fix miscellaneous error; +3 more in test/components/neon_glow_test.dart \u2014 done when: flutter analyze reports 0 errors for test/components/neon_glow_test.dart",
+      "short": "Fix test API mismatches in test/components/neon_glow_test.dart (8 errors): resolve undefined name 'testRenderer'; fix type mismatch; fix wrong constructor arg count; fix miscellaneous error; +3 more in test/components/neon_glow_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 30,
+      "description": "Fix test API mismatches in test/game/game_loop_integration_test.dart (8 errors): add missing param 'state'; fix wrong constructor arg count; fix type mismatch; resolve undefined name 'notifier'; +2 more in test/game/game_loop_integration_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/game_loop_integration_test.dart",
+      "short": "Fix test API mismatches in test/game/game_loop_integration_test.dart (8 errors): add missing param 'state'; fix wrong constructor arg count; fix type mismatch; resolve undefined name 'notifier'; +2 more in test/game/game_loop_integration_test.dart",
+      "files": [],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 31,
+      "description": "Fix test API mismatches in test/game/server_validation_service_test.dart (8 errors): fix miscellaneous error; add missing param 'state'; rename lifecycleState \u2192 state in test/game/server_validation_service_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/server_validation_service_test.dart",
+      "short": "Fix test API mismatches in test/game/server_validation_service_test.dart (8 errors): fix miscellaneous error; add missing param 'state'; rename lifecycleState \u2192 state in test/game/server_validation_service_test.dart",
+      "files": [],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 32,
+      "description": "Fix test API mismatches in lib/components/combat_attack_handler_test.dart (7 errors): fix broken import 'local_persistence_service.dart'; fix miscellaneous error; fix undefined function 'StateNotifierProvider'; fix undefined function 'LocalPersistenceService'; +2 more in lib/components/combat_attack_handler_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/components/combat_attack_handler_test.dart",
+      "short": "Fix test API mismatches in lib/components/combat_attack_handler_test.dart (7 errors): fix broken import 'local_persistence_service.dart'; fix miscellaneous error; fix undefined function 'StateNotifierProvider'; fix undefined function 'LocalPersistenceService'; +2 more in lib/components/combat_attack_handler_test.dart",
+      "files": [
+        "lib/components/combat_attack_handler_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 33,
+      "description": "Fix test API mismatches in test/game/fusion_effect_service_test.dart (7 errors): fix broken import 'flutter_primepod.dart'; fix broken import 'game_events.dart'; fix undefined function 'AstroGame'; fix undefined function 'Vector2'; +3 more in test/game/fusion_effect_service_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/fusion_effect_service_test.dart",
+      "short": "Fix test API mismatches in test/game/fusion_effect_service_test.dart (7 errors): fix broken import 'flutter_primepod.dart'; fix broken import 'game_events.dart'; fix undefined function 'AstroGame'; fix undefined function 'Vector2'; +3 more in test/game/fusion_effect_service_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 34,
+      "description": "Fix test API mismatches in test/integration/game_state_provider_test.dart (7 errors): fix wrong constructor arg count; fix type mismatch; remove void-result usage; fix miscellaneous error; +3 more in test/integration/game_state_provider_test.dart \u2014 done when: flutter analyze reports 0 errors for test/integration/game_state_provider_test.dart",
+      "short": "Fix test API mismatches in test/integration/game_state_provider_test.dart (7 errors): fix wrong constructor arg count; fix type mismatch; remove void-result usage; fix miscellaneous error; +3 more in test/integration/game_state_provider_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 35,
+      "description": "Fix test API mismatches in lib/game/fusion_effect_service_test.dart (6 errors): fix broken import 'flutter_primepod.dart'; fix undefined function 'AstroGame'; fix undefined function 'Vector2'; resolve undefined name 'find'; +2 more in lib/game/fusion_effect_service_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/game/fusion_effect_service_test.dart",
+      "short": "Fix test API mismatches in lib/game/fusion_effect_service_test.dart (6 errors): fix broken import 'flutter_primepod.dart'; fix undefined function 'AstroGame'; fix undefined function 'Vector2'; resolve undefined name 'find'; +2 more in lib/game/fusion_effect_service_test.dart",
+      "files": [
+        "lib/game/fusion_effect_service_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 36,
+      "description": "Fix test API mismatches in test/components/combat_result_label_golden_test.dart (6 errors): fix miscellaneous error; fix broken import 'combat_result_label_component.dart' in test/components/combat_result_label_golden_test.dart \u2014 done when: flutter analyze reports 0 errors for test/components/combat_result_label_golden_test.dart",
+      "short": "Fix test API mismatches in test/components/combat_result_label_golden_test.dart (6 errors): fix miscellaneous error; fix broken import 'combat_result_label_component.dart' in test/components/combat_result_label_golden_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 37,
+      "description": "Fix test API mismatches in test/game/capture_rules_test.dart (6 errors): fix broken import 'fake_async.dart'; fix missing member on 'CaptureRules'; fix undefined function 'fakeAsync'; resolve undefined name 'ref'; +1 more in test/game/capture_rules_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/capture_rules_test.dart",
+      "short": "Fix test API mismatches in test/game/capture_rules_test.dart (6 errors): fix broken import 'fake_async.dart'; fix missing member on 'CaptureRules'; fix undefined function 'fakeAsync'; resolve undefined name 'ref'; +1 more in test/game/capture_rules_test.dart",
+      "files": [],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 38,
+      "description": "Fix test API mismatches in test/game/fusion_rules_test.dart (6 errors): fix broken import 'fusion_rules.dart'; fix undefined function 'group'; fix undefined function 'test'; fix undefined function 'expect'; +2 more in test/game/fusion_rules_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/fusion_rules_test.dart",
+      "short": "Fix test API mismatches in test/game/fusion_rules_test.dart (6 errors): fix broken import 'fusion_rules.dart'; fix undefined function 'group'; fix undefined function 'test'; fix undefined function 'expect'; +2 more in test/game/fusion_rules_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 39,
+      "description": "Fix test API mismatches in test/integration/fusion_request_validation_test.dart (6 errors): resolve undefined name 'gameServiceProvider'; fix miscellaneous error; resolve undefined name 'fusionProviderProvider'; add missing param 'state' in test/integration/fusion_request_validation_test.dart \u2014 done when: flutter analyze reports 0 errors for test/integration/fusion_request_validation_test.dart",
+      "short": "Fix test API mismatches in test/integration/fusion_request_validation_test.dart (6 errors): resolve undefined name 'gameServiceProvider'; fix miscellaneous error; resolve undefined name 'fusionProviderProvider'; add missing param 'state' in test/integration/fusion_request_validation_test.dart",
+      "files": [],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 40,
+      "description": "Fix test API mismatches in test/services/server_validation_service_test.dart (6 errors): add missing param 'state'; fix missing member on 'Mote' in test/services/server_validation_service_test.dart \u2014 done when: flutter analyze reports 0 errors for test/services/server_validation_service_test.dart",
+      "short": "Fix test API mismatches in test/services/server_validation_service_test.dart (6 errors): add missing param 'state'; fix missing member on 'Mote' in test/services/server_validation_service_test.dart",
+      "files": [],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 41,
+      "description": "Fix test API mismatches in lib/components/capture_target_animation_test.dart (5 errors): fix broken import 'fusion_indicator_state.dart'; fix broken import 'capture_target_animation.dart'; fix undefined function 'CaptureTargetAnimation'; resolve undefined name 'Vector2'; +1 more in lib/components/capture_target_animation_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/components/capture_target_animation_test.dart",
+      "short": "Fix test API mismatches in lib/components/capture_target_animation_test.dart (5 errors): fix broken import 'fusion_indicator_state.dart'; fix broken import 'capture_target_animation.dart'; fix undefined function 'CaptureTargetAnimation'; resolve undefined name 'Vector2'; +1 more in lib/components/capture_target_animation_test.dart",
+      "files": [
+        "lib/components/capture_target_animation_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 42,
+      "description": "Fix test API mismatches in lib/components/vector_component_test.dart (5 errors): remove illegal const in lib/components/vector_component_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/components/vector_component_test.dart",
+      "short": "Fix test API mismatches in lib/components/vector_component_test.dart (5 errors): remove illegal const in lib/components/vector_component_test.dart",
+      "files": [
+        "lib/components/vector_component_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 43,
+      "description": "Fix test API mismatches in lib/game/particle_effects_test.dart (5 errors): fix undefined function 'ParticleSystem'; fix missing member on 'ParticleEffects' in lib/game/particle_effects_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/game/particle_effects_test.dart",
+      "short": "Fix test API mismatches in lib/game/particle_effects_test.dart (5 errors): fix undefined function 'ParticleSystem'; fix missing member on 'ParticleEffects' in lib/game/particle_effects_test.dart",
+      "files": [
+        "lib/game/particle_effects_test.dart"
+      ],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 44,
+      "description": "Fix test API mismatches in lib/game/perf_test.dart (5 errors): fix broken import 'flutter_driver.dart'; fix miscellaneous error; resolve undefined name 'FlutterDriver'; resolve undefined name 'find'; +1 more in lib/game/perf_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/game/perf_test.dart",
+      "short": "Fix test API mismatches in lib/game/perf_test.dart (5 errors): fix broken import 'flutter_driver.dart'; fix miscellaneous error; resolve undefined name 'FlutterDriver'; resolve undefined name 'find'; +1 more in lib/game/perf_test.dart",
+      "files": [
+        "lib/game/perf_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 45,
+      "description": "Fix test API mismatches in test/components/combat_particle_overlay_golden_test.dart (5 errors): fix broken import 'combat_particle_overlay.dart'; fix miscellaneous error; fix missing member on 'CombatParticleOverlayGoldenTestGame'; resolve undefined name 'AttackParticle' in test/components/combat_particle_overlay_golden_test.dart \u2014 done when: flutter analyze reports 0 errors for test/components/combat_particle_overlay_golden_test.dart",
+      "short": "Fix test API mismatches in test/components/combat_particle_overlay_golden_test.dart (5 errors): fix broken import 'combat_particle_overlay.dart'; fix miscellaneous error; fix missing member on 'CombatParticleOverlayGoldenTestGame'; resolve undefined name 'AttackParticle' in test/components/combat_particle_overlay_golden_test.dart",
+      "files": [],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 46,
+      "description": "Fix test API mismatches in test/game/fuse_motes_test.dart (5 errors): fix miscellaneous error; fix wrong constructor arg count; remove void-result usage in test/game/fuse_motes_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/fuse_motes_test.dart",
+      "short": "Fix test API mismatches in test/game/fuse_motes_test.dart (5 errors): fix miscellaneous error; fix wrong constructor arg count; remove void-result usage in test/game/fuse_motes_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 47,
+      "description": "Fix test API mismatches in test/providers/mote_count_provider_test.dart (5 errors): resolve undefined name 'gameStateProvider'; fix miscellaneous error; add missing param 'state'; fix undefined getter 'lifecycleState' in test/providers/mote_count_provider_test.dart \u2014 done when: flutter analyze reports 0 errors for test/providers/mote_count_provider_test.dart",
+      "short": "Fix test API mismatches in test/providers/mote_count_provider_test.dart (5 errors): resolve undefined name 'gameStateProvider'; fix miscellaneous error; add missing param 'state'; fix undefined getter 'lifecycleState' in test/providers/mote_count_provider_test.dart",
+      "files": [],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 48,
+      "description": "Fix test API mismatches in lib/game/capture_event_notifier_test.dart (4 errors): fix miscellaneous error; fix undefined function 'CaptureEventNotifier'; fix missing member on 'AudioService'; resolve undefined name 'calledOnce' in lib/game/capture_event_notifier_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/game/capture_event_notifier_test.dart",
+      "short": "Fix test API mismatches in lib/game/capture_event_notifier_test.dart (4 errors): fix miscellaneous error; fix undefined function 'CaptureEventNotifier'; fix missing member on 'AudioService'; resolve undefined name 'calledOnce' in lib/game/capture_event_notifier_test.dart",
+      "files": [
+        "lib/game/capture_event_notifier_test.dart"
+      ],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 49,
+      "description": "Fix test API mismatches in lib/game/particle_system_api_test.dart (4 errors): fix undefined function 'ParticleSystem' in lib/game/particle_system_api_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/game/particle_system_api_test.dart",
+      "short": "Fix test API mismatches in lib/game/particle_system_api_test.dart (4 errors): fix undefined function 'ParticleSystem' in lib/game/particle_system_api_test.dart",
+      "files": [
+        "lib/game/particle_system_api_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 50,
+      "description": "Fix test API mismatches in lib/game/particle_system_test.dart (4 errors): fix undefined function 'ParticleSystem' in lib/game/particle_system_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/game/particle_system_test.dart",
+      "short": "Fix test API mismatches in lib/game/particle_system_test.dart (4 errors): fix undefined function 'ParticleSystem' in lib/game/particle_system_test.dart",
+      "files": [
+        "lib/game/particle_system_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 51,
+      "description": "Fix test API mismatches in test/components/capture_result_label_golden_test.dart (4 errors): fix missing member on 'NotifierProvider'; fix wrong constructor arg count; fix undefined function 'AstroGame'; fix missing member on 'GameState' in test/components/capture_result_label_golden_test.dart \u2014 done when: flutter analyze reports 0 errors for test/components/capture_result_label_golden_test.dart",
+      "short": "Fix test API mismatches in test/components/capture_result_label_golden_test.dart (4 errors): fix missing member on 'NotifierProvider'; fix wrong constructor arg count; fix undefined function 'AstroGame'; fix missing member on 'GameState' in test/components/capture_result_label_golden_test.dart",
+      "files": [],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 52,
+      "description": "Fix test API mismatches in test/components/level_up_event_bus_test.dart (4 errors): fix miscellaneous error in test/components/level_up_event_bus_test.dart \u2014 done when: flutter analyze reports 0 errors for test/components/level_up_event_bus_test.dart",
+      "short": "Fix test API mismatches in test/components/level_up_event_bus_test.dart (4 errors): fix miscellaneous error in test/components/level_up_event_bus_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 53,
+      "description": "Fix test API mismatches in test/game/particle_effects_test.dart (4 errors): fix miscellaneous error in test/game/particle_effects_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/particle_effects_test.dart",
+      "short": "Fix test API mismatches in test/game/particle_effects_test.dart (4 errors): fix miscellaneous error in test/game/particle_effects_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 54,
+      "description": "Fix test API mismatches in lib/game/star_decay_test.dart (3 errors): fix undefined function 'GameStateNotifier'; fix undefined getter 'decayTimer' in lib/game/star_decay_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/game/star_decay_test.dart",
+      "short": "Fix test API mismatches in lib/game/star_decay_test.dart (3 errors): fix undefined function 'GameStateNotifier'; fix undefined getter 'decayTimer' in lib/game/star_decay_test.dart",
+      "files": [
+        "lib/game/star_decay_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 55,
+      "description": "Fix test API mismatches in lib/game/star_production_rate_provider_test.dart (3 errors): fix miscellaneous error; fix undefined getter 'notifier' in lib/game/star_production_rate_provider_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/game/star_production_rate_provider_test.dart",
+      "short": "Fix test API mismatches in lib/game/star_production_rate_provider_test.dart (3 errors): fix miscellaneous error; fix undefined getter 'notifier' in lib/game/star_production_rate_provider_test.dart",
+      "files": [
+        "lib/game/star_production_rate_provider_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 56,
+      "description": "Fix test API mismatches in lib/models/star_production_rate_provider_test.dart (3 errors): fix miscellaneous error; fix undefined getter 'notifier' in lib/models/star_production_rate_provider_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/models/star_production_rate_provider_test.dart",
+      "short": "Fix test API mismatches in lib/models/star_production_rate_provider_test.dart (3 errors): fix miscellaneous error; fix undefined getter 'notifier' in lib/models/star_production_rate_provider_test.dart",
+      "files": [
+        "lib/models/star_production_rate_provider_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 57,
+      "description": "Fix test API mismatches in test/game/cooldown_timer_test.dart (3 errors): fix miscellaneous error; fix undefined getter 'totalSeconds'; fix undefined getter 'remainingSeconds' in test/game/cooldown_timer_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/cooldown_timer_test.dart",
+      "short": "Fix test API mismatches in test/game/cooldown_timer_test.dart (3 errors): fix miscellaneous error; fix undefined getter 'totalSeconds'; fix undefined getter 'remainingSeconds' in test/game/cooldown_timer_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 58,
+      "description": "Fix test API mismatches in test/game/perf_test.dart (3 errors): fix broken import 'flutter_driver.dart'; resolve undefined name 'FlutterDriver'; resolve undefined name 'find' in test/game/perf_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/perf_test.dart",
+      "short": "Fix test API mismatches in test/game/perf_test.dart (3 errors): fix broken import 'flutter_driver.dart'; resolve undefined name 'FlutterDriver'; resolve undefined name 'find' in test/game/perf_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 59,
+      "description": "Fix test API mismatches in test/game/victory_conditions_test.dart (3 errors): fix undefined function 'Star'; fix undefined function 'Mote' in test/game/victory_conditions_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/victory_conditions_test.dart",
+      "short": "Fix test API mismatches in test/game/victory_conditions_test.dart (3 errors): fix undefined function 'Star'; fix undefined function 'Mote' in test/game/victory_conditions_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 60,
+      "description": "Fix test API mismatches in lib/components/combat_particle_component_test.dart (2 errors): remove illegal const in lib/components/combat_particle_component_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/components/combat_particle_component_test.dart",
+      "short": "Fix test API mismatches in lib/components/combat_particle_component_test.dart (2 errors): remove illegal const in lib/components/combat_particle_component_test.dart",
+      "files": [
+        "lib/components/combat_particle_component_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 61,
+      "description": "Fix test API mismatches in lib/components/particle_effects_test.dart (2 errors): fix undefined function 'ParticleSystem' in lib/components/particle_effects_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/components/particle_effects_test.dart",
+      "short": "Fix test API mismatches in lib/components/particle_effects_test.dart (2 errors): fix undefined function 'ParticleSystem' in lib/components/particle_effects_test.dart",
+      "files": [
+        "lib/components/particle_effects_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 62,
+      "description": "Fix test API mismatches in lib/game/audio_service_test.dart (2 errors): fix missing member on 'AudioService'; fix undefined getter 'played' in lib/game/audio_service_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/game/audio_service_test.dart",
+      "short": "Fix test API mismatches in lib/game/audio_service_test.dart (2 errors): fix missing member on 'AudioService'; fix undefined getter 'played' in lib/game/audio_service_test.dart",
+      "files": [
+        "lib/game/audio_service_test.dart"
+      ],
+      "depends_on": [
+        6
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 63,
+      "description": "Fix test API mismatches in lib/game/star_decay_manager_test.dart (2 errors): fix miscellaneous error in lib/game/star_decay_manager_test.dart \u2014 done when: flutter analyze reports 0 errors for lib/game/star_decay_manager_test.dart",
+      "short": "Fix test API mismatches in lib/game/star_decay_manager_test.dart (2 errors): fix miscellaneous error in lib/game/star_decay_manager_test.dart",
+      "files": [
+        "lib/game/star_decay_manager_test.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 64,
+      "description": "Fix test API mismatches in test/components/neon_renderer_config_test.dart (2 errors): fix miscellaneous error; fix undefined getter 'glowColor' in test/components/neon_renderer_config_test.dart \u2014 done when: flutter analyze reports 0 errors for test/components/neon_renderer_config_test.dart",
+      "short": "Fix test API mismatches in test/components/neon_renderer_config_test.dart (2 errors): fix miscellaneous error; fix undefined getter 'glowColor' in test/components/neon_renderer_config_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 65,
+      "description": "Fix test API mismatches in test/components/star_capture_indicator_test.dart (2 errors): fix broken import 'star_capture_indicator.dart'; fix undefined function 'StarCaptureIndicator' in test/components/star_capture_indicator_test.dart \u2014 done when: flutter analyze reports 0 errors for test/components/star_capture_indicator_test.dart",
+      "short": "Fix test API mismatches in test/components/star_capture_indicator_test.dart (2 errors): fix broken import 'star_capture_indicator.dart'; fix undefined function 'StarCaptureIndicator' in test/components/star_capture_indicator_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 66,
+      "description": "Fix test API mismatches in test/game/star_production_rate_provider_test.dart (2 errors): fix broken import 'star_production_rate_provider.dart'; resolve undefined name 'starProductionRatesProvider' in test/game/star_production_rate_provider_test.dart \u2014 done when: flutter analyze reports 0 errors for test/game/star_production_rate_provider_test.dart",
+      "short": "Fix test API mismatches in test/game/star_production_rate_provider_test.dart (2 errors): fix broken import 'star_production_rate_provider.dart'; resolve undefined name 'starProductionRatesProvider' in test/game/star_production_rate_provider_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 67,
+      "description": "Fix test API mismatches in test/components/combat_text_score_golden_test.dart (1 errors): fix miscellaneous error in test/components/combat_text_score_golden_test.dart \u2014 done when: flutter analyze reports 0 errors for test/components/combat_text_score_golden_test.dart",
+      "short": "Fix test API mismatches in test/components/combat_text_score_golden_test.dart (1 errors): fix miscellaneous error in test/components/combat_text_score_golden_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 68,
+      "description": "Fix test API mismatches in test/components/neon_glow_golden_test.dart (1 errors): fix undefined getter 'moteGlowColor' in test/components/neon_glow_golden_test.dart \u2014 done when: flutter analyze reports 0 errors for test/components/neon_glow_golden_test.dart",
+      "short": "Fix test API mismatches in test/components/neon_glow_golden_test.dart (1 errors): fix undefined getter 'moteGlowColor' in test/components/neon_glow_golden_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 69,
+      "description": "Fix test API mismatches in test/components/particle_system_test.dart (1 errors): fix undefined function 'ParticleManager' in test/components/particle_system_test.dart \u2014 done when: flutter analyze reports 0 errors for test/components/particle_system_test.dart",
+      "short": "Fix test API mismatches in test/components/particle_system_test.dart (1 errors): fix undefined function 'ParticleManager' in test/components/particle_system_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 70,
+      "description": "Fix test API mismatches in test/integration/fusion_provider_test.dart (1 errors): resolve undefined name 'fusionProviderProvider' in test/integration/fusion_provider_test.dart \u2014 done when: flutter analyze reports 0 errors for test/integration/fusion_provider_test.dart",
+      "short": "Fix test API mismatches in test/integration/fusion_provider_test.dart (1 errors): resolve undefined name 'fusionProviderProvider' in test/integration/fusion_provider_test.dart",
+      "files": [],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 71,
+      "description": "Fix mote lifecycle \u2014 spawn motes as MoteLifecycle.active in AstroGame._tickMoteProduction() and in GameStateNotifier.addMote(); FusionRules.canFuse() checks isActive so motes stuck in 'created' can never fuse \u2014 done when: flutter analyze 0 errors and newly spawned motes have state == MoteLifecycle.active",
+      "short": "Fix mote lifecycle \u2014 spawn motes as active so fusion can detect them",
+      "files": [
+        "lib/game/astro_game.dart",
+        "lib/models/game_state_provider.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 72,
+      "description": "Add lasso selection gesture to GestureHandler \u2014 add DragCallbacks to GestureHandler; on drag start record startPos; on drag update track currentPos; on drag end compute axis-aligned bounding box from start\u2192end and collect all MoteComponent and VectorComponent ids whose Flame world positions fall inside that box; write the selected ids into a new SelectionNotifier in lib/providers/selection_provider.dart (NotifierProvider<SelectionState>); clear selection on a plain tap that hits no star and no unit \u2014 done when: dragging across motes/vectors selects them; flutter analyze 0 errors",
+      "short": "Add lasso selection drag gesture to GestureHandler",
+      "files": [
+        "lib/game/gesture_handler.dart",
+        "lib/providers/selection_provider.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 73,
+      "description": "Render selection highlight ring on selected Mote/Vector components \u2014 MoteComponent: in render(), if its mote.id is in selectionProvider, draw an additional outer ring using neonColor with 0.5 alpha and +4px radius; VectorComponent: same pattern with +4px radius ring; both components need a way to read selectionProvider \u2014 pass a bool isSelected via constructor or use a Flame ComponentKey lookup \u2014 done when: selected units show a visible highlight ring; flutter analyze 0 errors",
+      "short": "Render selection highlight ring on selected Mote/Vector components",
+      "files": [
+        "lib/components/mote_component.dart",
+        "lib/components/vector_component.dart"
+      ],
+      "depends_on": [
+        72
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 74,
+      "description": "Tap-to-direct selected player units \u2014 in GestureHandler.onTapDown: if selectionProvider has player unit ids, route each selected VectorComponent to the tapped world position (if tap is within _tapRadius of a star, use that star's world position); route selected MoteComponents to the tapped position at moteSpeed; clear the selection after dispatching movement orders; existing 'send all vectors to tapped star' behavior only fires when selection is empty \u2014 done when: tapping a star with selected vectors sends only those vectors; flutter analyze 0 errors",
+      "short": "Tap-to-direct selected player units to star or free space",
+      "files": [
+        "lib/game/gesture_handler.dart",
+        "lib/game/astro_game.dart"
+      ],
+      "depends_on": [
+        72
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 75,
+      "description": "Player-initiated fusion \u2014 in GestureHandler.onTapDown: if tap hits a selected MoteComponent AND selectionProvider contains >= 5 player mote ids, fuse groups of 5; for each group of 5: compute centroid of their Flame positions, call GameStateNotifier.removeMote() x 5, call GameStateNotifier.addVector() with a new id and owner='player', spawn a VectorComponent at the centroid and add it to AstroGame, remove the 5 MoteComponents from the game tree; if selected count > 5, remainder motes stay selected \u2014 done when: lasso 5 motes, tap any selected mote \u2192 1 vector appears at centroid; flutter analyze 0 errors",
+      "short": "Player-initiated fusion: lasso 5 motes, tap any to fuse into vector",
+      "files": [
+        "lib/game/gesture_handler.dart",
+        "lib/game/astro_game.dart",
+        "lib/models/game_state_provider.dart"
+      ],
+      "depends_on": [
+        71,
+        72,
+        73
+      ],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 76,
+      "description": "Star capture on Vector arrival \u2014 in AstroGame.onLoad(), pass an onArrived callback to each VectorComponent; when a vector arrives, check if its position is within 48px of any star in _starPositions; if enemy or neutral star: reduce star's accumulatedPower by vector.currentHealth; if accumulatedPower <= 0 call captureStar(starId, vector.owner) and reset accumulatedPower to 0; if friendly star: add vector.currentHealth to star's accumulatedPower; then remove the vector from Riverpod state and from _vectorComponents \u2014 done when: sending a vector to an enemy star reduces its HP; at 0 HP the star flips ownership; flutter analyze 0 errors",
+      "short": "Star capture on Vector arrival \u2014 consume vector, add power, flip at 0 HP",
+      "files": [
+        "lib/game/astro_game.dart",
+        "lib/models/game_state_provider.dart"
+      ],
+      "depends_on": [],
+      "status": "pending",
+      "tier_history": []
+    },
+    {
+      "id": 77,
+      "description": "StarComponent live ownership updates \u2014 StarComponent currently captures star at construction time; it must reflect live Riverpod state instead; add a WidgetRef field and read the current Star from gameServiceProvider each render() call using the star.id; update neonColor to use the live owner; add an HP progress ring showing accumulatedPower / 20.0 so the player can see star investment \u2014 done when: capturing a star changes its colour on-screen without restart; flutter analyze 0 errors",
+      "short": "StarComponent reads live Riverpod state each render for owner/HP updates",
+      "files": [
+        "lib/components/star_component.dart"
+      ],
+      "depends_on": [
+        76
       ],
       "status": "pending",
       "tier_history": []
     },
     {
       "id": 78,
-      "description": "Add method _updateFusionIndicator in AstroGame to update fusion indicator based on pending motes \u2014 done when: fusion indicator updates based on pending mote count.",
-      "short": "Add method _updateFusionIndicator in AstroGame to update fusion indicator based on pending motes",
-      "files": [],
+      "description": "Enemy AI basic loop \u2014 add an _enemyAiTimer in AstroGame and tick it each update(dt); every 5 seconds: collect all enemy MoteComponents, route each toward the nearest neutral or player star (pick the closest by world position); if there are >= 5 enemy motes in _moteComponents for the enemy owner, fuse the oldest 5 into an enemy VectorComponent at the centroid of those motes and remove them (same fusion logic as player); route each enemy VectorComponent toward the player's home star (index 0 in _starPositions) \u2014 done when: enemy motes visibly move toward stars and occasionally fuse; enemy vectors travel toward player star; flutter analyze 0 errors",
+      "short": "Enemy AI: route enemy motes toward stars, fuse into vectors, attack player",
+      "files": [
+        "lib/game/astro_game.dart"
+      ],
       "depends_on": [
-        3,
-        41
+        76
       ],
       "status": "pending",
       "tier_history": []
     },
     {
       "id": 79,
-      "description": "Create HUD overlay showing current health and maxHealth of selected units using TextComponent \u2014 done when: health details are displayed on the HUD.",
-      "short": "Create HUD overlay showing current health and maxHealth of selected units using TextComponent",
-      "files": [],
+      "description": "Double-tap friendly star absorbs nearby player motes \u2014 add DoubleTapCallbacks to GestureHandler; on double-tap: find the nearest star within _tapRadius; if that star's ownerId == 'player', find all MoteComponents in _moteComponents whose position is within 80px of the star's world position; for each such mote: remove it from Riverpod state via removeMote(), remove its MoteComponent from the game tree, and add 1 to the star's accumulatedPower \u2014 done when: double-tapping player star pulls in nearby player motes; flutter analyze 0 errors",
+      "short": "Double-tap friendly star absorbs nearby player motes into star HP",
+      "files": [
+        "lib/game/gesture_handler.dart",
+        "lib/game/astro_game.dart"
+      ],
       "depends_on": [
-        0,
-        1
+        72
       ],
       "status": "pending",
       "tier_history": []
     },
     {
       "id": 80,
-      "description": "Add method _handleStarCapture in GameStateNotifier to handle successful star captures and update game state accordingly \u2014 done when: star capture updates player's captured stars.",
-      "short": "Add method _handleStarCapture in GameStateNotifier to handle successful star captures and update game state accordingly",
-      "files": [],
+      "description": "Win/loss detection \u2014 in AstroGame.update(dt), after UnitCombatResolver.tick(): read gameServiceProvider; win condition: player owns all 7 stars AND no enemy VectorComponents or enemy MoteComponents remain; lose condition: enemy owns all 7 stars AND no player units remain; on win/lose: call game.overlays.add('gameOver'); register a 'gameOver' overlay in the GameWidget overlayBuilderMap that shows the result and a Restart button that calls gameServiceProvider.notifier.reset() then restarts onLoad \u2014 done when: winning the board shows a win screen; flutter analyze 0 errors",
+      "short": "Win/loss detection and game over overlay",
+      "files": [
+        "lib/game/astro_game.dart"
+      ],
       "depends_on": [
-        0,
-        3,
-        41
+        76,
+        78
       ],
       "status": "pending",
       "tier_history": []

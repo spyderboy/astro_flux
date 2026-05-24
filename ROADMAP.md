@@ -638,7 +638,7 @@
 - [x] Add method _updateGameState to AstroGame in lib/game/astro_game.dart
 - [x] Update Mote model with lifecycle state machine in lib/models/mote.dart
 - [x] Implement capture logic in CombatAttackHandler in lib/game/combat_attack_handler.dart
-- [ ] Create and add CombatScoreWidget TextComponent in GameWidget in lib/game/game_widget.dart
+- [x] Create and add CombatScoreWidget TextComponent in GameWidget in lib/game/game_widget.dart
 - [x] Add method _updateFusionIndicator to AstroGame in lib/game/astro_game.dart
 - [x] Define StarLevelUpEvent class in lib/models/star_level_up_event.dart
 - [x] Implement VictoryRules.checkVictoryConditions() in GameStateNotifier in lib/game/game_state_notifier.dart
@@ -646,39 +646,39 @@
 - [x] Add method _handleCaptureSuccess to CombatAttackHandler in lib/game/combat_attack_handler.dart
 - [x] Update MoteComponent rendering with neon glow in lib/components/mote_component.dart
 - [x] Implement move logic in MoveOrderHandler in lib/game/move_order_handler.dart
-- [ ] Create HUD overlay for mote and vector counts in GameWidget in lib/game/game_widget.dart
+- [x] Create HUD overlay for mote and vector counts in GameWidget in lib/game/game_widget.dart
 - [x] Add method _handleMoveComplete to MoveOrderHandler in lib/game/move_order_handler.dart
 - [x] Define CombineOrderEvent class in lib/models/combine_order_event.dart
 - [x] Implement long press gesture detection in GestureHandler in lib/game/gesture_handler.dart
-- [ ] Create burst animation at centroid when combine succeeds in lib/components/burst_animation_component.dart
-- [ ] Add method _handleCombineSuccess to CombineOrderHandler in lib/game/combine_order_handler.dart
-- [ ] Update Star model with tiers and power pools in lib/models/star.dart
-- [ ] Implement siege logic in UnitCombatResolver in lib/game/unit_combat_resolver.dart
-- [ ] Create visual pulse on star each time a unit arrives in lib/components/pulse_effect_component.dart
-- [ ] Add method _handleUnitArrival to GameStateNotifier in lib/game/game_state_notifier.dart
-- [ ] Define UnitAttackEvent class in lib/models/unit_attack_event.dart
-- [ ] Implement combat logic in UnitCombatResolver.tick() in lib/game/unit_combat_resolver.dart
-- [ ] Create CombatParticleComponent demolish effect at unit world position in lib/components/combat_particle_component.dart
-- [ ] Add method _handleUnitCombat to UnitCombatResolver in lib/game/unit_combat_resolver.dart
-- [ ] Update MoteComponent rendering with world position in lib/components/mote_component.dart
-- [ ] Implement reinforce logic in CombineOrderHandler in lib/game/combine_order_handler.dart
-- [ ] Create HUD overlay showing captured stars vs total in GameWidget in lib/game/game_widget.dart
-- [ ] Add method _handleReinforceSuccess to CombineOrderHandler in lib/game/combine_order_handler.dart
-- [ ] Define UnitHealEvent class in lib/models/unit_heal_event.dart
-- [ ] Implement healing logic in GameStateNotifier in lib/game/game_state_notifier.dart
-- [ ] Create burst animation at centroid when heal succeeds in lib/components/heal_animation_component.dart
-- [ ] Add method _handleUnitHeal to GameStateNotifier in lib/game/game_state_notifier.dart
-- [ ] Update Star model with maxTier and accumulatedPower in lib/models/star.dart
-- [ ] Implement power pooling logic in UnitCombatResolver in lib/game/unit_combat_resolver.dart
-- [ ] Create HUD overlay showing current health and maxHealth of selected units in GameWidget in lib/game/game_widget.dart
-- [ ] Add method _handleStarCapture to GameStateNotifier in lib/game/game_state_notifier.dart
-- [ ] Define StarSiegeEvent class in lib/models/star_siege_event.dart
-- [ ] Implement siege logic in UnitCombatResolver.tick() in lib/game/unit_combat_resolver.dart
+- [x] Create burst animation at centroid when combine succeeds in lib/components/burst_animation_component.dart
+- [x] Add method _handleCombineSuccess to CombineOrderHandler in lib/game/combine_order_handler.dart
+- [x] Update Star model with tiers and power pools in lib/models/star.dart
+- [x] Implement siege logic in UnitCombatResolver in lib/game/unit_combat_resolver.dart
+- [x] Create visual pulse on star each time a unit arrives in lib/components/pulse_effect_component.dart
+- [x] Add method _handleUnitArrival to GameStateNotifier in lib/game/game_state_notifier.dart
+- [x] Define UnitAttackEvent class in lib/models/unit_attack_event.dart
+- [x] Implement combat logic in UnitCombatResolver.tick() in lib/game/unit_combat_resolver.dart
+- [x] Create CombatParticleComponent demolish effect at unit world position in lib/components/combat_particle_component.dart
+- [x] Add method _handleUnitCombat to UnitCombatResolver in lib/game/unit_combat_resolver.dart
+- [x] Update MoteComponent rendering with world position in lib/components/mote_component.dart
+- [x] Implement reinforce logic in CombineOrderHandler in lib/game/combine_order_handler.dart
+- [x] Create HUD overlay showing captured stars vs total in GameWidget in lib/game/game_widget.dart
+- [x] Add method _handleReinforceSuccess to CombineOrderHandler in lib/game/combine_order_handler.dart
+- [x] Define UnitHealEvent class in lib/models/unit_heal_event.dart
+- [x] Implement healing logic in GameStateNotifier in lib/game/game_state_notifier.dart
+- [x] Create burst animation at centroid when heal succeeds in lib/components/heal_animation_component.dart
+- [x] Add method _handleUnitHeal to GameStateNotifier in lib/game/game_state_notifier.dart
+- [x] Update Star model with maxTier and accumulatedPower in lib/models/star.dart
+- [x] Implement power pooling logic in UnitCombatResolver in lib/game/unit_combat_resolver.dart
+- [x] Create HUD overlay showing current health and maxHealth of selected units in GameWidget in lib/game/game_widget.dart
+- [x] Add method _handleStarCapture to GameStateNotifier in lib/game/game_state_notifier.dart
+- [x] Define StarSiegeEvent class in lib/models/star_siege_event.dart
+- [x] Implement siege logic in UnitCombatResolver.tick() in lib/game/unit_combat_resolver.dart
 - [ ] Create SiegeEffectComponent visual effect at star world position in lib/components/siege_effect_component.dart
-- [ ] Add _updateGameState method to AstroGame in lib/game/astro_game.dart
+- [x] Add _updateGameState method to AstroGame in lib/game/astro_game.dart
 - [x] Update Mote model with lifecycle state machine in lib/models/mote.dart
 - [x] Implement capture logic in CombatAttackHandler in lib/game/combat_attack_handler.dart
-- [ ] Create and add CombatScoreWidget TextComponent in GameWidget in lib/game/game_widget.dart
+- [x] Create and add CombatScoreWidget TextComponent in GameWidget in lib/game/game_widget.dart
 - [x] Add method _updateFusionIndicator to AstroGame in lib/game/astro_game.dart
 - [x] Define StarLevelUpEvent class in lib/models/star_level_up_event.dart
 - [x] Implement VictoryRules.checkVictoryConditions() in GameStateNotifier in lib/game/game_state_notifier.dart
@@ -686,108 +686,233 @@
 - [x] Add method _handleCaptureSuccess to CombatAttackHandler in lib/game/combat_attack_handler.dart
 - [x] Update MoteComponent rendering with neon glow in lib/components/mote_component.dart
 - [x] Implement move logic in MoveOrderHandler in lib/game/move_order_handler.dart
-- [ ] Create HUD overlay for mote and vector counts in GameWidget in lib/game/game_widget.dart
+- [x] Create HUD overlay for mote and vector counts in GameWidget in lib/game/game_widget.dart
 - [x] Add method _handleMoveComplete to MoveOrderHandler in lib/game/move_order_handler.dart
 - [x] Define CombineOrderEvent class in lib/models/combine_order_event.dart
 - [x] Implement long press gesture detection in GestureHandler in lib/game/gesture_handler.dart
-- [ ] Create burst animation at centroid when combine succeeds in lib/components/burst_animation_component.dart
-- [ ] Add method _handleCombineSuccess to CombineOrderHandler in lib/game/combine_order_handler.dart
-- [ ] Update Star model with tiers and power pools in lib/models/star.dart
-- [ ] Implement siege logic in UnitCombatResolver in lib/game/unit_combat_resolver.dart
-- [ ] Create visual pulse on star each time a unit arrives in lib/components/pulse_effect_component.dart
-- [ ] Add method _handleUnitArrival to GameStateNotifier in lib/game/game_state_notifier.dart
-- [ ] Define UnitAttackEvent class in lib/models/unit_attack_event.dart
-- [ ] Implement combat logic in UnitCombatResolver.tick() in lib/game/unit_combat_resolver.dart
-- [ ] Create CombatParticleComponent demolish effect at unit world position in lib/components/combat_particle_component.dart
-- [ ] Add method _handleUnitCombat to UnitCombatResolver in lib/game/unit_combat_resolver.dart
-- [ ] Update MoteComponent rendering with world position in lib/components/mote_component.dart
-- [ ] Implement reinforce logic in CombineOrderHandler in lib/game/combine_order_handler.dart
-- [ ] Create HUD overlay showing captured stars vs total in GameWidget in lib/game/game_widget.dart
-- [ ] Add method _handleReinforceSuccess to CombineOrderHandler in lib/game/combine_order_handler.dart
-- [ ] Define UnitHealEvent class in lib/models/unit_heal_event.dart
-- [ ] Implement healing logic in GameStateNotifier in lib/game/game_state_notifier.dart
-- [ ] Create burst animation at centroid when heal succeeds in lib/components/heal_animation_component.dart
-- [ ] Add method _handleUnitHeal to GameStateNotifier in lib/game/game_state_notifier.dart
-- [ ] Update Star model with maxTier and accumulatedPower in lib/models/star.dart
-- [ ] Implement power pooling logic in UnitCombatResolver in lib/game/unit_combat_resolver.dart
-- [ ] Create HUD overlay showing current health and maxHealth of selected units in GameWidget in lib/game/game_widget.dart
-- [ ] Add method _handleStarCapture to GameStateNotifier in lib/game/game_state_notifier.dart
-- [ ] Define StarSiegeEvent class in lib/models/star_siege_event.dart
-- [ ] Implement siege logic in UnitCombatResolver.tick() in lib/game/unit_combat_resolver.dart
+- [x] Create burst animation at centroid when combine succeeds in lib/components/burst_animation_component.dart
+- [x] Add method _handleCombineSuccess to CombineOrderHandler in lib/game/combine_order_handler.dart
+- [x] Update Star model with tiers and power pools in lib/models/star.dart
+- [x] Implement siege logic in UnitCombatResolver in lib/game/unit_combat_resolver.dart
+- [x] Create visual pulse on star each time a unit arrives in lib/components/pulse_effect_component.dart
+- [x] Add method _handleUnitArrival to GameStateNotifier in lib/game/game_state_notifier.dart
+- [x] Define UnitAttackEvent class in lib/models/unit_attack_event.dart
+- [x] Implement combat logic in UnitCombatResolver.tick() in lib/game/unit_combat_resolver.dart
+- [x] Create CombatParticleComponent demolish effect at unit world position in lib/components/combat_particle_component.dart
+- [x] Add method _handleUnitCombat to UnitCombatResolver in lib/game/unit_combat_resolver.dart
+- [x] Update MoteComponent rendering with world position in lib/components/mote_component.dart
+- [x] Implement reinforce logic in CombineOrderHandler in lib/game/combine_order_handler.dart
+- [x] Create HUD overlay showing captured stars vs total in GameWidget in lib/game/game_widget.dart
+- [x] Add method _handleReinforceSuccess to CombineOrderHandler in lib/game/combine_order_handler.dart
+- [x] Define UnitHealEvent class in lib/models/unit_heal_event.dart
+- [x] Implement healing logic in GameStateNotifier in lib/game/game_state_notifier.dart
+- [x] Create burst animation at centroid when heal succeeds in lib/components/heal_animation_component.dart
+- [x] Add method _handleUnitHeal to GameStateNotifier in lib/game/game_state_notifier.dart
+- [x] Update Star model with maxTier and accumulatedPower in lib/models/star.dart
+- [x] Implement power pooling logic in UnitCombatResolver in lib/game/unit_combat_resolver.dart
+- [x] Create HUD overlay showing current health and maxHealth of selected units in GameWidget in lib/game/game_widget.dart
+- [x] Add method _handleStarCapture to GameStateNotifier in lib/game/game_state_notifier.dart
+- [x] Define StarSiegeEvent class in lib/models/star_siege_event.dart
+- [x] Implement siege logic in UnitCombatResolver.tick() in lib/game/unit_combat_resolver.dart
 - [ ] Create SiegeEffectComponent visual effect at star world position in lib/components/siege_effect_component.dart
 
 # Backlog — generated 2026-05-19
 
 ## Tuesday 2026-05-19
-- [ ] Add _updateGameState method to AstroGame in lib/game/astro_game.dart — done when: game state is updated on each tick.
-- [ ] Update Mote model with lifecycle state machine in lib/models/mote.dart — done when: motes have states (created, active, fused).
-- [ ] Implement capture logic in CombatAttackHandler in lib/game/combat_attack_handler.dart — done when: successful captures update player's stars and vectors.
-- [ ] Create and add CombatScoreWidget TextComponent in GameWidget in lib/game/game_widget.dart — done when: score is displayed on the HUD.
-- [ ] Add method _updateFusionIndicator to AstroGame in lib/game/astro_game.dart — done when: fusion indicator updates based on pending motes.
-- [ ] Define StarLevelUpEvent class in lib/models/star_level_up_event.dart — done when: event exists for capturing stars and leveling up.
-- [ ] Implement VictoryRules.checkVictoryConditions() in GameStateNotifier in lib/game/game_state_notifier.dart — done when: game checks for victory conditions and triggers game over or win state.
-- [ ] Create WelcomeScreen StatefulWidget in lib/screens/welcome_screen.dart — done when: welcome screen with START button is shown.
-- [ ] Add method _handleCaptureSuccess to CombatAttackHandler in lib/game/combat_attack_handler.dart — done when: capture success triggers UI feedback.
-- [ ] Update MoteComponent rendering with neon glow in lib/components/mote_component.dart — done when: motes are rendered with a neon glow effect.
-- [ ] Implement move logic in MoveOrderHandler in lib/game/move_order_handler.dart — done when: units move toward tapped positions on the map.
-- [ ] Create HUD overlay for mote and vector counts in GameWidget in lib/game/game_widget.dart — done when: mote and vector counts are displayed on the HUD.
-- [ ] Add method _handleMoveComplete to MoveOrderHandler in lib/game/move_order_handler.dart — done when: move completion triggers any necessary UI updates.
-- [ ] Define CombineOrderEvent class in lib/models/combine_order_event.dart — done when: event exists for combining units.
-- [ ] Implement long press gesture detection in GestureHandler in lib/game/gesture_handler.dart — done when: long press triggers a combine or siege event.
-- [ ] Create burst animation at centroid when combine succeeds in lib/components/burst_animation_component.dart — done when: successful combines trigger an animated effect.
-- [ ] Add method _handleCombineSuccess to CombineOrderHandler in lib/game/combine_order_handler.dart — done when: combine success updates game state and triggers UI effects.
-- [ ] Update Star model with tiers and power pools in lib/models/star.dart — done when: stars have properties for current tier, accumulated power, and max tier.
-- [ ] Implement siege logic in UnitCombatResolver tick() in lib/game/unit_combat_resolver.dart — done when: enemy units cause damage to player units during combat.
-- [ ] Create visual pulse on star each time a unit arrives in lib/components/pulse_effect_component.dart — done when: units arriving at stars trigger visual feedback.
-- [ ] Add method _handleUnitArrival to GameStateNotifier in lib/game/game_state_notifier.dart — done when: units arriving at stars update game state and trigger visual effects.
-- [ ] Define UnitAttackEvent class in lib/models/unit_attack_event.dart — done when: event exists for unit combat events.
-- [ ] Implement combat logic in UnitCombatResolver.tick() in lib/game/unit_combat_resolver.dart — done when: player units cause damage to enemy units during combat.
-- [ ] Create CombatParticleComponent demolish effect at unit world position in lib/components/combat_particle_component.dart — done when: destroyed units trigger particle effects.
-- [ ] Add method _handleUnitCombat to UnitCombatResolver in lib/game/unit_combat_resolver.dart — done when: unit combat updates game state and triggers visual and audio effects.
-- [ ] Update MoteComponent rendering with world position in lib/components/mote_component.dart — done when: motes are rendered at their correct positions on the map.
-- [ ] Implement reinforce logic in CombineOrderHandler in lib/game/combine_order_handler.dart — done when: successful reinforcements update game state and trigger UI effects.
-- [ ] Create HUD overlay showing captured stars vs total in GameWidget in lib/game/game_widget.dart — done when: captured star count is displayed on the HUD.
-- [ ] Add method _handleReinforceSuccess to CombineOrderHandler in lib/game/combine_order_handler.dart — done when: reinforce success triggers UI feedback.
-- [ ] Define UnitHealEvent class in lib/models/unit_heal_event.dart — done when: event exists for unit healing events.
-- [ ] Implement healing logic in GameStateNotifier in lib/game/game_state_notifier.dart — done when: units are healed and UI is updated accordingly.
-- [ ] Create burst animation at centroid when heal succeeds in lib/components/heal_animation_component.dart — done when: successful heals trigger animated effects.
-- [ ] Add update(dt) to VectorComponent that moves position toward _target at speed px/s — done when: units visibly travel across the screen toward a tapped star.
-- [ ] Implement move logic in MoveOrderHandler to handle unit movement based on target positions — done when: selected units move to tap coordinates.
+- [x] Add _updateGameState method to AstroGame in lib/game/astro_game.dart — done when: game state is updated on each tick.
+- [x] Update Mote model with lifecycle state machine in lib/models/mote.dart — done when: motes have states (created, active, fused).
+- [x] Implement capture logic in CombatAttackHandler in lib/game/combat_attack_handler.dart — done when: successful captures update player's stars and vectors.
+- [x] Create and add CombatScoreWidget TextComponent in GameWidget in lib/game/game_widget.dart — done when: score is displayed on the HUD.
+- [x] Add method _updateFusionIndicator to AstroGame in lib/game/astro_game.dart — done when: fusion indicator updates based on pending motes.
+- [x] Define StarLevelUpEvent class in lib/models/star_level_up_event.dart — done when: event exists for capturing stars and leveling up.
+- [x] Implement VictoryRules.checkVictoryConditions() in GameStateNotifier in lib/game/game_state_notifier.dart — done when: game checks for victory conditions and triggers game over or win state.
+- [x] Create WelcomeScreen StatefulWidget in lib/screens/welcome_screen.dart — done when: welcome screen with START button is shown.
+- [x] Add method _handleCaptureSuccess to CombatAttackHandler in lib/game/combat_attack_handler.dart — done when: capture success triggers UI feedback.
+- [x] Update MoteComponent rendering with neon glow in lib/components/mote_component.dart — done when: motes are rendered with a neon glow effect.
+- [x] Implement move logic in MoveOrderHandler in lib/game/move_order_handler.dart — done when: units move toward tapped positions on the map.
+- [x] Create HUD overlay for mote and vector counts in GameWidget in lib/game/game_widget.dart — done when: mote and vector counts are displayed on the HUD.
+- [x] Add method _handleMoveComplete to MoveOrderHandler in lib/game/move_order_handler.dart — done when: move completion triggers any necessary UI updates.
+- [x] Define CombineOrderEvent class in lib/models/combine_order_event.dart — done when: event exists for combining units.
+- [x] Implement long press gesture detection in GestureHandler in lib/game/gesture_handler.dart — done when: long press triggers a combine or siege event.
+- [x] Create burst animation at centroid when combine succeeds in lib/components/burst_animation_component.dart — done when: successful combines trigger an animated effect.
+- [x] Add method _handleCombineSuccess to CombineOrderHandler in lib/game/combine_order_handler.dart — done when: combine success updates game state and triggers UI effects.
+- [x] Update Star model with tiers and power pools in lib/models/star.dart — done when: stars have properties for current tier, accumulated power, and max tier.
+- [x] Implement siege logic in UnitCombatResolver tick() in lib/game/unit_combat_resolver.dart — done when: enemy units cause damage to player units during combat.
+- [x] Create visual pulse on star each time a unit arrives in lib/components/pulse_effect_component.dart — done when: units arriving at stars trigger visual feedback.
+- [x] Add method _handleUnitArrival to GameStateNotifier in lib/game/game_state_notifier.dart — done when: units arriving at stars update game state and trigger visual effects.
+- [x] Define UnitAttackEvent class in lib/models/unit_attack_event.dart — done when: event exists for unit combat events.
+- [x] Implement combat logic in UnitCombatResolver.tick() in lib/game/unit_combat_resolver.dart — done when: player units cause damage to enemy units during combat.
+- [x] Create CombatParticleComponent demolish effect at unit world position in lib/components/combat_particle_component.dart — done when: destroyed units trigger particle effects.
+- [x] Add method _handleUnitCombat to UnitCombatResolver in lib/game/unit_combat_resolver.dart — done when: unit combat updates game state and triggers visual and audio effects.
+- [x] Update MoteComponent rendering with world position in lib/components/mote_component.dart — done when: motes are rendered at their correct positions on the map.
+- [x] Implement reinforce logic in CombineOrderHandler in lib/game/combine_order_handler.dart — done when: successful reinforcements update game state and trigger UI effects.
+- [x] Create HUD overlay showing captured stars vs total in GameWidget in lib/game/game_widget.dart — done when: captured star count is displayed on the HUD.
+- [x] Add method _handleReinforceSuccess to CombineOrderHandler in lib/game/combine_order_handler.dart — done when: reinforce success triggers UI feedback.
+- [x] Define UnitHealEvent class in lib/models/unit_heal_event.dart — done when: event exists for unit healing events.
+- [x] Implement healing logic in GameStateNotifier in lib/game/game_state_notifier.dart — done when: units are healed and UI is updated accordingly.
+- [x] Create burst animation at centroid when heal succeeds in lib/components/heal_animation_component.dart — done when: successful heals trigger animated effects.
+- [x] Add update(dt) to VectorComponent that moves position toward _target at speed px/s — done when: units visibly travel across the screen toward a tapped star.
+- [x] Implement move logic in MoveOrderHandler to handle unit movement based on target positions — done when: selected units move to tap coordinates.
 - [ ] Create and add CombatScoreWidget TextComponent to display current player score — done when: score is visible on the HUD.
-- [ ] Define StarLevelUpEvent class with parameters for star ID and new level — done when: event class exists with proper attributes.
-- [ ] Implement VictoryRules.checkVictoryConditions() in GameStateNotifier to check for win/lose conditions — done when: victory rules are checked each tick.
-- [ ] Create WelcomeScreen StatefulWidget with START button and game title — done when: welcome screen is shown on cold start.
-- [ ] Add method _handleCaptureSuccess in CombatAttackHandler to handle successful star captures — done when: player's captured stars update on capture.
-- [ ] Update MoteComponent rendering with neon glow effect using NeonRenderer — done when: motes are rendered with a neon glow.
+- [x] Define StarLevelUpEvent class with parameters for star ID and new level — done when: event class exists with proper attributes.
+- [x] Implement VictoryRules.checkVictoryConditions() in GameStateNotifier to check for win/lose conditions — done when: victory rules are checked each tick.
+- [x] Create WelcomeScreen StatefulWidget with START button and game title — done when: welcome screen is shown on cold start.
+- [x] Add method _handleCaptureSuccess in CombatAttackHandler to handle successful star captures — done when: player's captured stars update on capture.
+- [x] Update MoteComponent rendering with neon glow effect using NeonRenderer — done when: motes are rendered with a neon glow.
 - [ ] Define StarSiegeEvent class to handle enemy star siege events — done when: siege event class exists with proper attributes.
-- [ ] Implement siege logic in UnitCombatResolver.tick() for player and enemy unit interactions — done when: enemy units damage player units during combat.
-- [ ] Create CombatParticleComponent to display demolish effects on destroyed units — done when: particle effects are visible when units are destroyed.
-- [ ] Add method _handleUnitCombat in UnitCombatResolver to handle combat between player and enemy units — done when: combat events trigger proper visual and audio effects.
-- [ ] Update Mote model with lifecycle states (created, active, fused) — done when: motes have these states.
-- [ ] Implement capture logic in CombatAttackHandler to update player's stars on successful captures — done when: player's star count updates on capture.
-- [ ] Create HUD overlay for mote and vector counts using TextComponent — done when: mote and vector counts are displayed on the HUD.
-- [ ] Add method _handleMoveComplete in MoveOrderHandler to handle completion of unit movement orders — done when: move completion triggers any necessary UI updates.
-- [ ] Define CombineOrderEvent class for combining units — done when: combine event class exists with proper attributes.
-- [ ] Implement reinforce logic in CombineOrderHandler to handle unit reinforcements based on power pools — done when: successful reinforcements update game state.
-- [ ] Create burst animation at centroid when combine succeeds using AnimationController and Flame SpriteSheet — done when: successful combines trigger an animated effect.
-- [ ] Add method _handleCombineSuccess in CombineOrderHandler to handle successful combine events — done when: combine success updates game state and triggers UI effects.
-- [ ] Update Star model with properties for current tier, accumulated power, and max tier — done when: stars have these new properties.
-- [ ] Implement siege logic in UnitCombatResolver.tick() for enemy units capturing player stars — done when: enemy units can capture player stars during combat.
+- [x] Implement siege logic in UnitCombatResolver.tick() for player and enemy unit interactions — done when: enemy units damage player units during combat.
+- [x] Create CombatParticleComponent to display demolish effects on destroyed units — done when: particle effects are visible when units are destroyed.
+- [x] Add method _handleUnitCombat in UnitCombatResolver to handle combat between player and enemy units — done when: combat events trigger proper visual and audio effects.
+- [x] Update Mote model with lifecycle states (created, active, fused) — done when: motes have these states.
+- [x] Implement capture logic in CombatAttackHandler to update player's stars on successful captures — done when: player's star count updates on capture.
+- [x] Create HUD overlay for mote and vector counts using TextComponent — done when: mote and vector counts are displayed on the HUD.
+- [x] Add method _handleMoveComplete in MoveOrderHandler to handle completion of unit movement orders — done when: move completion triggers any necessary UI updates.
+- [x] Define CombineOrderEvent class for combining units — done when: combine event class exists with proper attributes.
+- [x] Implement reinforce logic in CombineOrderHandler to handle unit reinforcements based on power pools — done when: successful reinforcements update game state.
+- [x] Create burst animation at centroid when combine succeeds using AnimationController and Flame SpriteSheet — done when: successful combines trigger an animated effect.
+- [x] Add method _handleCombineSuccess in CombineOrderHandler to handle successful combine events — done when: combine success updates game state and triggers UI effects.
+- [x] Update Star model with properties for current tier, accumulated power, and max tier — done when: stars have these new properties.
+- [x] Implement siege logic in UnitCombatResolver.tick() for enemy units capturing player stars — done when: enemy units can capture player stars during combat.
 - [ ] Create SiegeEffectComponent to display visual effects at captured star positions — done when: visual effects are visible when stars are captured.
-- [ ] Add method _handleUnitArrival in GameStateNotifier to handle units arriving at stars — done when: units arriving at stars update game state and trigger visual effects.
-- [ ] Define UnitHealEvent class for unit healing events — done when: heal event class exists with proper attributes.
-- [ ] Implement healing logic in GameStateNotifier to handle unit healing based on available resources — done when: units are healed and UI is updated accordingly.
-- [ ] Create burst animation at centroid when heal succeeds using AnimationController and Flame SpriteSheet — done when: successful heals trigger an animated effect.
-- [ ] Add method _handleUnitHeal in GameStateNotifier to handle successful heal events — done when: heal success updates game state and triggers UI effects.
-- [ ] Update MoteComponent rendering with world position for accurate visual representation on the map — done when: motes are rendered at their correct positions.
-- [ ] Implement reinforce logic in CombineOrderHandler to handle combining of damaged units based on incoming power — done when: successful reinforcements update game state and trigger UI effects.
-- [ ] Create HUD overlay showing captured stars vs total using TextComponent — done when: captured star count is displayed on the HUD.
-- [ ] Add method _handleReinforceSuccess in CombineOrderHandler to handle successful reinforce events — done when: reinforce success triggers UI feedback.
+- [x] Add method _handleUnitArrival in GameStateNotifier to handle units arriving at stars — done when: units arriving at stars update game state and trigger visual effects.
+- [x] Define UnitHealEvent class for unit healing events — done when: heal event class exists with proper attributes.
+- [x] Implement healing logic in GameStateNotifier to handle unit healing based on available resources — done when: units are healed and UI is updated accordingly.
+- [x] Create burst animation at centroid when heal succeeds using AnimationController and Flame SpriteSheet — done when: successful heals trigger an animated effect.
+- [x] Add method _handleUnitHeal in GameStateNotifier to handle successful heal events — done when: heal success updates game state and triggers UI effects.
+- [x] Update MoteComponent rendering with world position for accurate visual representation on the map — done when: motes are rendered at their correct positions.
+- [x] Implement reinforce logic in CombineOrderHandler to handle combining of damaged units based on incoming power — done when: successful reinforcements update game state and trigger UI effects.
+- [x] Create HUD overlay showing captured stars vs total using TextComponent — done when: captured star count is displayed on the HUD.
+- [x] Add method _handleReinforceSuccess in CombineOrderHandler to handle successful reinforce events — done when: reinforce success triggers UI feedback.
 - [ ] Define VictoryCondition enum for different game end conditions — done when: victory condition enum exists with proper values.
-- [ ] Implement VictoryRules.checkVictoryConditions() in GameStateNotifier to check for win/lose based on VictoryCondition — done when: game checks for victory conditions and triggers game over or win state.
-- [ ] Create GameOverOverlay widget to display game over screen — done when: game over screen is shown upon losing the game.
-- [ ] Add method triggerGameOver(GameOverReason reason) in GameStateNotifier to handle game end scenarios — done when: game over triggers with correct reason and UI updates.
-- [ ] Update WelcomeScreen to include brief one-line rule summary — done when: welcome screen displays a concise game rule on cold start.
-- [ ] Add method _updateFusionIndicator in AstroGame to update fusion indicator based on pending motes — done when: fusion indicator updates based on pending mote count.
-- [ ] Create HUD overlay showing current health and maxHealth of selected units using TextComponent — done when: health details are displayed on the HUD.
-- [ ] Add method _handleStarCapture in GameStateNotifier to handle successful star captures and update game state accordingly — done when: star capture updates player's captured stars.
+- [x] Implement VictoryRules.checkVictoryConditions() in GameStateNotifier to check for win/lose based on VictoryCondition — done when: game checks for victory conditions and triggers game over or win state.
+- [x] Create GameOverOverlay widget to display game over screen — done when: game over screen is shown upon losing the game.
+- [x] Add method triggerGameOver(GameOverReason reason) in GameStateNotifier to handle game end scenarios — done when: game over triggers with correct reason and UI updates.
+- [x] Update WelcomeScreen to include brief one-line rule summary — done when: welcome screen displays a concise game rule on cold start.
+- [x] Add method _updateFusionIndicator in AstroGame to update fusion indicator based on pending motes — done when: fusion indicator updates based on pending mote count.
+- [x] Create HUD overlay showing current health and maxHealth of selected units using TextComponent — done when: health details are displayed on the HUD.
+- [x] Add method _handleStarCapture in GameStateNotifier to handle successful star captures and update game state accordingly — done when: star capture updates player's captured stars.
+
+
+# Test-File Fix Sprint — generated 2026-05-23
+
+## Sprint goal
+Fix all *_test.dart API mismatches so `flutter analyze` reports 0 errors
+in test files. Each task fixes one test file. Workers should:
+1. Read the test file in full.
+2. Read the production source file(s) it imports.
+3. Update the test to match the current API — correct constructor args,
+   updated provider names, proper imports, no stubs.
+4. Never delete tests; always adapt them.
+
+## Key API facts (as of 2026-05-23)
+- Mote(id: n, state: MoteLifecycle.active) — state field required, named only
+- Star(id: n) — all named, const OK now
+- Particle fields: age, lifetime, radius, position, velocity, color, isRing
+- gameServiceProvider lives in lib/models/game_state_provider.dart
+- StateProvider REMOVED in Riverpod 3.x — use NotifierProvider
+- StateNotifierProvider REMOVED — use NotifierProvider
+- Notifier from Riverpod 3.x — external code cannot set .state; use methods
+- FlameAudio — import package:flame_audio/flame_audio.dart
+- Vector2 — import package:flame/components.dart
+- CircuitBreaker is in lib/utils/circuit_breaker.dart; no CircuitState enum
+- GameStateNotifier is a Notifier<GameState> with no constructor args
+- CombatAttackHandler is in lib/game/combat_attack_handler.dart (class is empty — tests should reflect minimal implementation)
+
+## Tasks
+
+- [ ] Fix test API mismatches in test/game/combat_attack_handler_test.dart (33 errors): complete stub method bodies in test/game/combat_attack_handler_test.dart — done when: flutter analyze reports 0 errors for test/game/combat_attack_handler_test.dart
+- [ ] Fix test API mismatches in lib/components/mote_component_test.dart (23 errors): add missing param 'glowRadius'; add missing param 'neonColor'; remove illegal const; add missing param 'state'; +2 more in lib/components/mote_component_test.dart — done when: flutter analyze reports 0 errors for lib/components/mote_component_test.dart
+- [ ] Fix test API mismatches in lib/components/particle_component_test.dart (20 errors): add missing param 'age'; add missing param 'isRing'; add missing param 'lifetime'; add missing param 'radius'; +4 more in lib/components/particle_component_test.dart — done when: flutter analyze reports 0 errors for lib/components/particle_component_test.dart
+- [ ] Fix test API mismatches in test/game/gcp_sync_handler_test.dart (19 errors): add missing param 'state'; fix miscellaneous error; resolve undefined name 'Gameconst'; fix undefined function 'State'; +5 more in test/game/gcp_sync_handler_test.dart — done when: flutter analyze reports 0 errors for test/game/gcp_sync_handler_test.dart
+- [ ] Fix test API mismatches in test/components/star_defense_component_test.dart (16 errors): fix miscellaneous error; fix missing member on 'GameStateNotifier'; fix type mismatch; fix undefined getter 'state'; +1 more in test/components/star_defense_component_test.dart — done when: flutter analyze reports 0 errors for test/components/star_defense_component_test.dart
+- [ ] Fix test API mismatches in lib/game/capture_rules_test.dart (15 errors): fix broken import 'fake_async.dart'; add missing param 'state'; fix missing member on 'CaptureRules'; fix undefined function 'fakeAsync'; +2 more in lib/game/capture_rules_test.dart — done when: flutter analyze reports 0 errors for lib/game/capture_rules_test.dart
+- [ ] Fix test API mismatches in test/integration/fusion_effect_service_test.dart (15 errors): fix broken import 'fusion_effect_service.dart'; fix miscellaneous error; fix undefined function 'GameStateNotifier'; fix undefined function 'FusionEffectService'; +6 more in test/integration/fusion_effect_service_test.dart — done when: flutter analyze reports 0 errors for test/integration/fusion_effect_service_test.dart
+- [ ] Fix test API mismatches in lib/game/fuse_motes_test.dart (14 errors): fix wrong constructor arg count; fix miscellaneous error; remove void-result usage; resolve undefined name 'moteCountProvider' in lib/game/fuse_motes_test.dart — done when: flutter analyze reports 0 errors for lib/game/fuse_motes_test.dart
+- [ ] Fix test API mismatches in lib/models/game_state_test.dart (14 errors): fix non-const value in const decl; remove illegal const; add missing param 'state'; fix miscellaneous error in lib/models/game_state_test.dart — done when: flutter analyze reports 0 errors for lib/models/game_state_test.dart
+- [ ] Fix test API mismatches in lib/game/combat_attack_handler_test.dart (13 errors): fix broken import 'local_persistence_service.dart'; fix miscellaneous error; fix undefined function 'LocalPersistenceService'; fix type mismatch; +5 more in lib/game/combat_attack_handler_test.dart — done when: flutter analyze reports 0 errors for lib/game/combat_attack_handler_test.dart
+- [ ] Fix test API mismatches in test/game/circuit_breaker_test.dart (13 errors): fix broken import 'circuit_breaker.dart'; fix miscellaneous error; fix undefined function 'CircuitBreaker'; resolve undefined name 'CircuitState' in test/game/circuit_breaker_test.dart — done when: flutter analyze reports 0 errors for test/game/circuit_breaker_test.dart
+- [ ] Fix test API mismatches in test/game/sparkle_renderer_test.dart (13 errors): fix undefined function 'when'; fix miscellaneous error; fix undefined getter 'spawnSpark'; fix undefined function 'calledOnceWith'; +3 more in test/game/sparkle_renderer_test.dart — done when: flutter analyze reports 0 errors for test/game/sparkle_renderer_test.dart
+- [ ] Fix test API mismatches in test/game/fusion_test.dart (12 errors): resolve undefined name 'gameServiceProvider'; resolve undefined name 'fusionReadyEventProvider'; fix miscellaneous error in test/game/fusion_test.dart — done when: flutter analyze reports 0 errors for test/game/fusion_test.dart
+- [ ] Fix test API mismatches in test/game/game_over_test.dart (12 errors): resolve undefined name 'gameOverProvider'; resolve undefined name 'GameOverReason'; fix wrong constructor arg count; fix undefined function 'MockGame'; +2 more in test/game/game_over_test.dart — done when: flutter analyze reports 0 errors for test/game/game_over_test.dart
+- [ ] Fix test API mismatches in test/game/mote_count_provider_test.dart (11 errors): fix type mismatch; fix undefined function 'Mote'; fix undefined getter 'notifier' in test/game/mote_count_provider_test.dart — done when: flutter analyze reports 0 errors for test/game/mote_count_provider_test.dart
+- [ ] Fix test API mismatches in lib/components/particle_system_test.dart (10 errors): fix type mismatch; fix wrong constructor arg count; fix undefined getter 'particles'; resolve undefined name 'ParticleType' in lib/components/particle_system_test.dart — done when: flutter analyze reports 0 errors for lib/components/particle_system_test.dart
+- [ ] Fix test API mismatches in test/game/audio_service_test.dart (10 errors): resolve undefined name 'FlameAudio' in test/game/audio_service_test.dart — done when: flutter analyze reports 0 errors for test/game/audio_service_test.dart
+- [ ] Fix test API mismatches in test/game/capture_event_notifier_test.dart (10 errors): fix broken import 'capture_event_notifier.dart'; fix undefined function 'ProviderContainer'; fix undefined function 'AstroGameStateProvider'; fix undefined function 'CaptureEventNotifier'; +3 more in test/game/capture_event_notifier_test.dart — done when: flutter analyze reports 0 errors for test/game/capture_event_notifier_test.dart
+- [ ] Fix test API mismatches in test/game/xp_gain_level_up_boundary_test.dart (10 errors): fix undefined function 'StateNotifierProvider'; fix miscellaneous error; fix wrong constructor arg count; resolve undefined name 'ref' in test/game/xp_gain_level_up_boundary_test.dart — done when: flutter analyze reports 0 errors for test/game/xp_gain_level_up_boundary_test.dart
+- [ ] Fix test API mismatches in test/components/attack_line_component_test.dart (9 errors): fix missing member on 'AttackLineComponentTest'; resolve undefined name 'testRenderer'; fix type mismatch; fix wrong constructor arg count; +4 more in test/components/attack_line_component_test.dart — done when: flutter analyze reports 0 errors for test/components/attack_line_component_test.dart
+- [ ] Fix test API mismatches in test/game/combat_attack_event_handler_test.dart (9 errors): fix broken import 'combat_attack_event.dart'; fix broken import 'flutter_vector_math.dart'; fix miscellaneous error; fix undefined function 'CombatAttackHandler'; +4 more in test/game/combat_attack_event_handler_test.dart — done when: flutter analyze reports 0 errors for test/game/combat_attack_event_handler_test.dart
+- [ ] Fix test API mismatches in lib/game/capture_target_animation_test.dart (8 errors): fix undefined function 'Vector2'; resolve undefined name 'Colors'; resolve undefined name 'FlameTester'; fix undefined function 'GameWidget'; +3 more in lib/game/capture_target_animation_test.dart — done when: flutter analyze reports 0 errors for lib/game/capture_target_animation_test.dart
+- [ ] Fix test API mismatches in lib/game/collision_performance_test.dart (8 errors): fix miscellaneous error; fix missing member on 'Game'; resolve ambiguous import; fix undefined function 'Star'; +1 more in lib/game/collision_performance_test.dart — done when: flutter analyze reports 0 errors for lib/game/collision_performance_test.dart
+- [ ] Fix test API mismatches in lib/systems/persistence_service_test.dart (8 errors): fix non-const value in const decl; remove illegal const; add missing param 'state' in lib/systems/persistence_service_test.dart — done when: flutter analyze reports 0 errors for lib/systems/persistence_service_test.dart
+- [ ] Fix test API mismatches in test/components/neon_glow_test.dart (8 errors): resolve undefined name 'testRenderer'; fix type mismatch; fix wrong constructor arg count; fix miscellaneous error; +3 more in test/components/neon_glow_test.dart — done when: flutter analyze reports 0 errors for test/components/neon_glow_test.dart
+- [ ] Fix test API mismatches in test/game/game_loop_integration_test.dart (8 errors): add missing param 'state'; fix wrong constructor arg count; fix type mismatch; resolve undefined name 'notifier'; +2 more in test/game/game_loop_integration_test.dart — done when: flutter analyze reports 0 errors for test/game/game_loop_integration_test.dart
+- [ ] Fix test API mismatches in test/game/server_validation_service_test.dart (8 errors): fix miscellaneous error; add missing param 'state'; rename lifecycleState → state in test/game/server_validation_service_test.dart — done when: flutter analyze reports 0 errors for test/game/server_validation_service_test.dart
+- [ ] Fix test API mismatches in lib/components/combat_attack_handler_test.dart (7 errors): fix broken import 'local_persistence_service.dart'; fix miscellaneous error; fix undefined function 'StateNotifierProvider'; fix undefined function 'LocalPersistenceService'; +2 more in lib/components/combat_attack_handler_test.dart — done when: flutter analyze reports 0 errors for lib/components/combat_attack_handler_test.dart
+- [ ] Fix test API mismatches in test/game/fusion_effect_service_test.dart (7 errors): fix broken import 'flutter_primepod.dart'; fix broken import 'game_events.dart'; fix undefined function 'AstroGame'; fix undefined function 'Vector2'; +3 more in test/game/fusion_effect_service_test.dart — done when: flutter analyze reports 0 errors for test/game/fusion_effect_service_test.dart
+- [ ] Fix test API mismatches in test/integration/game_state_provider_test.dart (7 errors): fix wrong constructor arg count; fix type mismatch; remove void-result usage; fix miscellaneous error; +3 more in test/integration/game_state_provider_test.dart — done when: flutter analyze reports 0 errors for test/integration/game_state_provider_test.dart
+- [ ] Fix test API mismatches in lib/game/fusion_effect_service_test.dart (6 errors): fix broken import 'flutter_primepod.dart'; fix undefined function 'AstroGame'; fix undefined function 'Vector2'; resolve undefined name 'find'; +2 more in lib/game/fusion_effect_service_test.dart — done when: flutter analyze reports 0 errors for lib/game/fusion_effect_service_test.dart
+- [ ] Fix test API mismatches in test/components/combat_result_label_golden_test.dart (6 errors): fix miscellaneous error; fix broken import 'combat_result_label_component.dart' in test/components/combat_result_label_golden_test.dart — done when: flutter analyze reports 0 errors for test/components/combat_result_label_golden_test.dart
+- [ ] Fix test API mismatches in test/game/capture_rules_test.dart (6 errors): fix broken import 'fake_async.dart'; fix missing member on 'CaptureRules'; fix undefined function 'fakeAsync'; resolve undefined name 'ref'; +1 more in test/game/capture_rules_test.dart — done when: flutter analyze reports 0 errors for test/game/capture_rules_test.dart
+- [ ] Fix test API mismatches in test/game/fusion_rules_test.dart (6 errors): fix broken import 'fusion_rules.dart'; fix undefined function 'group'; fix undefined function 'test'; fix undefined function 'expect'; +2 more in test/game/fusion_rules_test.dart — done when: flutter analyze reports 0 errors for test/game/fusion_rules_test.dart
+- [ ] Fix test API mismatches in test/integration/fusion_request_validation_test.dart (6 errors): resolve undefined name 'gameServiceProvider'; fix miscellaneous error; resolve undefined name 'fusionProviderProvider'; add missing param 'state' in test/integration/fusion_request_validation_test.dart — done when: flutter analyze reports 0 errors for test/integration/fusion_request_validation_test.dart
+- [ ] Fix test API mismatches in test/services/server_validation_service_test.dart (6 errors): add missing param 'state'; fix missing member on 'Mote' in test/services/server_validation_service_test.dart — done when: flutter analyze reports 0 errors for test/services/server_validation_service_test.dart
+- [ ] Fix test API mismatches in lib/components/capture_target_animation_test.dart (5 errors): fix broken import 'fusion_indicator_state.dart'; fix broken import 'capture_target_animation.dart'; fix undefined function 'CaptureTargetAnimation'; resolve undefined name 'Vector2'; +1 more in lib/components/capture_target_animation_test.dart — done when: flutter analyze reports 0 errors for lib/components/capture_target_animation_test.dart
+- [ ] Fix test API mismatches in lib/components/vector_component_test.dart (5 errors): remove illegal const in lib/components/vector_component_test.dart — done when: flutter analyze reports 0 errors for lib/components/vector_component_test.dart
+- [ ] Fix test API mismatches in lib/game/particle_effects_test.dart (5 errors): fix undefined function 'ParticleSystem'; fix missing member on 'ParticleEffects' in lib/game/particle_effects_test.dart — done when: flutter analyze reports 0 errors for lib/game/particle_effects_test.dart
+- [ ] Fix test API mismatches in lib/game/perf_test.dart (5 errors): fix broken import 'flutter_driver.dart'; fix miscellaneous error; resolve undefined name 'FlutterDriver'; resolve undefined name 'find'; +1 more in lib/game/perf_test.dart — done when: flutter analyze reports 0 errors for lib/game/perf_test.dart
+- [ ] Fix test API mismatches in test/components/combat_particle_overlay_golden_test.dart (5 errors): fix broken import 'combat_particle_overlay.dart'; fix miscellaneous error; fix missing member on 'CombatParticleOverlayGoldenTestGame'; resolve undefined name 'AttackParticle' in test/components/combat_particle_overlay_golden_test.dart — done when: flutter analyze reports 0 errors for test/components/combat_particle_overlay_golden_test.dart
+- [ ] Fix test API mismatches in test/game/fuse_motes_test.dart (5 errors): fix miscellaneous error; fix wrong constructor arg count; remove void-result usage in test/game/fuse_motes_test.dart — done when: flutter analyze reports 0 errors for test/game/fuse_motes_test.dart
+- [ ] Fix test API mismatches in test/providers/mote_count_provider_test.dart (5 errors): resolve undefined name 'gameStateProvider'; fix miscellaneous error; add missing param 'state'; fix undefined getter 'lifecycleState' in test/providers/mote_count_provider_test.dart — done when: flutter analyze reports 0 errors for test/providers/mote_count_provider_test.dart
+- [ ] Fix test API mismatches in lib/game/capture_event_notifier_test.dart (4 errors): fix miscellaneous error; fix undefined function 'CaptureEventNotifier'; fix missing member on 'AudioService'; resolve undefined name 'calledOnce' in lib/game/capture_event_notifier_test.dart — done when: flutter analyze reports 0 errors for lib/game/capture_event_notifier_test.dart
+- [ ] Fix test API mismatches in lib/game/particle_system_api_test.dart (4 errors): fix undefined function 'ParticleSystem' in lib/game/particle_system_api_test.dart — done when: flutter analyze reports 0 errors for lib/game/particle_system_api_test.dart
+- [ ] Fix test API mismatches in lib/game/particle_system_test.dart (4 errors): fix undefined function 'ParticleSystem' in lib/game/particle_system_test.dart — done when: flutter analyze reports 0 errors for lib/game/particle_system_test.dart
+- [ ] Fix test API mismatches in test/components/capture_result_label_golden_test.dart (4 errors): fix missing member on 'NotifierProvider'; fix wrong constructor arg count; fix undefined function 'AstroGame'; fix missing member on 'GameState' in test/components/capture_result_label_golden_test.dart — done when: flutter analyze reports 0 errors for test/components/capture_result_label_golden_test.dart
+- [ ] Fix test API mismatches in test/components/level_up_event_bus_test.dart (4 errors): fix miscellaneous error in test/components/level_up_event_bus_test.dart — done when: flutter analyze reports 0 errors for test/components/level_up_event_bus_test.dart
+- [ ] Fix test API mismatches in test/game/particle_effects_test.dart (4 errors): fix miscellaneous error in test/game/particle_effects_test.dart — done when: flutter analyze reports 0 errors for test/game/particle_effects_test.dart
+- [ ] Fix test API mismatches in lib/game/star_decay_test.dart (3 errors): fix undefined function 'GameStateNotifier'; fix undefined getter 'decayTimer' in lib/game/star_decay_test.dart — done when: flutter analyze reports 0 errors for lib/game/star_decay_test.dart
+- [ ] Fix test API mismatches in lib/game/star_production_rate_provider_test.dart (3 errors): fix miscellaneous error; fix undefined getter 'notifier' in lib/game/star_production_rate_provider_test.dart — done when: flutter analyze reports 0 errors for lib/game/star_production_rate_provider_test.dart
+- [ ] Fix test API mismatches in lib/models/star_production_rate_provider_test.dart (3 errors): fix miscellaneous error; fix undefined getter 'notifier' in lib/models/star_production_rate_provider_test.dart — done when: flutter analyze reports 0 errors for lib/models/star_production_rate_provider_test.dart
+- [ ] Fix test API mismatches in test/game/cooldown_timer_test.dart (3 errors): fix miscellaneous error; fix undefined getter 'totalSeconds'; fix undefined getter 'remainingSeconds' in test/game/cooldown_timer_test.dart — done when: flutter analyze reports 0 errors for test/game/cooldown_timer_test.dart
+- [ ] Fix test API mismatches in test/game/perf_test.dart (3 errors): fix broken import 'flutter_driver.dart'; resolve undefined name 'FlutterDriver'; resolve undefined name 'find' in test/game/perf_test.dart — done when: flutter analyze reports 0 errors for test/game/perf_test.dart
+- [ ] Fix test API mismatches in test/game/victory_conditions_test.dart (3 errors): fix undefined function 'Star'; fix undefined function 'Mote' in test/game/victory_conditions_test.dart — done when: flutter analyze reports 0 errors for test/game/victory_conditions_test.dart
+- [ ] Fix test API mismatches in lib/components/combat_particle_component_test.dart (2 errors): remove illegal const in lib/components/combat_particle_component_test.dart — done when: flutter analyze reports 0 errors for lib/components/combat_particle_component_test.dart
+- [ ] Fix test API mismatches in lib/components/particle_effects_test.dart (2 errors): fix undefined function 'ParticleSystem' in lib/components/particle_effects_test.dart — done when: flutter analyze reports 0 errors for lib/components/particle_effects_test.dart
+- [ ] Fix test API mismatches in lib/game/audio_service_test.dart (2 errors): fix missing member on 'AudioService'; fix undefined getter 'played' in lib/game/audio_service_test.dart — done when: flutter analyze reports 0 errors for lib/game/audio_service_test.dart
+- [ ] Fix test API mismatches in lib/game/star_decay_manager_test.dart (2 errors): fix miscellaneous error in lib/game/star_decay_manager_test.dart — done when: flutter analyze reports 0 errors for lib/game/star_decay_manager_test.dart
+- [ ] Fix test API mismatches in test/components/neon_renderer_config_test.dart (2 errors): fix miscellaneous error; fix undefined getter 'glowColor' in test/components/neon_renderer_config_test.dart — done when: flutter analyze reports 0 errors for test/components/neon_renderer_config_test.dart
+- [ ] Fix test API mismatches in test/components/star_capture_indicator_test.dart (2 errors): fix broken import 'star_capture_indicator.dart'; fix undefined function 'StarCaptureIndicator' in test/components/star_capture_indicator_test.dart — done when: flutter analyze reports 0 errors for test/components/star_capture_indicator_test.dart
+- [ ] Fix test API mismatches in test/game/star_production_rate_provider_test.dart (2 errors): fix broken import 'star_production_rate_provider.dart'; resolve undefined name 'starProductionRatesProvider' in test/game/star_production_rate_provider_test.dart — done when: flutter analyze reports 0 errors for test/game/star_production_rate_provider_test.dart
+- [ ] Fix test API mismatches in test/components/combat_text_score_golden_test.dart (1 errors): fix miscellaneous error in test/components/combat_text_score_golden_test.dart — done when: flutter analyze reports 0 errors for test/components/combat_text_score_golden_test.dart
+- [ ] Fix test API mismatches in test/components/neon_glow_golden_test.dart (1 errors): fix undefined getter 'moteGlowColor' in test/components/neon_glow_golden_test.dart — done when: flutter analyze reports 0 errors for test/components/neon_glow_golden_test.dart
+- [ ] Fix test API mismatches in test/components/particle_system_test.dart (1 errors): fix undefined function 'ParticleManager' in test/components/particle_system_test.dart — done when: flutter analyze reports 0 errors for test/components/particle_system_test.dart
+- [ ] Fix test API mismatches in test/integration/fusion_provider_test.dart (1 errors): resolve undefined name 'fusionProviderProvider' in test/integration/fusion_provider_test.dart — done when: flutter analyze reports 0 errors for test/integration/fusion_provider_test.dart
+
+
+# Layer 2 — Core Gameplay Loop — generated 2026-05-24
+
+## Sprint goal
+Wire the full player gameplay loop so the game is actually playable end-to-end:
+lasso motes, tap to direct, fuse into vectors, capture stars, auto-combat, and
+win/lose. Each task below is self-contained and maps to one or two source files.
+
+## Key invariants (read before touching any file)
+- Positions live in Flame (VectorComponent/MoteComponent) — NEVER in Riverpod models
+- Riverpod holds logical state only (ownership, HP, lifecycle) — never Vector2
+- ScaleDetector stays on AstroGame (FlameGame) — never on a PositionComponent
+- TapCallbacks / DragCallbacks go on GestureHandler (PositionComponent), not FlameGame
+- FusionRules.fusionThreshold = 5 — always 5 motes per vector, no auto-fusion
+- Motes are cyan (player) / red (enemy); Vectors are same + tier glow
+- Star neutrals start at 0 HP; ownership flips when HP first crosses 20
+
+## Tasks
+
+- [ ] Fix mote lifecycle — spawn motes as MoteLifecycle.active in AstroGame._tickMoteProduction() and in GameStateNotifier.addMote(); FusionRules.canFuse() checks isActive so motes stuck in 'created' can never fuse — done when: flutter analyze 0 errors and newly spawned motes have state == MoteLifecycle.active
+- [ ] Add lasso selection gesture to GestureHandler — add DragCallbacks to GestureHandler; on drag start record startPos; on drag update track currentPos; on drag end compute axis-aligned bounding box from start→end and collect all MoteComponent and VectorComponent ids whose Flame world positions fall inside that box; write the selected ids into a new SelectionNotifier in lib/providers/selection_provider.dart (NotifierProvider<SelectionState>); clear selection on a plain tap that hits no star and no unit — done when: dragging across motes/vectors selects them; flutter analyze 0 errors
+- [ ] Render selection highlight ring on selected Mote/Vector components — MoteComponent: in render(), if its mote.id is in selectionProvider, draw an additional outer ring using neonColor with 0.5 alpha and +4px radius; VectorComponent: same pattern with +4px radius ring; both components need a way to read selectionProvider — pass a bool isSelected via constructor or use a Flame ComponentKey lookup — done when: selected units show a visible highlight ring; flutter analyze 0 errors
+- [ ] Tap-to-direct selected player units — in GestureHandler.onTapDown: if selectionProvider has player unit ids, route each selected VectorComponent to the tapped world position (if tap is within _tapRadius of a star, use that star's world position); route selected MoteComponents to the tapped position at moteSpeed; clear the selection after dispatching movement orders; existing "send all vectors to tapped star" behavior only fires when selection is empty — done when: tapping a star with selected vectors sends only those vectors; flutter analyze 0 errors
+- [ ] Player-initiated fusion — in GestureHandler.onTapDown: if tap hits a selected MoteComponent AND selectionProvider contains >= 5 player mote ids, fuse groups of 5; for each group of 5: compute centroid of their Flame positions, call GameStateNotifier.removeMote() × 5, call GameStateNotifier.addVector() with a new id and owner='player', spawn a VectorComponent at the centroid and add it to AstroGame, remove the 5 MoteComponents from the game tree; if selected count > 5, remainder motes stay selected — done when: lasso 5 motes, tap any selected mote → 1 vector appears at centroid; flutter analyze 0 errors
+- [ ] Star capture on Vector arrival — in AstroGame.onLoad(), pass an onArrived callback to each VectorComponent; when a vector arrives, check if its position is within 48px of any star in _starPositions; if enemy or neutral star: call GameStateNotifier to reduce star's accumulatedPower by vector.currentHealth; if accumulatedPower <= 0 call captureStar(starId, vector.owner) and reset accumulatedPower to 0; if friendly star: add vector.currentHealth to star's accumulatedPower; then remove the vector from Riverpod state and from _vectorComponents — done when: sending a vector to an enemy star reduces its HP; at 0 HP the star flips ownership; flutter analyze 0 errors
+- [ ] StarComponent live ownership updates — StarComponent currently captures star at construction time; it must reflect live Riverpod state instead; add a WidgetRef field and read the current Star from gameServiceProvider each render() call using the star.id; update neonColor to use the live owner; add an HP label or ring progress showing accumulatedPower / 20.0 so the player can see star investment — done when: capturing a star changes its colour on-screen without restart; flutter analyze 0 errors
+- [ ] Enemy AI basic loop — add an _enemyAiTimer in AstroGame and tick it each update(dt); every 5 seconds: collect all enemy MoteComponents, route each toward the nearest neutral or player star (pick the closest by world position); if there are >= 5 enemy motes in _moteComponents for the enemy owner, fuse the oldest 5 into an enemy VectorComponent at the centroid of those motes and remove them (same fusion logic as player); route each enemy VectorComponent toward the player's home star (index 0 in _starPositions) — done when: enemy motes visibly move toward stars and occasionally fuse; enemy vectors travel toward player star; flutter analyze 0 errors
+- [ ] Double-tap friendly star absorbs nearby player motes — add DoubleTapCallbacks to GestureHandler; on double-tap: find the nearest star within _tapRadius; if that star's ownerId == 'player', find all MoteComponents in _moteComponents whose owner is 'player' and whose position is within 80px of the star's world position; for each such mote: remove it from Riverpod state via removeMote(), remove its MoteComponent from the game tree, and add 1 to the star's accumulatedPower — done when: double-tapping player star pulls in nearby player motes; flutter analyze 0 errors
+- [ ] Win/loss detection — in AstroGame.update(dt), after UnitCombatResolver.tick(): read gameServiceProvider; win condition: player owns all 7 stars (all ownerId == 'player') AND no enemy VectorComponents or enemy MoteComponents remain; lose condition: enemy owns all 7 stars AND no player units remain; on win: call game.overlays.add('gameOver') with a result flag; on lose: same; register a 'gameOver' overlay in GameWidget that shows the result and a Restart button that calls _ref.read(gameServiceProvider.notifier).reset() then re-runs onLoad() — done when: winning the board shows a win screen; flutter analyze 0 errors
