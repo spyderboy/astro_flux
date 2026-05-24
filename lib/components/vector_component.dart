@@ -21,12 +21,17 @@ class VectorComponent extends PositionComponent {
   final Vector vector;
   final void Function(VectorComponent vc)? onArrived;
 
-  /// World-space pixels per second.
-  static const double speed = 80.0;
+  /// Mote baseline speed in world-space pixels per second.
+  static const double moteSpeed = 100.0;
+  /// Vector speed = 80% of Mote speed (per vision: slower but hits harder).
+  static const double speed = moteSpeed * 0.8;
   /// Arrival threshold in world-space pixels.
   static const double arrivalThreshold = 6.0;
 
   Vector2? _target;
+
+  /// Whether this vector is currently selected by the player.
+  bool isSelected = false;
 
   VectorComponent({
     required this.vector,
@@ -46,7 +51,7 @@ class VectorComponent extends PositionComponent {
     switch (tier) {
       case 2:  return 20.0;
       case 3:  return 28.0;
-      default: return 14.0;
+      default: return 16.0;
     }
   }
 
@@ -54,7 +59,8 @@ class VectorComponent extends PositionComponent {
 
   // ── Owner / tier colour ─────────────────────────────────────────────────────
 
-  Color get _color {
+  /// Public colour accessor used by tests and render.
+  Color get neonColor {
     if (vector.owner == 'enemy') return const Color(0xFFFF3366);
     switch (vector.tier) {
       case 2:  return const Color(0xFF00FFAA);
@@ -85,31 +91,51 @@ class VectorComponent extends PositionComponent {
       return;
     }
 
-    position += dir.normalized() * (speed * dt);
+    final moveStep = speed * dt;
+    position += (dir / dist) * moveStep;
   }
 
   @override
   void render(Canvas canvas) {
     final r     = radius;
-    final color = _color;
+    final color = neonColor;
 
     // Outer glow
     canvas.drawCircle(
       Offset.zero,
       r,
       Paint()
-        ..color     = color.withOpacity(0.6)
-        ..blendMode = BlendMode.plus
-        ..maskFilter = MaskFilter.blur(BlurStyle.normal, r * 0.7),
+        ..color = Color.fromARGB(
+            (color.a * 0.6 * 255).round().clamp(0, 255),
+            (color.r * 255).round(),
+            (color.g * 255).round(),
+            (color.b * 255).round(),
+          ),
     );
 
-    // Solid core
+    // Inner solid core
     canvas.drawCircle(
       Offset.zero,
-      r * 0.5,
+      r - 1,
       Paint()
-        ..color     = color
-        ..blendMode = BlendMode.plus,
+        ..color = Color.fromARGB(
+            255,
+            (color.r * 255).round(),
+            (color.g * 255).round(),
+            (color.b * 255).round(),
+          ),
     );
+
+    // Selection highlight ring
+    if (isSelected) {
+      canvas.drawCircle(
+        Offset.zero,
+        r + 4.0,
+        Paint()
+          ..color = color.withValues(alpha: 0.5)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2.0,
+      );
+    }
   }
 }

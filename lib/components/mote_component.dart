@@ -1,37 +1,53 @@
+// ignore_for_file: depend_on_referenced_packages
 import 'dart:ui';
 import 'package:flame/components.dart';
-import 'package:flame/events.dart';
-import '../models/mote.dart';
+import 'package:flutter/painting.dart' show Color;
+import 'package:astro_flux/components/neon_renderer.dart';
+import 'package:astro_flux/models/mote.dart';
 
-class MoteComponent extends PositionComponent with TapCallbacks {
-  final Mote mote;
-  final double radius;
-  final double glowRadius;
+/// A component that renders a "mote" — a small glowing orb — using the
+/// [NeonRenderer] mixin for a neon glow effect.
+class MoteComponent extends PositionComponent with NeonRenderer {
+  /// The base color of this mote's neon glow.
+  @override
   final Color neonColor;
 
+  /// The radius used for the glow effect (also the visual size of the mote).
+  @override
+  final double glowRadius;
+
+  final Mote mote;
+
+  /// Whether this mote is currently selected by the player.
+  bool isSelected = false;
+
   MoteComponent({
+    required this.neonColor,
+    required this.glowRadius,
     required this.mote,
-    Vector2? position,
-    this.radius = 8.0,
-    this.glowRadius = 12.0,
-    this.neonColor = const Color(0xFF00FFFF),
-  }) : super(position: position) {
-    size = Vector2.all(radius * 2);
-  }
+    super.position,
+    super.anchor,
+  }) : super(
+          size: Vector2.all(glowRadius * 3),
+        );
 
   @override
   void render(Canvas canvas) {
-    final paint = Paint()
-      ..color = neonColor
-      ..style = PaintingStyle.fill
-      ..blendMode = BlendMode.plus
-      ..maskFilter = MaskFilter.blur(BlurStyle.normal, glowRadius / 2);
+    // The PositionComponent canvas is already translated to this component's
+    // top-left corner. Shift to the visual centre before drawing.
+    canvas.translate(glowRadius * 1.5, glowRadius * 1.5);
+    renderNeonSelf(canvas);
 
-    canvas.drawCircle(Offset.zero, radius, paint);
-  }
-
-  @override
-  Future<void> onTapDown(TapDownEvent event) async {
-    // Handle mote tap
+    // Selection highlight ring — drawn on top of glow.
+    if (isSelected) {
+      canvas.drawCircle(
+        Offset.zero,
+        glowRadius + 4.0,
+        Paint()
+          ..color = neonColor.withValues(alpha: 0.5)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2.0,
+      );
+    }
   }
 }
