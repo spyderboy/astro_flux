@@ -2,6 +2,7 @@
 import 'package:flame/game.dart' hide Vector;
 import 'package:flame/components.dart' hide Vector;
 import 'package:flame/events.dart';
+<<<<<<< Updated upstream
 import 'package:flutter/painting.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:astro_flux/models/mote.dart';
@@ -17,6 +18,11 @@ import 'package:astro_flux/game/gesture_handler.dart';
 import 'package:astro_flux/game/ai/enemy_ai.dart';
 import 'package:astro_flux/systems/mote_production_system.dart';
 import 'audio_service.dart';
+=======
+import 'package:flame/components.dart';
+import 'package:astro_flux/game/ai/aggressive_ai.dart';
+import 'package:flame/camera.dart';
+>>>>>>> Stashed changes
 
 const double _minZoom = 0.4;
 const double _maxZoom = 2.0;
