@@ -916,3 +916,570 @@ win/lose. Each task below is self-contained and maps to one or two source files.
 - [ ] Enemy AI basic loop — add an _enemyAiTimer in AstroGame and tick it each update(dt); every 5 seconds: collect all enemy MoteComponents, route each toward the nearest neutral or player star (pick the closest by world position); if there are >= 5 enemy motes in _moteComponents for the enemy owner, fuse the oldest 5 into an enemy VectorComponent at the centroid of those motes and remove them (same fusion logic as player); route each enemy VectorComponent toward the player's home star (index 0 in _starPositions) — done when: enemy motes visibly move toward stars and occasionally fuse; enemy vectors travel toward player star; flutter analyze 0 errors
 - [ ] Double-tap friendly star absorbs nearby player motes — add DoubleTapCallbacks to GestureHandler; on double-tap: find the nearest star within _tapRadius; if that star's ownerId == 'player', find all MoteComponents in _moteComponents whose owner is 'player' and whose position is within 80px of the star's world position; for each such mote: remove it from Riverpod state via removeMote(), remove its MoteComponent from the game tree, and add 1 to the star's accumulatedPower — done when: double-tapping player star pulls in nearby player motes; flutter analyze 0 errors
 - [x] Win/loss detection — in AstroGame.update(dt), after UnitCombatResolver.tick(): read gameServiceProvider; win condition: player owns all 7 stars (all ownerId == 'player') AND no enemy VectorComponents or enemy MoteComponents remain; lose condition: enemy owns all 7 stars AND no player units remain; on win: call game.overlays.add('gameOver') with a result flag; on lose: same; register a 'gameOver' overlay in GameWidget that shows the result and a Restart button that calls _ref.read(gameServiceProvider.notifier).reset() then re-runs onLoad() — done when: winning the board shows a win screen; flutter analyze 0 errors
+
+---
+
+## BENCHMARK SPRINT — 500 Gameplay Tasks
+
+### Block A — Core game loop wiring
+
+- [ ] In lib/game/astro_game.dart onLoad: call flutter.debugPrint to log 'AstroGame loaded' and verify no exceptions thrown — done when: flutter analyze 0 errors; log line appears on launch
+- [ ] In lib/game/astro_game.dart: add _elapsedSeconds double field; increment in update(double dt) with _elapsedSeconds += dt — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _playerStarCount int getter that counts stars in gameServiceProvider with ownerId == 'player' — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _enemyStarCount int getter that counts stars with ownerId == 'enemy' — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: call _unitCombatResolver.tick(dt) inside update(double dt) — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _productionTimer double field; in update(dt) accumulate; when >= 5.0 call _spawnMotesForOwnedStars() and reset to 0 — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: implement _spawnMotesForOwnedStars() stub that iterates gameServiceProvider.stars where ownerId == 'player' — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _checkWinCondition() called every 2s in update; returns true when _playerStarCount == totalStars and no enemy VectorComponents exist — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _checkLossCondition() called every 2s; returns true when _playerStarCount == 0 and no player VectorComponents exist — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: when _checkWinCondition() returns true call overlays.add('gameOver') — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: when _checkLossCondition() returns true call overlays.add('gameOver') — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _routeSelectedUnitsTo(Vector2 target) that calls setTarget on all VectorComponents where isSelected == true — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: in onTapDown handler call _routeSelectedUnitsTo(event.localPosition) when units are selected — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _clearSelection() that sets isSelected=false on all VectorComponents — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: call _clearSelection() after _routeSelectedUnitsTo() — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _selectedUnitCount int getter returning count of VectorComponents where isSelected == true — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _handleStarTap(int starId) that routes selected player units to starPositions[starId] — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: wire GestureHandler.onStarTapped callback to _handleStarTap — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _spawnPlayerUnit(Vector2 pos) that creates a VectorComponent with owner='player' and adds it to the game — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _spawnEnemyUnit(Vector2 pos) that creates a VectorComponent with owner='enemy' and adds it to the game — done when: flutter analyze 0 errors
+
+### Block B — Star component visuals
+
+- [ ] In lib/components/star_component.dart: add Color get _ownerColor returning Color(0xFF00DDFF) for 'player', Color(0xFFFF3366) for 'enemy', Color(0xFF888888) for neutral — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: in render(Canvas canvas) draw a filled circle at (size/2) with radius 18 using _ownerColor — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: add String ownerId field with default '' — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: add int tier field with default 1 — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: add double hp field with default 0 — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: in render draw outer glow ring at radius 22 with _ownerColor at 40% alpha using BlendMode.plus — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: draw HP arc at radius 26; sweep = (hp/20).clamp(0,1) * 2*pi; strokeWidth 3; color matches _ownerColor — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: add _captureFlash double field; when ownerId changes set to 0.4; in update(dt) decrement; in render overlay white circle at alpha = _captureFlash/0.4 while > 0 — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: add TextComponent child showing tier number at position offset(0, -24); update when tier changes — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: add _productionRing double field 0..1; advance in update(dt) at rate 1/5 per second; in render draw thin clockwise arc at radius 30 in white 30% alpha — done when: flutter analyze 0 errors
+
+### Block C — Mote component behavior
+
+- [ ] In lib/components/mote_component.dart: add Vector2? _target field — done when: flutter analyze 0 errors
+- [ ] In lib/components/mote_component.dart: add void setTarget(Vector2 t) method that sets _target = t.clone() — done when: flutter analyze 0 errors
+- [ ] In lib/components/mote_component.dart: in update(dt): if _target != null move position toward _target at 50px/s; when within 6px call onArrived?.call(this) and set _target=null — done when: flutter analyze 0 errors
+- [ ] In lib/components/mote_component.dart: add void Function(MoteComponent)? onArrived callback field — done when: flutter analyze 0 errors
+- [ ] In lib/components/mote_component.dart: add String owner field defaulting to 'player' — done when: flutter analyze 0 errors
+- [ ] In lib/components/mote_component.dart: add int liveHp field defaulting to 1 — done when: flutter analyze 0 errors
+- [ ] In lib/components/mote_component.dart: in render draw a 6px filled circle in neon cyan for 'player', neon red for 'enemy' — done when: flutter analyze 0 errors
+- [ ] In lib/components/mote_component.dart: add bool isSelected field; when isSelected draw a dashed ring at radius 10 in white — done when: flutter analyze 0 errors
+- [ ] In lib/components/mote_component.dart: add idle drift: when _target == null oscillate position ±3px in x using sin(elapsedTime) — done when: flutter analyze 0 errors
+- [ ] In lib/components/mote_component.dart: add _elapsedTime double field incremented in update(dt) — done when: flutter analyze 0 errors
+
+### Block D — Vector component behavior
+
+- [ ] In lib/components/vector_component.dart: verify setTarget(Vector2) method exists and moves unit at speed from _speedForTier(tier) — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add bool isSelected field; when true draw selection ring at glowRadius + 5 in cyan — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add String owner field defaulting to 'player' — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: render neon circle; color = cyan #00DDFF for player tier1, #00FFAA for tier2, #FFDD00 for tier3; red #FF3366 for enemy — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: draw HP arc at glowRadius+4; sweep = liveHp/maxHealth * 2*pi; strokeWidth 2; only visible when liveHp < maxHealth — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add _prevPosition Vector2 field updated each frame; draw a motion trail line from _prevPosition to position in owner color at 30% alpha — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: in update(dt) store _prevPosition = position.clone() before moving — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add speedMultiplier double field defaulting to 1.0; multiply speed by speedMultiplier in update — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add T3 rotating outer ring: when tier==3 draw a ring at glowRadius+8 that rotates at 90deg/s — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add _rotationAngle double incremented by pi/2 * dt when tier==3 — done when: flutter analyze 0 errors
+
+### Block E — Gesture handler
+
+- [ ] In lib/game/gesture_handler.dart: add void Function(Rect)? onLassoSelect callback field — done when: flutter analyze 0 errors
+- [ ] In lib/game/gesture_handler.dart: add Vector2? _dragStart field — done when: flutter analyze 0 errors
+- [ ] In lib/game/gesture_handler.dart: override onDragStart: set _dragStart = event.localStartPosition — done when: flutter analyze 0 errors
+- [ ] In lib/game/gesture_handler.dart: override onDragEnd: if _dragStart != null and drag > 15px call onLassoSelect with Rect.fromPoints; clear _dragStart — done when: flutter analyze 0 errors
+- [ ] In lib/game/gesture_handler.dart: override onLongTapDown: call onLongPress?.call() after 600ms — done when: flutter analyze 0 errors
+- [ ] In lib/game/gesture_handler.dart: add void Function()? onLongPress callback field — done when: flutter analyze 0 errors
+- [ ] In lib/game/gesture_handler.dart: add double _pressElapsed field; in update(dt) if pointer held increment; when >= 0.6 and not moved > 8px fire onLongPress — done when: flutter analyze 0 errors
+- [ ] In lib/game/gesture_handler.dart: in onTapUp: if no star within 60px and no unit within 30px call onTapEmpty?.call() — done when: flutter analyze 0 errors
+- [ ] In lib/game/gesture_handler.dart: add void Function()? onTapEmpty callback field — done when: flutter analyze 0 errors
+- [ ] In lib/game/gesture_handler.dart: add void Function(Vector2)? onTapWorld callback for taps not near any star — done when: flutter analyze 0 errors
+
+### Block F — Fusion mechanics
+
+- [ ] In lib/game/astro_game.dart: implement _handleLongPress(): sum tier-points of selected units (T1=1 T2=5); if sum >= 5 spawn one T2 VectorComponent at centroid of selected units; remove selected units — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: in _handleLongPress compute centroid as average position of selected VectorComponents — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: in _handleLongPress remove each selected unit from game world after computing centroid — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _fusionCount int field incremented on each successful fusion — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: after fusion spawn add a FusionExplosionComponent at centroid position — done when: flutter analyze 0 errors
+- [ ] In lib/components/fusion_explosion_component.dart: verify component expands radius 0->30px over 0.3s then fades — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: tap-to-fuse: in onTapUp if tapped component is a selected player unit and _selectedUnitCount >= 5 call _handleLongPress() — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _isFusionReady bool getter returning _selectedUnitCount >= 5 — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: when _isFusionReady is true update selection ring color to white on all selected units — done when: flutter analyze 0 errors
+- [ ] In lib/game/fusion_rules.dart: add static bool canFuse(List<VectorComponent> units) returning units.fold(0, (s,u) => s + u.tier) >= 5 — done when: flutter analyze 0 errors
+
+### Block G — Capture & HP pool
+
+- [ ] In lib/game/astro_game.dart: in _spawnMotesForOwnedStars wire MoteComponent.onArrived to _onMoteArrived — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: implement _onMoteArrived(MoteComponent mote): find StarComponent within 40px; if found apply mote.liveHp to star.hp; remove mote from world — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: in _onMoteArrived if star is neutral (ownerId == '') and arriving mote is 'player' set star.ownerId = 'player' when hp >= 20 — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: in _onMoteArrived if star is enemy-owned and mote is 'player' subtract mote.liveHp from star.hp; if hp <= 0 flip ownerId to 'player' — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: in _onMoteArrived after ownership flip call audioService.playCapture() — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: in _onMoteArrived after flip call screenShake(intensity: 0.4, duration: 0.3) — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: implement star tier upgrade: after each HP addition if star.hp >= 30 and star.tier == 1 set star.tier = 2 — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: tier 3 upgrade: if star.hp >= 90 and star.tier == 2 set star.tier = 3 — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: implement double-tap star: when double-tap detected on star call _pullNearbyUnitsToStar(starId) — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: implement _pullNearbyUnitsToStar(int starId): route all player VectorComponents within 200px world radius to star position — done when: flutter analyze 0 errors
+
+### Block H — Combat system
+
+- [ ] In lib/game/unit_combat_resolver.dart: verify tick(double dt) method exists and scans player vs enemy units — done when: flutter analyze 0 errors
+- [ ] In lib/game/unit_combat_resolver.dart: add static double collisionRadius(int tier) returning 16 for T1, 24 for T2, 36 for T3 — done when: flutter analyze 0 errors
+- [ ] In lib/game/unit_combat_resolver.dart: in tick scan all player VectorComponents against all enemy VectorComponents; when distance <= collisionRadius(tier) apply mutual damage — done when: flutter analyze 0 errors
+- [ ] In lib/game/unit_combat_resolver.dart: mutual damage: each unit loses liveHp equal to the other's liveHp — done when: flutter analyze 0 errors
+- [ ] In lib/game/unit_combat_resolver.dart: when a unit's liveHp <= 0 call _destroyUnit(component) — done when: flutter analyze 0 errors
+- [ ] In lib/game/unit_combat_resolver.dart: in _destroyUnit remove component from Flame world and update gameServiceProvider to remove the logical unit — done when: flutter analyze 0 errors
+- [ ] In lib/game/unit_combat_resolver.dart: in _destroyUnit spawn 4 FluxParticleComponents at position with velocity spread 360 degrees — done when: flutter analyze 0 errors
+- [ ] In lib/game/unit_combat_resolver.dart: in _destroyUnit call audioService.playDeath() throttled to max 1 per 100ms — done when: flutter analyze 0 errors
+- [ ] In lib/game/unit_combat_resolver.dart: add _lastDeathSoundTime double; only play death sound if elapsed - _lastDeathSoundTime > 0.1 — done when: flutter analyze 0 errors
+- [ ] In lib/game/unit_combat_resolver.dart: add T3 AOE: when T3 unit is destroyed deal 2 damage to all enemy units within 40px — done when: flutter analyze 0 errors
+
+### Block I — Enemy AI
+
+- [ ] In lib/game/ai/enemy_ai.dart: add void tick(double dt) method that delegates to current strategy — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: add AiStrategy _strategy field assigned randomly on construction — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: add _tickTimer double field; accumulate in tick(dt); trigger AI logic every 8s — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: expander strategy: every 8s find nearest neutral star and route one idle enemy unit toward it — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: aggressor strategy: every 6s route all idle enemy units toward player's highest-hp star — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: builder strategy: accumulate enemy units for 30s then route all toward nearest player star — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: add _builderTimer double; reset to 0 on wave dispatch; when > 30s dispatch wave — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: add home defense: if enemy home star hp < 5 recall all enemy units to home star — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: add idle prevention: any enemy unit with no target for > 5s gets routed to nearest contested star — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add EnemyAI _enemyAI field; initialise in onLoad; call _enemyAI.tick(dt) in update — done when: flutter analyze 0 errors
+
+### Block J — HUD elements
+
+- [ ] In lib/game/hud.dart: add a Text label 'Stars: X/N' in top-left using a Consumer that watches gameServiceProvider — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: add 'Units: Y' text below star count — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: add elapsed timer 'MM:SS' top-right; reads _elapsedSeconds from astroGame — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: add pause button icon top-right; tapping calls game.pauseEngine() / resumeEngine() — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: add speed toggle button '1×'/'2×'; tapping sets game.engine.timeDilation — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: add minimap Container 80×80 bottom-left; draws star dots in owner colors — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: minimap star dots: cyan for player, red for enemy, grey for neutral; radius 4px — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: add score Text top-center showing current score from scoreProvider — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: add select-all button bottom-right '⊞'; tapping sets isSelected=true on all player VectorComponents — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: add combo label that shows '×N' when comboProvider >= 2 — done when: flutter analyze 0 errors
+
+### Block K — Audio wiring
+
+- [ ] In lib/game/audio_service.dart: add void playCapture() that calls FlameAudio.play('capture.ogg') — done when: flutter analyze 0 errors
+- [ ] In lib/game/audio_service.dart: add void playFuse() that calls FlameAudio.play('fuse.ogg') — done when: flutter analyze 0 errors
+- [ ] In lib/game/audio_service.dart: add void playDeath() that calls FlameAudio.play('pop.ogg') — done when: flutter analyze 0 errors
+- [ ] In lib/game/audio_service.dart: add void playWin() and playLose() calling win.ogg and lose.ogg — done when: flutter analyze 0 errors
+- [ ] In lib/game/audio_service.dart: add void loopBgm() that calls FlameAudio.bgm.play('ambient.ogg', volume: 0.3) — done when: flutter analyze 0 errors
+- [ ] In lib/game/audio_service.dart: add void stopBgm() that calls FlameAudio.bgm.stop() — done when: flutter analyze 0 errors
+- [ ] In lib/game/audio_service.dart: add double sfxVolume field defaulting to 1.0; multiply volume by sfxVolume on all play calls — done when: flutter analyze 0 errors
+- [ ] In lib/game/audio_service.dart: add bool musicEnabled field defaulting to true; skip loopBgm() when false — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: call _audio.loopBgm() in onLoad — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: call _audio.stopBgm() in game-over path — done when: flutter analyze 0 errors
+
+### Block L — Screen shake
+
+- [ ] In lib/game/camera_shake_mixin.dart: verify shake(double intensity, double duration) method exists — done when: flutter analyze 0 errors
+- [ ] In lib/game/camera_shake_mixin.dart: in shake store _shakeIntensity and _shakeDuration fields — done when: flutter analyze 0 errors
+- [ ] In lib/game/camera_shake_mixin.dart: in update(dt) if _shakeDuration > 0 offset camera by Random(-1,1)*_shakeIntensity; decrement _shakeDuration — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _shake(double intensity, double duration) helper that calls cameraShakeMixin.shake — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: call _shake(0.4, 0.3) in _onMoteArrived when star ownership changes — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: call _shake(0.25, 0.2) in _destroyUnit when unit tier == 3 — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add camera auto-pan on game start: in onLoad tween camera to player home star position over 1s — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add camera world bounds clamp in update: clamp viewfinder.position.x to 0..worldW; .y to 0..worldH — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add pinch-zoom in onScaleUpdate: if info.pointerCount >= 2 set zoom = (zoom * info.scale.global.x).clamp(0.4, 2.0) — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add two-finger pan in onScaleUpdate: if pointerCount >= 2 subtract info.delta.global / zoom from viewfinder.position — done when: flutter analyze 0 errors
+
+### Block M — Score system
+
+- [ ] In lib/game/score_system.dart: add int _score field and int get score — done when: flutter analyze 0 errors
+- [ ] In lib/game/score_system.dart: add void addKill(int tier) method: _score += tier * 10 — done when: flutter analyze 0 errors
+- [ ] In lib/game/score_system.dart: add void addCapture() method: _score += 100 — done when: flutter analyze 0 errors
+- [ ] In lib/game/score_system.dart: add void addUpgrade() method: _score += 50 — done when: flutter analyze 0 errors
+- [ ] In lib/game/score_system.dart: add int _combo field; void incrementCombo() that increments; void resetCombo() — done when: flutter analyze 0 errors
+- [ ] In lib/game/score_system.dart: add double _comboResetTimer; in tick(dt) decrement; when <= 0 call resetCombo() — done when: flutter analyze 0 errors
+- [ ] In lib/game/score_system.dart: add int get combo returning _combo — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add ScoreSystem _score field; call _score.addKill on unit death — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: call _score.addCapture() in _onMoteArrived when star ownership changes — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: call _score.tick(dt) in update — done when: flutter analyze 0 errors
+
+### Block N — Visual effects
+
+- [ ] In lib/components/score_pop_component.dart: create class extending PositionComponent; show '+N' text that floats up 30px and fades over 0.8s — done when: flutter analyze 0 errors
+- [ ] In lib/game/unit_combat_resolver.dart: spawn ScorePopComponent('+${unit.liveHp}') at kill position — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: add pulse animation: when a mote is spawned animate radius 18->26->18 over 0.3s — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: add _pulseTimer double and _pulsing bool; trigger on production cycle — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add static background star field: in onLoad add 80 PositionComponents as tiny white dots at random positions — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add damaged-unit flicker: when liveHp < maxHealth * 0.3 alternate paint.color between full and 60% alpha at 4Hz — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add _flickerTimer double incremented in update; use sin(_flickerTimer * 4 * pi) for flicker — done when: flutter analyze 0 errors
+- [ ] In lib/components/mote_component.dart: add birth animation: scale from 0 to 1 over 0.15s on first frame — done when: flutter analyze 0 errors
+- [ ] In lib/components/mote_component.dart: add _birthTimer double starting at 0; increment in update; scale = min(1.0, _birthTimer / 0.15) — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: contested star flicker: when 0 < hp < 20 and ownerId == '' alternate color between white and grey at 2Hz — done when: flutter analyze 0 errors
+
+### Block O — Level system
+
+- [ ] In lib/game/level_config.dart: verify LevelConfig has starCount, List<Vector2> starPositions, int playerHomeIndex, int enemyHomeIndex fields — done when: flutter analyze 0 errors
+- [ ] In lib/game/levels.dart: verify kLevels list has at least 5 LevelConfig entries — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add LevelConfig _levelConfig field; use _levelConfig.starPositions when initialising stars in onLoad — done when: flutter analyze 0 errors
+- [ ] In lib/screens/level_select_screen.dart: verify screen renders a grid of level cards using kLevels — done when: flutter analyze 0 errors
+- [ ] In lib/screens/level_select_screen.dart: tapping level card navigates to game screen with correct LevelConfig — done when: flutter analyze 0 errors
+- [ ] In lib/screens/level_select_screen.dart: add Easy/Normal/Hard difficulty row below grid; selected difficulty stored in difficultyProvider — done when: flutter analyze 0 errors
+- [ ] In lib/screens/welcome_screen.dart: Play button navigates to '/levels' route — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: read difficulty from difficultyProvider; scale enemy production interval (Easy=8s, Normal=5s, Hard=3s) — done when: flutter analyze 0 errors
+- [ ] In lib/game/level_config.dart: add LevelConfig.level1() factory: 7 stars, player bottom-left, enemy top-right, 5 neutrals distributed between — done when: flutter analyze 0 errors
+- [ ] In lib/game/level_config.dart: add LevelConfig.level2() factory: 9 stars asymmetric layout — done when: flutter analyze 0 errors
+
+### Block P — Game over overlay
+
+- [ ] In lib/game/game_over_overlay.dart: verify overlay displays WIN or LOSE text — done when: flutter analyze 0 errors
+- [ ] In lib/game/game_over_overlay.dart: show elapsed time as 'Time: MM:SS' — done when: flutter analyze 0 errors
+- [ ] In lib/game/game_over_overlay.dart: show final score as 'Score: XXXXX' — done when: flutter analyze 0 errors
+- [ ] In lib/game/game_over_overlay.dart: show stars captured as 'Stars: X/N' — done when: flutter analyze 0 errors
+- [ ] In lib/game/game_over_overlay.dart: add Restart button that calls game.resetGame() and removes overlay — done when: flutter analyze 0 errors
+- [ ] In lib/game/game_over_overlay.dart: add Main Menu button that pops navigation back to welcome screen — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: implement resetGame(): clear all components; reset Riverpod state; re-initialise stars from _levelConfig — done when: flutter analyze 0 errors
+- [ ] In lib/game/game_over_overlay.dart: WIN overlay uses cyan neon text; LOSE uses red neon text — done when: flutter analyze 0 errors
+- [ ] In lib/game/game_over_overlay.dart: show 'New Best!' badge when score exceeds stored best for this level — done when: flutter analyze 0 errors
+- [ ] In lib/game/game_over_overlay.dart: add share row showing 'Level N | MM:SS | Score XXXXX' as selectable text — done when: flutter analyze 0 errors
+
+### Block Q — Pause & settings
+
+- [ ] In lib/game/pause_overlay.dart: verify overlay shows 'PAUSED' with semi-transparent background — done when: flutter analyze 0 errors
+- [ ] In lib/game/pause_overlay.dart: add Resume button that removes overlay and calls game.resumeEngine() — done when: flutter analyze 0 errors
+- [ ] In lib/game/pause_overlay.dart: add Quit to Menu button — done when: flutter analyze 0 errors
+- [ ] In lib/screens/game_screen.dart: override didChangeAppLifecycleState: pause game when AppLifecycleState.paused; resume on resumed — done when: flutter analyze 0 errors
+- [ ] In lib/game/settings_screen.dart: add SFX volume Slider 0..1 that updates AudioService.sfxVolume — done when: flutter analyze 0 errors
+- [ ] In lib/game/settings_screen.dart: add Music toggle that sets AudioService.musicEnabled — done when: flutter analyze 0 errors
+- [ ] In lib/game/settings_screen.dart: add colorblind mode toggle that swaps cyan/red for blue/orange — done when: flutter analyze 0 errors
+- [ ] In lib/game/settings_screen.dart: add haptics toggle — done when: flutter analyze 0 errors
+- [ ] In lib/screens/welcome_screen.dart: add gear icon navigating to settings screen — done when: flutter analyze 0 errors
+- [ ] In lib/game/settings_screen.dart: add Reset progress button that clears all providers — done when: flutter analyze 0 errors
+
+### Block R — Tutorial
+
+- [ ] In lib/game/tutorial_manager.dart: verify TutorialManager tracks tutorialStep int 0..5 — done when: flutter analyze 0 errors
+- [ ] In lib/game/tutorial_manager.dart: add void onEvent(TutorialEvent e) that advances step when correct event received — done when: flutter analyze 0 errors
+- [ ] In lib/game/tutorial_overlay.dart: step 0 shows 'Drag to select your units' with dismiss on first lasso — done when: flutter analyze 0 errors
+- [ ] In lib/game/tutorial_overlay.dart: step 1 shows 'Tap a star to send them!' dismissed on first move order — done when: flutter analyze 0 errors
+- [ ] In lib/game/tutorial_overlay.dart: step 2 shows 'Hold to fuse 5 units → Vector!' dismissed on first fuse — done when: flutter analyze 0 errors
+- [ ] In lib/game/tutorial_overlay.dart: step 3 shows 'Capture all stars to win!' dismissed after 3s — done when: flutter analyze 0 errors
+- [ ] In lib/game/tutorial_manager.dart: add bool isComplete getter returning tutorialStep >= 4 — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: call tutorialManager.onEvent(TutorialEvent.lasso) after first lasso select — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: call tutorialManager.onEvent(TutorialEvent.fuse) after first fusion — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: do not show tutorial overlays when tutorialManager.isComplete is true — done when: flutter analyze 0 errors
+
+### Block S — Performance
+
+- [ ] In lib/game/astro_game.dart: add _combatScanTimer double; only call _unitCombatResolver.tick every 3 frames (accumulate dt) to reduce O(n²) scans — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add MAX_PLAYER_UNITS = 80 const; in _spawnPlayerUnit only spawn if current player unit count < MAX_PLAYER_UNITS — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add MAX_ENEMY_UNITS = 80 const; same guard for enemy spawn — done when: flutter analyze 0 errors
+- [ ] In lib/game/unit_combat_resolver.dart: cap FluxParticle spawn: if total particle count >= 40 skip spawning new ones — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: skip _checkWinLoss every frame; use _winCheckTimer double and check only every 2s — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _winCheckTimer double field; accumulate in update; trigger check when >= 2.0 — done when: flutter analyze 0 errors
+- [ ] In lib/components/mote_component.dart: store velocity as a field rather than recomputing each frame — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: only update _prevPosition when unit actually moved (velocity > 0) — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: background star field PositionComponents use priority -1 so they render behind everything — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add dart:developer Timeline marks around _tickCombat for profiling in kDebugMode — done when: flutter analyze 0 errors
+
+### Block T — Star defense & siege
+
+- [ ] In lib/components/star_component.dart: add bool isUnderAttack field; when true draw a red flickering border ring — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: in update set each player star's isUnderAttack = true when any enemy unit is within 80px world radius — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: auto-defend: when a player star isUnderAttack reroute idle player units within 120px to attack the nearest enemy unit — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: add _siegeFlicker double; when isUnderAttack oscillate border alpha using sin(_siegeFlicker * 4) — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: increment _siegeFlicker in update(dt) — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: comeback mechanic: when player owns only 1 star and unit count <= 5 double production rate for 20s — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _comebackActive bool and _comebackTimer double fields — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: show 'SURGE!' banner text for 3s when comeback mechanic activates — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: add star HP regeneration: owned stars increase hp by 0.5 per second up to tier threshold — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: add _regenTimer double; accumulate in update; add 0.5 to hp every 1s when ownerId != '' — done when: flutter analyze 0 errors
+
+### Block U — Unit AI behavior
+
+- [ ] In lib/components/vector_component.dart: add separation steering: in update if another unit is within 20px add repulsion vector — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add _nearbyUnits List<VectorComponent> field updated each tick for separation — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add arrival deceleration: when within 60px of target reduce speed linearly to 10px/s — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add retreat behavior: when liveHp <= 1 override target to nearest friendly star — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add _retreating bool field set true when liveHp <= 1 — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: formation spread: when routing N>1 units to same star offset each unit's target by position on hex grid spacing 20px — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _hexOffset(int index) helper returning Vector2 offset on a hex grid for index — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add unit stagger: when taking damage set _staggerTimer = 0.15; zero velocity while > 0 — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add _staggerTimer double decremented in update — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add interception: if an enemy unit is within 80px and moving toward this unit switch target to intercept it — done when: flutter analyze 0 errors
+
+### Block V — Win/loss cinematic
+
+- [ ] In lib/game/astro_game.dart: on win: tween camera zoom out to 0.5 over 1s showing all stars, then add gameOver overlay — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: on loss: pan camera to enemy home star over 0.5s then add gameOver overlay — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: slow-motion on capture: set engine.timeDilation = 0.2 for 0.4s after a star flips then restore to 1.0 — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _timeDilationTimer double; in update decrease; when 0 restore timeDilation to 1.0 — done when: flutter analyze 0 errors
+- [ ] In lib/game/game_over_overlay.dart: WIN path shows 'VICTORY' in large neon cyan; animates scale 0.5->1.0 over 0.5s — done when: flutter analyze 0 errors
+- [ ] In lib/game/game_over_overlay.dart: LOSE path shows 'DEFEATED' in red neon; screen fades from red to dark over 0.3s — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: impact zoom: when T3 meets T3 in combat tween camera zoom to 1.5× over 0.2s then back over 0.3s — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _impactZoomActive bool to prevent multiple simultaneous impact zooms — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add win confetti: on win spawn 20 FluxParticleComponents in random colors from screen center — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _gameOverPending bool; when true skip all game logic in update — done when: flutter analyze 0 errors
+
+### Block W — Minimap & navigation
+
+- [ ] In lib/game/hud.dart: minimap shows player unit dots as 1px cyan circles — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: minimap shows enemy unit dots as 1px red circles — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: minimap updates on a 0.25s timer not every frame — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: tapping minimap computes world position from tap offset and pans camera there — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: minimap draws a white rect showing current camera viewport bounds — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: fog of war on minimap: hide enemy unit dots when > 200px from nearest player star — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: star count HUD label pulses briefly when star count changes — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: add alert icon in HUD when any player unit has been idle > 15s — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: double-tapping star count label cycles camera through each player-owned star — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: add territory bar at bottom: split cyan/red showing relative star ownership percent — done when: flutter analyze 0 errors
+
+### Block X — Environment & hazards
+
+- [ ] In lib/game/astro_game.dart: place 2 NebulaNebula NebulaZoneComponents at fractional world positions in onLoad — done when: flutter analyze 0 errors
+- [ ] In lib/components/nebula_zone_component.dart: render as radial gradient cloud with alpha 0.25-0.45 — done when: flutter analyze 0 errors
+- [ ] In lib/components/nebula_zone_component.dart: pulse opacity between 0.25 and 0.55 using sin(elapsed * pi / 2) period 4s — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: in update slow units inside nebula zones to 50% speed by checking containment and setting speedMultiplier=0.5 — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: restore speedMultiplier=1.0 for units that have left nebula zone — done when: flutter analyze 0 errors
+- [ ] In lib/game/beacon_speed_modifier.dart: in each tick set speedMultiplier=1.3 for units within 100px of any beacon star; 1.0 outside — done when: flutter analyze 0 errors
+- [ ] In lib/components/beacon_star_component.dart: draw pulsing aura ring at radius ±8px at 1Hz — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: in _tickCombat units passing through nebula zone take 0.1 damage per second — done when: flutter analyze 0 errors
+- [ ] In lib/game/wind_path_deflector.dart: add wind force: in each tick add wind_direction_provider.value * 0.3 * dt to velocity of units inside nebula — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: show wind direction indicator arrow in bottom-right corner — done when: flutter analyze 0 errors
+
+### Block Y — Accessibility & settings polish
+
+- [ ] In lib/game/settings_screen.dart: larger tap targets toggle increases all gesture detection radii by 50% — done when: flutter analyze 0 errors
+- [ ] In lib/game/settings_screen.dart: reduced motion toggle disables all particle effects and pulsing animations — done when: flutter analyze 0 errors
+- [ ] In lib/game/settings_screen.dart: font size toggle between normal and large for all HUD TextComponents — done when: flutter analyze 0 errors
+- [ ] In lib/game/settings_screen.dart: auto-expand toggle: when on player motes auto-route to nearest neutral star — done when: flutter analyze 0 errors
+- [ ] In lib/game/settings_screen.dart: auto-defend toggle: when on newly spawned motes auto-route to most threatened star — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: if autoExpandEnabled in settingsProvider route new player motes to nearest neutral star — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: if autoDefendEnabled route new player motes to most sieged star — done when: flutter analyze 0 errors
+- [ ] In lib/game/settings_screen.dart: add version number display using package_info_plus — done when: flutter analyze 0 errors
+- [ ] In lib/screens/welcome_screen.dart: animated title 'ASTRO FLUX' letters appear one by one over 1s on first launch — done when: flutter analyze 0 errors
+- [ ] In lib/screens/welcome_screen.dart: add 20 slowly drifting mote-sized dots in background — done when: flutter analyze 0 errors
+
+### Block Z — Quality & tests
+
+- [ ] Add unit test in test/game/score_system_test.dart: addKill(1) increases score by 10; addCapture increases by 100 — done when: test passes; flutter analyze 0 errors
+- [ ] Add unit test in test/game/fusion_rules_test.dart: canFuse with 5 T1 units returns true; 4 returns false — done when: test passes; flutter analyze 0 errors
+- [ ] Add unit test in test/game/capture_rules_test.dart: canAttack returns false for unknown IDs; true for valid pair — done when: test passes; flutter analyze 0 errors
+- [ ] Add unit test in test/game/unit_combat_resolver_test.dart: two T1 units at distance <= 16 both reach 0 HP after tick — done when: test passes; flutter analyze 0 errors
+- [ ] Add unit test in test/models/star_test.dart: Star.copyWith changes only the specified field; all others unchanged — done when: test passes; flutter analyze 0 errors
+- [ ] Add unit test in test/models/vector_test.dart: Vector.power returns correct value for each tier — done when: test passes; flutter analyze 0 errors
+- [ ] Fix all 'prefer_final_fields' warnings in lib/ — done when: flutter analyze reports 0 prefer_final_fields warnings
+- [ ] Fix all 'annotate_overrides' warnings in lib/ — done when: flutter analyze reports 0 annotate_overrides warnings
+- [ ] Remove all magic numbers from render() methods in lib/components/: extract to named constants — done when: flutter analyze 0 errors
+- [ ] Add dartdoc /// comments to all public classes in lib/game/: one-line description per class — done when: flutter analyze 0 errors
+
+### Block AA — More gameplay interactions
+
+- [ ] In lib/game/astro_game.dart: triple-tap on a unit selects all player units of same tier via select_all_of_tier_command.dart — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: two-finger swipe routes all selected units back to player home star — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: long-press on a star shows a small info panel (tier, HP, owner, production rate) for 2s — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add rally point: triple-tap empty space sets a rally point; new motes auto-route there — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: draw rally point as a pulsing cyan crosshair PositionComponent — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: sacrifice unit: triple-tap a selected unit adds its liveHp to nearest friendly star and removes it — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add patrol order: long-press drag draws a patrol path; unit moves back and forth — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add unit lock: double-tap a selected unit to lock it in place; show padlock icon — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: locked units ignore route orders but still participate in combat — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add escort order: long-press star then drag to another star auto-routes motes from first to second — done when: flutter analyze 0 errors
+- [ ] In lib/game/gesture_handler.dart: detect double-tap by tracking time between two onTapDown events < 300ms — done when: flutter analyze 0 errors
+- [ ] In lib/game/gesture_handler.dart: add void Function(int starId)? onDoubleTapStar callback — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: wire onDoubleTapStar to _pullNearbyUnitsToStar — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: edge scroll: when drag is within 60px of screen edge pan camera 200px/s in that direction — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _edgeScrollActive bool; in update check drag position against screen edges — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add snap-to-home: double-tap star count HUD icon centers camera on player home star — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: render speed-lines: when speed > 80px/s draw 2 short white lines behind unit pointing away from velocity — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add unit number in debug mode: kDebugMode shows unit ID as tiny text above component — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add 2× speed toggle: HUD button sets engine.timeDilation 1.0/2.0 — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add 4× speed option cycling 1→2→4→1× — done when: flutter analyze 0 errors
+
+### Block AB — More star mechanics
+
+- [ ] In lib/components/star_component.dart: draw star connection lines between adjacent player-owned stars using canvas.drawLine — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: star link bonus: add int linkBonus getter; +1 if another player-owned star within 300px — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: apply linkBonus to production: tier-based rate + linkBonus motes per cycle — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: tier 4 stars draw a rotating outer ring at radius 34 — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: tier 4 upgrade threshold: when hp >= 270 and tier == 3 set tier = 4 — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: show production rate label 'x1'/'x3'/'x9'/'x20' above owned star — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: 3s recapture window: when star flips to neutral keep a _recaptureTimer; previous owner gets 50% HP back if they reinvest within 3s — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: add star outpost state: neutral stars with hp >= 10 show yellow color and produce 0 motes — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: add star HP text tooltip: tapping star shows 'HP: X/20' label for 2s — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: map-wide pip row: HUD shows 7 colored circles matching current star ownership — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: wave ripple on capture: expanding ring radius 18→60 over 0.6s in new owner color — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: add _rippleTimer double and _rippleActive bool; trigger in onOwnerChanged — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: resource scarcity event: every 90s a random star stops producing for 15s; show grey overlay — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: production spike event: every 60s a random owned star produces 2× for 10s; show green flash — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: contested star flicker rate doubles when hp > 15 (close to capture) — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: draw opponent capture arc in red when enemy is adding HP to a player star — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: star production burst: when a star is first captured spawn 3 bonus motes immediately — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: tier upgrade flash: golden bloom ring expands r=22→40 over 0.5s on upgrade — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _starProductionBurst(int starId) called on first capture — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: fortification bonus: tier 3+ stars have effective capture threshold 40 not 20 — done when: flutter analyze 0 errors
+
+### Block AC — More AI behavior
+
+- [ ] In lib/game/ai/enemy_ai.dart: Sniper strategy: route all units at player's lowest-HP star — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: add AiStrategy.sniper to enum — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: AI response to player moves: if player sends >3 units toward enemy star reroute half idle units to intercept — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: add _playerMoveCount int field; increment when player move detected; reset every 5s — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: AI feint: Aggressor sends small decoy group at one star then main force at another 1 in 4 waves — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: AI adaptivity: if enemy loses 3 stars in a row switch to Aggressor regardless of initial strategy — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: add _lostStarStreak int counter; increment on each star loss; trigger strategy switch at 3 — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: AI economy: always maintain 2 units at home star; only dispatch surplus — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: AI star investment: after capturing neutral star immediately route 3 units to it — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: AI recovery: if enemy owns only home star switch to Turtle (defend-only) for 30s — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: add AiStrategy.turtle to enum; implement as defend-only — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: AI tier-up: when 5 idle T1 units near home star fuse them into T2 — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: AI concede: if AI has 0 units and 0 stars for >10s call game.triggerAiConcede() — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: AI multi-front: Aggressor with >= 15 units splits force to attack two player stars simultaneously — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add void triggerAiConcede() that sets all enemy stars to player ownership — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: add response latency jitter: AI decisions delayed 0.2-0.8s randomly to feel natural — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: add _responseJitter double set randomly on each decision; subtract from tick timer — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: AI difficulty scaling: Easy = 0.6× tick frequency; Hard = 1.5× — done when: flutter analyze 0 errors
+- [ ] In lib/game/ai/enemy_ai.dart: in constructor read difficultyProvider and set _tickMultiplier accordingly — done when: flutter analyze 0 errors
+- [ ] In lib/game/game_over_overlay.dart: show AI strategy used: 'You faced: Aggressor' — done when: flutter analyze 0 errors
+
+### Block AD — More HUD & UI
+
+- [ ] In lib/game/hud.dart: add threat meter 0-100 based on enemy units × proximity to player stars — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: threat meter shows as a thin red bar at bottom of screen — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: screen edge warning: when enemy unit within 80px of player home star flash red border on HUD — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: show 'Fuse ready ⚡' indicator below unit count when >= 5 T1 selected — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: add unit balance indicator: icon showing player vs enemy unit count ratio — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: add kill feed: show last 3 kill events as fading text on right side for 2s each — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: low-unit warning: when player unit count <= 5 HUD unit label turns red and pulses — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: add level name banner 'Level 1: First Contact' that fades after 2s on game start — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: add objectives reminder 'Capture all 7 stars' that fades after 8s — done when: flutter analyze 0 errors
+- [ ] In lib/screens/level_select_screen.dart: add best time per level 'Best: MM:SS' below each completed card — done when: flutter analyze 0 errors
+- [ ] In lib/screens/level_select_screen.dart: add difficulty rating 1-5 stars shown on each level card — done when: flutter analyze 0 errors
+- [ ] In lib/screens/level_select_screen.dart: locked levels shown as dimmed with a lock icon — done when: flutter analyze 0 errors
+- [ ] In lib/screens/level_select_screen.dart: level unlock gating: level N+1 unlocks after winning level N — done when: flutter analyze 0 errors
+- [ ] In lib/screens/welcome_screen.dart: style title 'ASTRO FLUX' in neon cyan font — done when: flutter analyze 0 errors
+- [ ] In lib/screens/welcome_screen.dart: add Continue button visible when a game is in progress — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: HUD opacity setting: all HUD elements use opacity from settingsProvider.hudOpacity — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: add difficulty badge 'EASY'/'HARD' tag in corner — done when: flutter analyze 0 errors
+- [ ] In lib/game/game_over_overlay.dart: add score breakdown rows: Kills, Captures, Upgrades, Time bonus — done when: flutter analyze 0 errors
+- [ ] In lib/screens/welcome_screen.dart: show win streak counter 'Win streak: N' below play button — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: production rate HUD: on tap show 'Next mote: Xs' for each owned star — done when: flutter analyze 0 errors
+
+### Block AE — More visual polish
+
+- [ ] In lib/components/mote_component.dart: glow radius varies by owner: player 8px cyan, enemy 7px red — done when: flutter analyze 0 errors
+- [ ] In lib/components/mote_component.dart: idle motes pulse glow radius ±2px at 1Hz using sin — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: T2 units render as a diamond (rotated square) using Path — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: T3 units render as a hexagon using Path with 6 vertices — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add unit facing: rotate to face movement direction using atan2(velocity.y, velocity.x) — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: enemy units use color #FF3366 T1, #FF6644 T2, #FF9900 T3 — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: background color shifts from #050510 toward #100505 as enemy captures more stars — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _bgColorTimer double; lerp background color based on enemyStarCount / totalStars — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: star glow radius varies by tier: T1=22 T2=26 T3=32 T4=40 — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: player home star has brighter glow (+4px) to distinguish from captured stars — done when: flutter analyze 0 errors
+- [ ] In lib/components/fusion_explosion_component.dart: T3 fusion shows larger bloom than T2: radius 0->50 instead of 0->30 — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: unit merging animation: the 5 T1 units slide toward centroid over 0.2s before disappearing — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: T2 spawn flash: new T2 shows 0.3s gold bloom at spawn position — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add _spawnFlashTimer double; show gold circle that fades — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: T3 spawn: screen shake intensity 0.3 + large gold bloom — done when: flutter analyze 0 errors
+- [ ] In lib/components/nebula_zone_component.dart: draw as radial gradient Paint object with center color transparent and edge color purple 30% alpha — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add screen edge vignette: dark radial gradient overlay on HUD layer — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: add pulsing aura: outer ring radius oscillates ±4px at 0.8Hz for owned stars — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: combat spark shower: each combat hit spawns 2 FluxParticleComponents at impact point — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: enemy stars pulse at 1.2Hz in red while player stars pulse at 0.8Hz in cyan — done when: flutter analyze 0 errors
+
+### Block AF — Achievements & progression
+
+- [ ] In lib/game/astro_game.dart: add achievement 'First Capture': fire on player's first star capture; show toast — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add achievement 'Fusion Master': fire after 10 fusions in one session — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add achievement 'Dominator': fire when player owns all stars simultaneously — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add achievement 'Survivor': fire on win when player owned only 1 star at some point — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _lowestStarCount int tracking minimum player star count; used for Survivor check — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add achievement 'Speed Run': fire on winning level 1 in under 3 minutes — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add AchievementToast component: slides in from top for 2.5s showing achievement name — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _achievementsUnlocked Set<String> field; check before firing to prevent duplicates — done when: flutter analyze 0 errors
+- [ ] In lib/game/score_system.dart: add time bonus: 1000 points for wins under 3min; 500 for under 5min — done when: flutter analyze 0 errors
+- [ ] In lib/game/score_system.dart: add efficiency multiplier: kills/unitsLost ratio applied to final score — done when: flutter analyze 0 errors
+- [ ] In lib/game/game_over_overlay.dart: show achievements unlocked this run as a row of icons — done when: flutter analyze 0 errors
+- [ ] In lib/screens/welcome_screen.dart: show 'X/10 badges earned' count below player name — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: hat-trick achievement: capturing 3 stars in < 30s shows 'HAT TRICK!' banner and plays special sound — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _captureTimestamps List<double> field; check last 3 for hat-trick — done when: flutter analyze 0 errors
+- [ ] In lib/game/score_system.dart: add session stats: totalGamesPlayed, totalWins, longestWinStreak — done when: flutter analyze 0 errors
+
+### Block AG — Final 79 tasks
+
+- [ ] In lib/game/astro_game.dart: add random map seed: LevelConfig.randomSeed generates star positions deterministically — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: show seed number in HUD corner when random mode active — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: blitz mode: production rate 4×; combat damage 2×; toggled from settings — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _blitzMode bool field read from settingsProvider — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: in _spawnMotesForOwnedStars multiply spawn count by 4 when _blitzMode — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add slow-motion replay: game over stores last 10s of unit positions; plays back at 0.25× speed — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _replayBuffer List<Map<int,Vector2>> storing unit positions each frame — done when: flutter analyze 0 errors
+- [ ] In lib/game/game_over_overlay.dart: add Replay button that triggers slow-motion replay — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: kill combo: 5 kills within 10s grants 15s window where player motes move 20% faster — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _killStreakCount int and _killStreakTimer double; reset after 10s with no kill — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: show 'KILL STREAK!' banner for 3s when streak bonus activates — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add critical hit: 10% chance combat deals 2× damage; show larger spark — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _isCritHit() bool returning Random().nextDouble() < 0.1 — done when: flutter analyze 0 errors
+- [ ] In lib/game/unit_combat_resolver.dart: apply crit multiplier: if _isCritHit() multiply damage by 2 — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add daily bonus: first game of the day doubles production rate for first 60s — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _dailyBonusActive bool and _dailyBonusTimer double — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: show 'DAILY BONUS' banner while daily bonus active — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add morale break: 3 ally deaths within 5s reduces nearby player unit speed by 10% for 5s — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _moraleBreakTimer double; when active multiply player unit speeds by 0.9 — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: show morale-break visual: unit briefly dims to 60% opacity — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add T2 unit shield: first 2 damage absorbed; shield shown as outer ring that breaks — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add int shieldHp field defaulting to 2 for tier==2 — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: render shield ring at glowRadius+9 that disappears when shieldHp <= 0 — done when: flutter analyze 0 errors
+- [ ] In lib/game/unit_combat_resolver.dart: apply damage to shieldHp first; only damage liveHp after shield depleted — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: reinforcement rush: units arriving to an active combat get +20% speed bonus for 5s — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _isCombatActive(Vector2 pos) bool that checks for combat within 80px — done when: flutter analyze 0 errors
+- [ ] In lib/components/mote_component.dart: reinforcement rush: set speedMultiplier=1.2 when spawned near active combat — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: stalemate detection: two units fighting for >8s with neither dying both get destroyed — done when: flutter analyze 0 errors
+- [ ] In lib/game/unit_combat_resolver.dart: add _combatDuration Map<String,double> tracking how long each pair has fought — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: chain explosion: T3 death deals 1 damage to all other T3 units within 60px — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: knockback: T3 unit hitting T1 pushes T1 back 30px — done when: flutter analyze 0 errors
+- [ ] In lib/components/vector_component.dart: add _knockback(Vector2 direction, double distance) method — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add 2-player local mode: split bottom-half / top-half touch zones — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: player 2 uses magenta #FF00FF units — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _player2Units list and _player2StarCount getter — done when: flutter analyze 0 errors
+- [ ] In lib/game/hud.dart: add second HUD in opposite corner for P2 showing star and unit counts — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add FPS counter in bottom-right in kDebugMode — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _frameCount int and _fpsTimer double; compute FPS every 0.5s — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add spatial hash for combat: divide world into 100px cells; only check units in same/adjacent cells — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _spatialHash Map<String,List<VectorComponent>> rebuilt in update — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _cellKey(Vector2 pos) helper returning '${(pos.x/100).floor()},${(pos.y/100).floor()}' — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add _neighborCells(String key) returning 9 adjacent cell keys — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add app lifecycle pause: listen to WidgetsBindingObserver; pauseEngine on inactive — done when: flutter analyze 0 errors
+- [ ] In lib/screens/game_screen.dart: add WidgetsBindingObserver mixin and didChangeAppLifecycleState override — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: keep screen awake: call WakelockPlus.enable() in onLoad; disable in game over — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: handle screen rotation: on resize recalculate star world positions as fractions of new world size — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: handle very small screens: if canvasSize.y < 700 scale world to fit all stars without scrolling — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add loading screen: show CircularProgressIndicator while onLoad completes; replace with game widget after — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: memory pressure: add onLowMemory that clears particle pool and reduces background star count — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: dispose audio on game over: call _audio.stopBgm() in onDetach — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add error guard in _onMoteArrived: wrap in try/catch; on error log and skip without crashing — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add null-safety guard in gesture callbacks: check isMounted before calling game methods — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: wrap game-over state with _gameOverPending guard to prevent re-triggering — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add crash reporting stub: wrap update() in try/catch; log uncaught errors to console — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add analytics stub: log 'game_start', 'game_win', 'game_lose' events to console — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add share score: game over calls Share.share('I scored X on Astro Flux Level N!') — done when: flutter analyze 0 errors
+- [ ] In lib/game/astro_game.dart: add version display: settings screen shows app version from package_info_plus — done when: flutter analyze 0 errors
+- [ ] In lib/game/balance.dart: create file with all numeric balance constants: moteSpeed, captureThreshold, combatRadius etc — done when: flutter analyze 0 errors
+- [ ] In lib/game/balance.dart: add const double kMoteSpeed = 50.0 — done when: flutter analyze 0 errors
+- [ ] In lib/game/balance.dart: add const double kCaptureThreshold = 20.0 — done when: flutter analyze 0 errors
+- [ ] In lib/game/balance.dart: add const double kProductionInterval = 5.0 — done when: flutter analyze 0 errors
+- [ ] In lib/game/balance.dart: add const double kT1CombatRadius = 16.0 — done when: flutter analyze 0 errors
+- [ ] In lib/game/balance.dart: add const double kT2CombatRadius = 24.0 — done when: flutter analyze 0 errors
+- [ ] In lib/game/balance.dart: add const double kT3CombatRadius = 36.0 — done when: flutter analyze 0 errors
+- [ ] In lib/game/balance.dart: add const int kMaxPlayerUnits = 80 — done when: flutter analyze 0 errors
+- [ ] In lib/game/balance.dart: add const double kFusionThreshold = 5.0 — done when: flutter analyze 0 errors
+- [ ] In lib/components/mote_component.dart: replace magic number 50 with kMoteSpeed from balance.dart — done when: flutter analyze 0 errors
+- [ ] In lib/components/star_component.dart: replace magic number 20 with kCaptureThreshold from balance.dart — done when: flutter analyze 0 errors
+- [ ] In lib/game/unit_combat_resolver.dart: replace hardcoded 16/24/36 with kT1/T2/T3CombatRadius — done when: flutter analyze 0 errors
+- [ ] Add unit test in test/game/balance_test.dart: verify kT1CombatRadius < kT2CombatRadius < kT3CombatRadius — done when: test passes; flutter analyze 0 errors
+- [ ] Add unit test in test/game/astro_game_test.dart: _hexOffset(0) returns Vector2.zero(); _hexOffset(1) returns non-zero — done when: test passes; flutter analyze 0 errors
+- [ ] Add unit test in test/game/score_system_test.dart: combo increments on kill; resets after 2s gap — done when: test passes; flutter analyze 0 errors
+- [ ] Add unit test in test/models/level_config_test.dart: LevelConfig.level1() has starCount == 7 — done when: test passes; flutter analyze 0 errors
+- [ ] Fix all remaining merge conflicts in lib/: remove all <<<<<<< ======= >>>>>>> markers — done when: flutter analyze 0 errors
+- [ ] Run flutter pub get and verify pubspec.lock is up to date — done when: flutter analyze 0 errors
+- [ ] Add barrel export file lib/components/components.dart exporting all component classes — done when: flutter analyze 0 errors
+- [ ] Add barrel export file lib/game/game.dart exporting all game classes — done when: flutter analyze 0 errors
+- [ ] Final flutter analyze clean pass: resolve all remaining warnings in lib/ — done when: flutter analyze lib/ returns 0 issues
+- [ ] Add dart:developer log calls in key game events (star capture, fusion, game over) for performance tracing in kDebugMode — done when: flutter analyze 0 errors
