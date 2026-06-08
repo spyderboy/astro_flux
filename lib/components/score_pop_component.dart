@@ -2,45 +2,36 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
-/// A component that displays a popping score animation (e.g., "+10").
-class ScorePopComponent extends TextComponent {
+class ScorePopComponent extends PositionComponent {
   final String text;
-  final double duration;
+  final double duration = 0.8; // Duration for fading effect
   double _elapsed = 0.0;
 
   ScorePopComponent({
     required Vector2 position,
     required this.text,
-    this.duration = 1.0,
   }) : super(
-          position: position,
-          text: text,
-          textRenderer: TextPaint(
-            style: const TextStyle(
-              color: Colors.yellow,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        );
+        position: position,
+        size: Vector2(50, 30),
+      );
+
+  @override
+  void render(Canvas canvas) {
+    final paint = TextPaint(
+      style: TextStyle(
+        color: Color.fromARGB((1.0 - (_elapsed / duration)).clamp(0.0, 1.0) * 255, 255, 255, 0),
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        blendMode: BlendMode.plus,
+      ),
+    );
+    paint.render(canvas, text, Vector2(0, -30), anchor: Anchor.bottomCenter);
+  }
 
   @override
   void update(double dt) {
     _elapsed += dt;
-    final progress = (_elapsed / duration).clamp(0.0, 1.0);
-    final opacity = (1.0 - progress).clamp(0.0, 1.0);
-
-    // Move upwards
-    position.y -= 50 * dt;
-
-    // Update text rendering with fading effect
-    textRenderer = TextPaint(
-      style: TextStyle(
-        color: Colors.yellow.withAlpha((opacity * 255).toInt()),
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-      ),
-    );
+    position.y -= (30 * dt).clamp(0.0, 30.0); // Move upwards
 
     if (_elapsed >= duration) {
       removeFromParent();

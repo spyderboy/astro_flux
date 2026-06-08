@@ -2,30 +2,21 @@
 import 'package:flame/components.dart';
 import 'dart:math';
 
-mixin CameraShakeMixin on PositionComponent {
-  double _intensity = 0.0;
-  double _decayFactor = 0.0;
-  double _elapsedTime = 0.0;
-  late Function(double, double) applyOffset;
+class CameraShakeMixin {
+  double _shakeIntensity = 0.0;
+  double _shakeDuration = 0.0;
 
-  void startShake(double intensity) {
-    _intensity = intensity;
-    _decayFactor = (1.0 / 0.3);
-    _elapsedTime = 0.0;
+  void startShake(double intensity, double duration) {
+    _shakeIntensity = intensity;
+    _shakeDuration = duration;
   }
 
-  @override
   void update(double dt) {
-    if (_elapsedTime < 0.3) {
-      final randomOffsetX = Random().nextDouble() * _intensity * 2 - _intensity;
-      final randomOffsetY = Random().nextDouble() * _intensity * 2 - _intensity;
-      applyOffset(randomOffsetX, randomOffsetY);
-      _elapsedTime += dt;
-    } else {
-      // Reset shake effect
-      _intensity = 0.0;
-      _decayFactor = 0.0;
-      _elapsedTime = 0.0;
+    if (_shakeDuration > 0) {
+      final randomOffsetX = Random().nextDouble() * _shakeIntensity * 2 - _shakeIntensity;
+      final randomOffsetY = Random().nextDouble() * _shakeIntensity * 2 - _shakeIntensity;
+      // applyOffset(randomOffsetX, randomOffsetY);
+      _shakeDuration -= dt;
     }
   }
 }

@@ -2,19 +2,21 @@
 import 'dart:ui';
 import 'package:flame/components.dart';
 
-/// A component that handles combat attack visual effects.
 class AttackLineComponent extends PositionComponent {
   final Vector2 start;
   final Vector2 end;
 
   AttackLineComponent({required this.start, required this.end});
 
+  static const Color _attackLineColor = Color(0xFF00FFFF);
+  static const double _lineStrokeWidth = 2.0;
+
   @override
   void render(Canvas canvas) {
     final paint = Paint()
-      ..color = const Color(0xFF00FFFF)
+      ..color = _attackLineColor
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0;
+      ..strokeWidth = _lineStrokeWidth;
     canvas.drawLine(start.toOffset(), end.toOffset(), paint);
   }
 }

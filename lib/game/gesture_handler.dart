@@ -1,37 +1,30 @@
 // ignore_for_file: depend_on_referenced_packages
-import 'package:flame/components.dart' hide Vector;
-import 'package:flame/events.dart';
+import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-/// Transparent full-screen component that intercepts single-finger taps.
-///
-/// Detects which star (if any) was tapped by checking world-space distance
-/// to each star's position. Invokes [onStarTapped] with the star's id.
-///
-/// ⚠️  TapCallbacks MUST be on PositionComponent, NOT on FlameGame.
-///     ScaleDetector (pinch-zoom) remains on AstroGame.
-class GestureHandler extends PositionComponent with TapCallbacks {
+class GestureHandler {
   final Ref ref;
-  final Map<int, Vector2> starPositions;
-  final void Function(int starId) onStarTapped;
+  Vector2? _tapPosition;
+  int _lastTapTime = 0;
+  void Function(int starId)? onDoubleTapStar;
 
-  static const double _tapRadius = 44.0; // generous tap target in world pixels
+  Vector2? _dragStart; // Added field for drag start position
 
-  GestureHandler({
-    required this.ref,
-    required this.starPositions,
-    required this.onStarTapped,
-    super.size,
-  });
+  GestureHandler(this.ref);
 
-  @override
-  void onTapDown(TapDownEvent event) {
-    final tapPos = event.localPosition;
-    for (final entry in starPositions.entries) {
-      if ((tapPos - entry.value).length <= _tapRadius) {
-        onStarTapped(entry.key);
-        return;
+  void onTapDown(TapDownEvent event) async {
+    final currentTime = DateTime.now().millisecondsSinceEpoch;
+    if (_tapPosition != null && (currentTime - _lastTapTime) < 300) {
+      // Double tap detected
+      print('Double tap detected at position: ${event.localPosition}');
+      if (onDoubleTapStar != null) {
+        // Handle double tap logic here
+        onDoubleTapStar!(/* Implement logic to find star ID at this position */);
       }
+      return;
     }
+
+    _tapPosition = Vector2(event.localPosition.dx, event.localPosition.dy);
+    _lastTapTime = currentTime;
   }
 }

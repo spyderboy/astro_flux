@@ -6,12 +6,12 @@ import 'package:astro_flux/providers/game_state_provider.dart';
 import 'package:astro_flux/providers/mote_count_provider.dart';
 
 void main() {
-  test('Mote count provider returns correct mote count', () {
+  test('Mote count provider returns correct mote count', () async {
     final container = ProviderContainer();
     addTearDown(container.dispose);
 
     // Arrange
-    final gameStateProvider = GameStateNotifier([
+    final initialState = GameState(motes: [
       Mote(id: 1),
       Mote(id: 2),
       Mote(id: 3),
@@ -23,12 +23,13 @@ void main() {
       Mote(id: 9),
     ]);
 
-    container.read(gameStateProvider.notifier).state = gameStateProvider.state;
+    container.listen(gameStateProvider, (previous, next) {});
+    container.read(gameStateProvider.notifier).state = initialState;
 
     // Act
     final moteCount = container.read(moteCountProvider);
 
     // Assert
-    expect(moteCount, equals(10));
+    expect(moteCount, equals(9));
   });
 }

@@ -11,8 +11,8 @@ void main() {
     final container = ProviderContainer(
       overrides: [
         gameStateProvider.overrideWith((ref) => GameState(
-          motes: List.generate(9, (index) => Mote(id: index)).where((mote) => mote.lifecycleState == MoteLifecycle.active).toList(),
-        ) as GameState),
+          motes: List.generate(9, (index) => Mote(id: index)),
+        )),
       ],
     );
 

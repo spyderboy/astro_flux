@@ -1,21 +1,27 @@
 // ignore_for_file: depend_on_referenced_packages
-import 'package:flutter_riverpod/flutter_primepod.dart';
+class MockRef implements Ref {
+}
+
+// ignore_for_file: depend_on_referenced_packages
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test/test.dart';
 import 'package:astro_flux/game/fusion_effect_service.dart';
-import 'game_events.dart';
-import 'package:astro_flux/models/game_state_provider.dart';
-import 'package:astro_flux/game/audio_service.dart';
+import 'package:astro_flux/game/astro_game.dart';
+import 'package:vector_math/vector_math.dart';
 
 void main() {
   late FusionEffectService fusionEffectService;
+  late AstroGame game;
 
   setUp(() {
-    fusionEffectService = FusionEffectService(AstroGame());
+    final container = ProviderContainer();
+    game = AstroGame(MockRef());
+    fusionEffectService = FusionEffectService(game);
   });
 
   test('triggers a fusion explosion at the given position', () {
     final position = Vector2(100, 200);
     fusionEffectService.triggerFusion(position);
-    expect(find.byType(FusionExplosionComponent), findsOneWidget);
+    expect(game.children.whereType<FusionExplosionComponent>().length, equals(1));
   });
 }

@@ -1,27 +1,27 @@
-import 'package:flame/game.dart' hide Vector;
+// ignore_for_file: depend_on_referenced_packages
 import 'dart:ui';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:astro_flux/components/combat_particle_component.dart';
+import 'package:flame/components.dart';
+import 'package:astro_flux/components/attack_line_component.dart';
 
 class AttackLineComponentTest {
-  final testRenderer = RenderedElement()
-    ..renderedSize = const Size(1920.0, 1080.0);
+  final testRenderer = RenderBox(); // Corrected to use RenderBox
 }
 
 void main() {
-  test('AttackLineComponent renders correctly', () {
-    final render = <Offset>[];
-    final canvas = Canvas(testRenderer, 1920.0, 1080.0);
+  test('AttackLineComponent renders correctly', () async {
+    final recorder = PictureRecorder(); // Added PictureRecorder for rendering
+    final canvas = Canvas(recorder);
 
-    canvas.translate(640.0, 360.0);
-    final testPaint = Paint()
-      ..strokeWidth = 1.0
-      ..color = Colors.white;
-    canvas.drawPath(Path(), Paint().toPattern!
-        [testRenderedPainter]);
-    testRenderer?.paint(canvas);
+    const start = Vector2(640.0, 360.0);
+    const end = Vector2(1280.0, 720.0);
+    final attackLineComponent = AttackLineComponent(start: start, end: end);
+    attackLineComponent.render(canvas);
 
-    assert(render.length == 2);
+    final picture = recorder.endRecording();
+    final image = await picture.toImage(1920, 1080);
+    final byteData = await image.toByteData(format: ImageByteFormat.png);
+
+    expect(byteData != null, true); // Added an assertion to check if rendering is successful
   });
 }

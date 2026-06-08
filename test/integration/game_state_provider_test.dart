@@ -2,6 +2,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:astro_flux/models/game_state_provider.dart';
+import 'package:vector_math/vector_math.dart';
 
 void main() {
   group('GameStateProvider Integration Test', () {
@@ -29,7 +30,7 @@ void main() {
 
       // Trigger fusion at position where exactly 10 motes exist
       final position = Vector2(100, 200);
-      container.read(fusionProvider.notifier).requestFusion(10); // Request fusion for 10 motes
+      container.read(fusionProvider.notifier).requestFusion(position); // Request fusion for 10 motes
 
       await tester.pumpAndSettle();
 

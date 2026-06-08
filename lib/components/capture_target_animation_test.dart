@@ -1,5 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:ui';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:astro_flux/lib/models/fusion_indicator_state.dart';
 import 'package:astro_flux/lib/components/capture_target_animation.dart';

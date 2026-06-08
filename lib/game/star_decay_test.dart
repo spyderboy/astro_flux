@@ -16,7 +16,7 @@ void main() {
       gameStateNotifier.captureStar(1, 'player');
 
       // Start the decay timer for a short duration
-      manager.startDecayTimer(10);
+      manager.startDecayTimer(10); // Change Duration to int
       expect(manager.decayTimer.isActive, isTrue);
 
       // Simulate the decay firing mid-capture

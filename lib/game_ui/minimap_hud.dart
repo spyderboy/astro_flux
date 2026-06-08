@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/star_production_rate_provider.dart';
 
+
 class MinimapHUD extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -3,8 +3,7 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'particle_system.dart';
 
-/// A component that animates a pulsing ring effect around a star
-/// while it is being targeted for capture.
+/// A component that renders a targeting indicator with particle effects.
 class StarTargetingIndicator extends Component {
   final ParticleSystem particleSystem;
   final Vector2 position;
@@ -16,22 +15,23 @@ class StarTargetingIndicator extends Component {
     required this.color,
   });
 
+  static const double _ringSpawnInterval = 0.8;
+  static const double _ringRadius = 15.0;
+  static const double _ringLifetime = 1.0;
+
   double _timer = 0;
 
   @override
   void update(double dt) {
     _timer += dt;
     // Periodically spawn a ring to create a pulsing/expanding effect
-    if (_timer >= 0.8) {
+    if (_timer >= _ringSpawnInterval) {
       _timer = 0;
-      // Use dynamic to bypass the Vector2 version mismatch between
-      // vector_math and vector_math_64 caused by inconsistent imports
-      // in the dependency tree.
       particleSystem.spawnRing(
-        position as dynamic,
+        position,
         color: color.withAlpha(120),
-        radius: 15.0,
-        lifetime: 1.0,
+        radius: _ringRadius,
+        lifetime: _ringLifetime,
       );
     }
   }

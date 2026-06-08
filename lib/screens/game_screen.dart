@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:astro_flux/models/game_state_provider.dart';
+import 'package:flame/flame_game.dart';
+import 'package:flame/components.dart';
 
 class GameScreen extends ConsumerStatefulWidget {
   const GameScreen({super.key});
@@ -11,11 +13,13 @@ class GameScreen extends ConsumerStatefulWidget {
 }
 
 class _GameScreenState extends ConsumerState<GameScreen> with WidgetsBindingObserver {
+  late FlameGame game;
   bool _paused = false;
 
   @override
   void initState() {
     super.initState();
+    game = ref.read(gameServiceProvider);
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -27,7 +31,7 @@ class _GameScreenState extends ConsumerState<GameScreen> with WidgetsBindingObse
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.inactive || state == AppLifecycleState.paused) {
+    if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
       setState(() {
         _paused = true;
         game.pauseEngine();
@@ -103,10 +107,12 @@ class _GameScreenState extends ConsumerState<GameScreen> with WidgetsBindingObse
               const Center(
                 child: Text(
                   'PAUSED',
-                  style: TextStyle(
-                    color: Color(0xFF00DDFF),
-                    fontSize: 48,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 8,
-                  ),
-... [truncated at 3000 chars]
+                  style: TextStyle(color: Color(0xFF00DDFF)),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}

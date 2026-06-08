@@ -7,27 +7,28 @@ import 'package:astro_flux/providers/fusion_provider.dart';
 
 void main() {
   group('Fusion Request Validation Tests', () {
-    test('should validate fusion request', () {
+    test('should validate fusion request', () async {
       final container = ProviderContainer();
       final notifier = container.read(gameServiceProvider.notifier);
-      final fusionProvider = container.read(fusionProviderProvider);
+      final fusionProvider = container.listen(fusionProvider, (prev, next) {});
 
       final motes = List.generate(10, (i) => Mote(id: i));
       notifier.state = GameState(motes: motes, vectors: [], stars: []);
 
-      final canFuse = notifier.canFuseFusion();
+      final canFuse = container.read(canFuseProvider);
 
       expect(canFuse, isTrue);
     });
 
-    test('should not validate fusion with insufficient motes', () {
+    test('should not validate fusion with insufficient motes', () async {
       final container = ProviderContainer();
       final notifier = container.read(gameServiceProvider.notifier);
+      final fusionProvider = container.listen(fusionProvider, (prev, next) {});
 
       final motes = List.generate(5, (i) => Mote(id: i));
       notifier.state = GameState(motes: motes, vectors: [], stars: []);
 
-      final canFuse = notifier.canFuseFusion();
+      final canFuse = container.read(canFuseProvider);
 
       expect(canFuse, isFalse);
     });

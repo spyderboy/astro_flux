@@ -2,8 +2,6 @@
 import 'dart:ui';
 import 'package:flame/components.dart';
 
-/// A component that renders a neon checkmark when a star is captured.
-/// The checkmark fades in over [_duration] seconds and then removes itself.
 class StarCaptureIndicator extends PositionComponent {
   final int starId;
   final Color color;
@@ -22,7 +20,6 @@ class StarCaptureIndicator extends PositionComponent {
   double _progress = 0.0;
   bool _captured = false;
 
-  /// Call to start the capture animation.
   void startCapture() {
     _captured = true;
     _progress = 0.0;
@@ -57,7 +54,6 @@ class StarCaptureIndicator extends PositionComponent {
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 20.0)
       ..blendMode = BlendMode.plus;
 
-    // Checkmark centred on component origin
     final Path path = Path();
     path.moveTo(-15.0, 0.0);
     path.lineTo(0.0,   15.0);

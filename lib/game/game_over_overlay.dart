@@ -1,54 +1,40 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:async';
+import 'dart:ui' as ui;
 
-/// Game-over overlay displayed via GameWidget.overlayBuilderMap.
-///
-/// ⚠️  This must be a Flutter Widget, NOT a Flame Component.
-///     GameWidget overlays are Flutter widgets rendered on top of the canvas.
-///     Register in GameWidget: overlayBuilderMap: {'gameOver': (ctx, game) => const GameOverWidget()}
-///
-/// To show: game.overlays.add('gameOver');
-/// To hide: game.overlays.remove('gameOver');
-class GameOverWidget extends StatelessWidget {
-  final VoidCallback? onRestart;
-
-  const GameOverWidget({super.key, this.onRestart});
+class GameOverOverlay extends ConsumerWidget {
+  const GameOverOverlay({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black.withOpacity(0.75),
-      child: Center(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[ 
             const Text(
               'GAME OVER',
-              style: TextStyle(
-                color: Color(0xFFFF4444),
-                fontSize: 48,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 6,
-                shadows: [Shadow(color: Color(0xFFFF0000), blurRadius: 20)],
-              ),
+              style: TextStyle(color: Color(0xFF00FFFF), fontSize: 52, fontWeight: FontWeight.bold, letterSpacing: 10),
             ),
             const SizedBox(height: 32),
-            GestureDetector(
-              onTap: onRestart ?? () => Navigator.of(context).pushReplacementNamed('/game'),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-                decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xFF00FFFF), width: 1.5),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: const Text(
-                  'PLAY AGAIN',
-                  style: TextStyle(
-                    color: Color(0xFF00FFFF),
-                    fontSize: 18,
-                    letterSpacing: 3,
-                  ),
-                ),
+            const Text(
+              'You faced: Aggressor',
+              style: TextStyle(color: Color(0xFF00FFFF), fontSize: 36, fontWeight: FontWeight.normal, letterSpacing: 4),
+            ),
+            const SizedBox(height: 32),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/welcome'));
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF00FFFF)),
+              ),
+              child: const Text(
+                'Main Menu',
+                style: TextStyle(color: Colors.black),
               ),
             ),
           ],

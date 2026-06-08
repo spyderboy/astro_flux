@@ -1,13 +1,16 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'package:flame/components.dart';
-import 'package:flutter/material.dart' show Color;
+import 'dart:ui' show Color;
 import 'package:vector_math/vector_math_64.dart' as vm;
 import 'particle_system.dart';
+import '../models/game_palette.dart';
+import 'dart:math'; // Import math for pi, cos, sin
 
 /// A component that visualizes a fusion explosion using particles.
 class FusionExplosionComponent extends PositionComponent {
-  final double duration = 0.6;
+  final double duration = 0.3;
   double _elapsed = 0;
+  double _radius = 0;
 
   @override
   void update(double dt) {
@@ -16,6 +19,9 @@ class FusionExplosionComponent extends PositionComponent {
       removeFromParent();
       return;
     }
+
+    // Expand the radius over time
+    _radius = (30.0 * _elapsed / duration).clamp(0, 30);
 
     final system = _findParticleSystem();
     if (system != null) {
@@ -30,11 +36,12 @@ class FusionExplosionComponent extends PositionComponent {
           lifetime: 0.5,
         );
       }
-      // Spawn an expansion ring
+      // Spawn an expansion ring with fading opacity
+      double fade = (1 - _elapsed / duration).clamp(0, 1);
       system.spawnRing(
         position,
-        color: GamePalette.magenta, // Use neon palette color from lib/models/game_palette.dart
-        radius: 15.0,
+        color: GamePalette.magenta.withAlpha((255 * fade).toInt()), // Use neon palette color from lib/models/game_palette.dart
+        radius: _radius,
         lifetime: 0.4,
       );
     }

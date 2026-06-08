@@ -1,16 +1,16 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'package:flutter_driver/flutter_driver.dart';
-import 'package:astro_flux/game/astro_game.dart';
+import 'package:test/test.dart';
 
 void main() async {
   FlutterDriver driver;
   try {
     driver = await FlutterDriver.connect();
-    await driver.waitFor(find.text('Loading...'), timeout: Duration(seconds: 30));
+    await driver.waitFor(find.text('Game Title')); // Replace with actual game title or text
     List<double> frameTimes = [];
-    for (int i = 0; i < 60; i++) {
+    for (int i = 0; i < 60; i++) { // Run game loop for 60 seconds (1000ms each)
       final start = DateTime.now().millisecondsSinceEpoch;
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(Duration(milliseconds: 1000));
       final end = DateTime.now().millisecondsSinceEpoch;
       frameTimes.add(end - start);
     }

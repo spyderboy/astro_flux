@@ -2,7 +2,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:astro_flux/models/combat_attack_event.dart';
-import 'package:astro_flux/models/game_state_provider.dart';
+import 'package:astro_flux/game/game_service.dart';
 import 'package:astro_flux/components/combat_attack_handler.dart';
 
 void main() {
@@ -20,7 +20,7 @@ void main() {
       container.dispose();
     });
 
-    test('handleEvent detects near-miss tap just outside star radius', () {
+    test('handleEvent detects near-miss tap just outside star radius', () async {
       final handler = container.read(handlerProvider);
       container.read(gameServiceProvider.notifier).addStar(10, 1);
 
@@ -28,7 +28,7 @@ void main() {
       const eventNearMiss = CombatAttackEvent(sourceVectorId: 1, targetStarId: 10);
 
       expect(
-        handler.handleEvent(eventNearMiss),
+        await handler.handle(eventNearMiss),
         isTrue,
         reason: 'Should dispatch visuals for a near-miss tap just outside star radius',
       );

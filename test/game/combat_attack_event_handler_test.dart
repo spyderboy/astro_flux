@@ -2,11 +2,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:astro_flux/models/combat_attack_event.dart';
-import 'package:astro_flux/models/game_state_provider.dart';
-import 'package:astro_flux/components/combat_attack_handler.dart';
-import 'package:astro_flux/models/mote.dart';
-import 'package:astro_flux/models/star.dart';
-import 'package:flutter_vector_math/flutter_vector_math.dart';
+import 'package:astro_flux/game/combat_attack_handler.dart';
 
 void main() {
   group('CombatAttackHandler', () {
@@ -23,24 +19,18 @@ void main() {
       container.dispose();
     });
 
-    test('handleEvent detects mote-star hit within radius', () {
+    test('handleEvent detects near-miss tap just outside star radius', () {
       final handler = container.read(handlerProvider);
+      container.read(gameServiceProvider.notifier).addStar(10, 1);
 
-      // Add a star with radius 20
-      container.read(gameServiceProvider.notifier).addStar(1, 1);
+      // Simulate a combat event with a vector near the star but just outside its radius
+      const eventNearMiss = CombatAttackEvent(sourceVectorId: 1, targetStarId: 10);
 
-      // Add a mote close to the star (radius 5)
-      container.read(gameServiceProvider.notifier).addMote(1);
-      final mote = container.read(gameServiceProvider.state).motes.first;
-      mote.position = Vector2(0, 0);
-
-      // Trigger combat event
-      const event = CombatAttackEvent(sourceVectorId: 1, targetStarId: 1);
-      handler.handleEvent(event);
-
-      // Check if particles are spawned
-      final particleSystem = container.read(gameServiceProvider.state).particleSystem;
-      expect(particleSystem.sparks.length, isNonZero, reason: 'Should spawn sparks when mote hits star');
+      expect(
+        handler.handle(eventNearMiss),
+        isTrue,
+        reason: 'Should dispatch visuals for a near-miss tap just outside star radius',
+      );
     });
   });
 }

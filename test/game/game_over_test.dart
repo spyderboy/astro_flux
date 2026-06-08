@@ -38,7 +38,7 @@ void main() {
     test('triggers game over and shows overlay', () {
       final container = ProviderContainer(
         overrides: [
-          gameOverProvider.overrideWithValue(GameOverReason.defeat),
+          gameOverProvider.overrideWithValue(true),
         ],
       );
       final controller = GameOverController(container);
@@ -52,7 +52,7 @@ void main() {
     test('resets game and hides overlay', () {
       final container = ProviderContainer(
         overrides: [
-          gameOverProvider.overrideWithValue(GameOverReason.defeat),
+          gameOverProvider.overrideWithValue(true),
         ],
       );
       final controller = GameOverController(container);

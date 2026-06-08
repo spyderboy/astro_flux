@@ -11,13 +11,13 @@ void main() {
     final gameState = GameState(
       motes: List.generate(10, (index) => Mote(id: index)),
       vectors: [],
-      stars: [Star(id: 1, tier: 1, ownerId: 'player')],
+      stars: [Star(id: 1, tier: 1, ownerId: '')],
     );
 
-    expect(CaptureRules.canCapture(1, 1, gameState), true);
+    expect(CaptureRules.canCapture(1, gameState), true);
 
     fakeAsync((async) {
-      CaptureRules.tryPerformCapture(ref.read(gameServiceProvider.notifier), 1, 1);
+      CaptureRules.tryPerformCapture(gameState, 1);
       async.elapse(Duration(seconds: 1));
       expect(gameState.motes.length, equals(0));
       expect(gameState.vectors.length, equals(1));
@@ -28,16 +28,15 @@ void main() {
     final gameState = GameState(
       motes: List.generate(20, (index) => Mote(id: index)),
       vectors: [],
-      stars: [Star(id: 1, tier: 1, ownerId: 'player')],
+      stars: [Star(id: 1, tier: 1, ownerId: '')],
     );
 
-    expect(CaptureRules.canCapture(1, 1, gameState), true);
+    expect(CaptureRules.canCapture(1, gameState), true);
 
     fakeAsync((async) {
-      CaptureRules.tryPerformCapture(ref.read(gameServiceProvider.notifier), 1, 1);
+      CaptureRules.tryPerformCapture(gameState, 1);
       async.elapse(Duration(seconds: 1));
-      final newState = ref.read(gameServiceProvider);
-      expect(newState.stars[0].tier, equals(2));
+      expect(gameState.stars[0].tier, equals(2));
     });
   });
 }
